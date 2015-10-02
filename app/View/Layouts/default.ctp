@@ -31,6 +31,10 @@
 		echo $this->Html->css('jquery-ui.structure.min');
 		echo $this->Html->css('jquery-ui.theme.min');
 		
+		// JQuery
+		echo $this->Html->script('jquery-2.1.4.min');
+		echo $this->Html->script('jquery-ui.min');
+		
 		// Bootstrap
 		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap.min');
 		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap-theme.min');
@@ -39,14 +43,10 @@
 		
 		// Custom CSS
 		echo $this->Html->css('layout');
-		echo $this->Html->css('system');
-		echo $this->Html->css('menu');
 		echo $this->Html->css('print');
 		echo $this->Html->css('responsive');
 		
 		// Javascript
-		echo $this->Html->script('jquery-2.1.4.min');
-		echo $this->Html->script('jquery-ui.min');
 		echo $this->Html->script('jquery.mask');
 		echo $this->Html->script('custom-default');
 		echo $this->Html->script('custom-ajax');

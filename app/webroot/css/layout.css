@@ -21,91 +21,45 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-body {
-	background: #030;
+html, body {
+	height: 100%;
+	background: #333;
 }
 header {
-	background: #040;
-	background-image: -moz-linear-gradient(right bottom,#070 0%,#030 100%);
-	background-image: -webkit-gradient(linear,right bottom, left top,color-stop(0, #070),color-stop(1, #030));
-	background: -webkit-linear-gradient(right bottom, #070 0%, #030 100%);
-	background: -o-linear-gradient(right bottom, #070 0%, #030 100%);
-	background: -ms-linear-gradient(right bottom, #070 0%, #030 100%);
-	background: linear-gradient(right bottom, #070 0%, #030 100%);
-
-	margin: 0;
-	border-bottom: 0.3em solid #002800;
-	padding: 0 0.5em;
-}
-header a {
-	color: #030;
-}
-header h1 {
-	float: left;
 	background: none;
-	font-size: 1.4em;
-	margin-bottom: 0;
-	margin-right: 1em;
+	border: 0;
+	padding: 0;
 }
-header h1 a {
-	font-size: 40px;
-	font-weight: normal;
-	text-decoration: none;
+header .navbar {
+	background: transparent;
+	border: none;
+	margin: 5px;
+	box-shadow: none;
 }
-header h1 a:hover {
-	color: #800;
+header .navbar-default .navbar-nav > li:hover {
+	background-color: #666;
 }
-header h1 a img {
-	max-width: 240px;
-	vertical-align: text-bottom;
+header .navbar-default .navbar-nav > li > a {
+	color: #ddd;
 }
-#content {
-	
+header .navbar-default .navbar-nav > li > a:hover {
+	color: #fff;
 }
-#content h1 {
-	font-size: 1.3em;
-	font-weight: bolder;
-	margin: 0;
-	padding: 0.5em;
+.navbar-default .navbar-brand {
+	color: #ddd;
+	padding: 15px 15px;
+}
+.navbar-default .navbar-brand:hover {
+	color: #fff;
+	background-color: #666;
 }
 footer {
-	background: #003333;
+	background: transparent;
 	color: #FFF;
 	padding: 2em 0;
 	text-align: center;
 }
 
-h1 {
-	background: none;
-}
-h2 {
-	background: none;
-	border-bottom: 0.1em solid #888;
-	font-size: 1.2em;
-	color: #600;
-	padding: 0.2em 0.3em;
-}
-h3 {
-	color: #1e5f96;
-	font-size: 1.5em;
-	font-weight: bolder;
-	border: 0;
-	margin: 0;
-	padding: 0.5em 0;
-}
-h4 {
-	color: #1e5f96;
-	font-weight: bolder;
-	border: 0;
-	margin: 0;
-	padding: 0.5em 0;
-}
-a {
-	color: #030;
-}
-a:hover {
-	color: #800;
-}
 a img {
 	vertical-align: text-bottom;
 }
@@ -166,27 +120,6 @@ table {
 	clear: none;
 }
 
-.centralizarComTamanhoMaximo {
-	margin: 0 auto;
-	max-width: 1200px;
-}
-.login {
-	float: right;
-	margin: 0.5em;
-}
-.login a {
-	color: #fff;
-}
-.clear {
-	clear: both;
-	margin: 0;
-	padding: 0;
-}
-.clearLeft {
-	clear: left;
-	margin: 0;
-	padding: 0;
-}
 .ajaxload {
 	width: 100%;
 	height: 50px;
@@ -206,60 +139,7 @@ table {
 	right: 0;
 	z-index: 9999999999;
 }
-.line {
-	border-top: 3px solid #666;
-}
 
-#content>.direita {
-	float: right;
-	width: 390px;
-	border-left: 0.3em solid #030;
-	margin-bottom: 1em;
-	padding-left: 1em;
-}
-#content>.esquerda {
-	margin-right: 400px;
-}
-#content>.esquerda {
-	margin-right: 400px;
-}
-
-.sac {
-	float:right;
-	height: 100px;
-}
-.linksPrincipais {
-	display: block;
-	font-size: 24px;
-	font-weight: normal;
-	margin: 0.5em 0 1em;
-	text-decoration: none;
-}
-.linksPrincipais img {
-	vertical-align: middle;
-}
-.agendaHeader {
-	background: #030;
-	color: #fff;
-	padding: 0.5em;
-	text-align: center;
-}
-.agendaItem {
-	border-bottom: 0.2em solid #030;
-	padding: 0.5em;
-}
-.agendaItemData {
-	float: left;
-	padding: 0.5em 0.5em 0.5em 0;
-}
-* .zero,
-* .clean{
-	margin: 0;
-	padding: 0;
-}
-a.clean {
-	text-decoration: none;
-}
 .date {
 	cursor: pointer;
 	text-align: center;
@@ -273,6 +153,9 @@ a.clean {
 .phone {
 	width: 8em;
 	text-align: center;
+}
+.telefone {
+	width: 130px;
 }
 
 table.realce {
@@ -498,275 +381,4 @@ html .tagVermelha:hover{
 	text-align: justify;
 	text-indent: 0.5em;
 	text-justify: inter-word;
-}
-
-/******************************************************************************/
-/* Home ***********************************************************************/
-.homeContent {
-	background: #fff url('../img/background.png');
-	margin: 0 auto;
-	max-width: 1200px;
-}
-.faixa {
-	background: #003333;
-	padding-top: 2em;
-}
-.faixa img {
-	max-width: 98%;
-}
-.mote {
-	margin: 2em 1em;
-	text-align: center;
-}
-.mote img {
-	max-width: 98%;
-}
-.homeSistemaClinimap>div {
-	display: inline-block;
-	width: 50%;
-	padding: 0.5em;
-	vertical-align: top;
-	text-align: center;
-}
-.homeSistemaClinimap img {
-	max-width: 98%;
-}
-.homeDiferenciaisTecnicos {
-	text-align: center;
-}
-.homeDiferenciaisTecnicos img {
-	display: inline-block;
-	height: 180px;
-	margin: 0 0.25em 0.25em;
-	max-width: 98%;
-}
-.homeSejaUmParceiro {
-	padding: 3em 3em 0;
-}
-.homeSejaUmParceiro img {
-	max-width: 98%;
-	vertical-align: top;
-}
-.homeSejaUmParceiro img:last-child {
-	margin: -25em 0 0 0;
-}
-.homeSync {
-	text-align: center;
-}
-.homeSync img {
-	max-width: 98%;
-}
-.homeSync img:nth-child(2) {
-	margin-top: -3em;
-}
-.homeExtras {
-	text-align: center;
-}
-.homeExtras img {
-	max-width: 98%;
-}
-.homeValorDoInvestimento img {
-	max-width: 98%;
-}
-.homeInformacoesEContato>div {
-	display: inline-block;
-	padding: 2em 5%;
-	width: 50%;
-	vertical-align: top;
-}
-.homeInformacoesEContato img {
-	max-width: 100%;
-}
-.homeInformacoesEContato>div:nth-child(2) img {
-	margin-right: 0.5em;
-}
-
-.assinaturaForm {
-	font-size: 0.9em;
-}
-.radioInlineOptions>input,
-.radioInlineOptions>label {
-	display: inline-block;
-}
-
-/******************************************************************************/
-/* JCarousel ******************************************************************/
-.jcarousel-wrapper {
-	margin: 0 auto;
-	position: relative;
-	border-radius: 5px;
-	max-width: 1200px;
-}
-.jcarousel-wrapper a:hover {
-	color: #FFFF00;
-}
-.jcarousel-wrapper .photo-credits {
-	position: absolute;
-	right: 15px;
-	bottom: 0;
-	font-size: 13px;
-	color: #fff;
-	text-shadow: 0 0 1px rgba(0, 0, 0, 0.85);
-	opacity: .66;
-}
-.jcarousel-wrapper .photo-credits a {
-	color: #fff;
-}
-
-/** Carousel **/
-.jcarousel {
-	position: relative;
-	overflow: hidden;
-	width: 100%;
-	max-width: 1200px;
-	max-height: 438px;
-}
-.jcarousel ul {
-	width: 20000em;
-	position: relative;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-.jcarousel li {
-	float: left;
-	margin: 0;
-}
-.jcarousel li img {
-	width: 100%;
-}
-
-/** Carousel Controls **/
-.jcarousel-control-prev,
-.jcarousel-control-next {
-	position: absolute;
-	top: 50%;
-	width: 30px;
-	height: 30px;
-	text-align: center;
-	background: #4E443C;
-	color: #fff;
-	text-decoration: none;
-	text-shadow: 0 0 1px #000;
-	font: 24px/27px Arial, sans-serif;
-	-webkit-border-radius: 30px;
-	-moz-border-radius: 30px;
-	border-radius: 30px;
-	-webkit-box-shadow: 0 0 2px #999;
-	-moz-box-shadow: 0 0 2px #999;
-	box-shadow: 0 0 2px #999;
-}
-.jcarousel-control-prev {
-	left: -20px;
-}
-.jcarousel-control-next {
-	right: -20px;
-}
-.jcarousel-control-prev:hover span,
-.jcarousel-control-next:hover span {
-	display: block;
-}
-.jcarousel-control-prev.inactive,
-.jcarousel-control-next.inactive {
-	opacity: .5;
-	cursor: default;
-}
-
-/** Carousel Pagination **/
-.jcarousel-pagination {
-	position: absolute;
-	bottom: 0;
-	left: 15px;
-}
-.jcarousel-pagination a {
-	text-decoration: none;
-	display: inline-block;
-
-	font-size: 11px;
-	line-height: 14px;
-	min-width: 14px;
-
-	background: #fff;
-	color: #4E443C;
-	border-radius: 14px;
-	padding: 3px;
-	text-align: center;
-
-	margin-right: 2px;
-
-	opacity: .75;
-}
-.jcarousel-pagination a.active {
-	background: #4E443C;
-	color: #fff;
-	opacity: 1;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
-}
-
-/******************************************************************************/
-/* Chosen *********************************************************************/
-.chosen-container,
-.chosen-container div,
-.chosen-drop {
-	padding: 0;
-}
-
-/******************************************************************************/
-/* JqPlot *********************************************************************/
-table.jqplot-table-legend {
-	width: auto;
-}
-.jqplot-highlighter-tooltip, .jqplot-canvasOverlay-tooltip {
-    background: #EEE;
-	padding: 0.5em;
-}
-
-/******************************************************************************/
-/* Jquery UI ******************************************************************/
-.ui-timepicker-div .ui-widget-header {
-	margin-bottom: 8px;
-}
-.ui-timepicker-div dl {
-	font-weight: normal;
-	line-height: normal;
-	margin: 0 auto;
-	text-align: left;
-	width: 90%;
-}
-.ui-timepicker-div dl dt {
-	background: none;
-	height: 25px;
-}
-.ui-timepicker-div dl dd {
-	background: none;
-	margin: -25px 0 10px 65px;
-}
-.ui-timepicker-div td {
-	font-size: 90%;
-}
-.ui-datepicker-header {
-	margin-bottom: 0;	
-}
-.ui-datepicker-title {
-	margin-bottom: 0;
-	padding: 0;	
-}
-.ui-datepicker td {
-	line-height: normal;
-}
-.ui-dialog .ui-dialog-content {
-	padding: 0.3em 0.5em;
-}
-.ui-dialog .ui-dialog-content form {
-	margin: 0;
-	width: 100%;
-}
-.ui-dialog .ui-dialog-content form div {
-	margin-bottom: 0;
-}
-.ui-dialog .ui-dialog-content form div.input {
-	padding: 0.2em 0 0.3em;
-}
-.ui-dialog .ui-dialog-buttonpane {
-	margin-top: 0;
 }

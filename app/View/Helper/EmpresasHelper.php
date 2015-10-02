@@ -4,6 +4,38 @@ class EmpresasHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function linkParaExcluir(&$empresa) {
+		return $this->Html->link($this->Html->image('icons/delete-16.png'),
+			array(
+				'admin' => true,
+				'controller' => 'empresas',
+				'action' => 'excluir',
+				$empresa['id'],
+			),
+			array(
+				'title' => 'Excluir empresa',
+				'style' => 'margin: 0 0.5em;',
+				'confirm' => 'Tem certeza que deseja excluir este empresa?',
+				'escape' => false
+			)
+		);
+	}
+	public function linkParaEditar(&$empresa) {
+		return $this->Html->link($this->Html->image('icons/edit-16.png'),
+			array(
+				'admin' => true,
+				'controller' => 'empresas',
+				'action' => 'editar',
+				$empresa['id'],
+			),
+			array(
+				'class' => 'dlgEditarPadrao',
+				'title' => 'Editar empresa',
+				'style' => 'margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
 	public function formBuscaPadrao() {
 		$ret = '';
 		$ret.= $this->Form->create('Filtro', array(

@@ -11,4 +11,4 @@ else {
 		'srcRoot' => $this->Util->getSrcRoot(),
 	));
 }
-$this->Js->buffer("loadMenu();");
+//$this->Js->buffer("loadMenu();");

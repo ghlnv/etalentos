@@ -17,14 +17,6 @@ class EmpresasController extends AppController {
 
 	// #########################################################################
 	// Ações do admin ##########################################################
-	public function admin_autocompletePrincipioAtivo() {
-		$this->set('data', $this->Empresa->principiosAtivosUnicos($_GET['term']));
-		$this->render('admin_jsonAutocomplete');
-	}
-	public function admin_autocompleteNome() {
-		$this->set('data', $this->Empresa->nomesUnicos($_GET['term']));
-		$this->render('admin_jsonAutocomplete');
-	}
 	public function admin_cadastrar() {
 		if(!empty($this->request->data)) {
 			if($this->Empresa->cadastrar($this->request->data)) {
@@ -33,17 +25,6 @@ class EmpresasController extends AppController {
 			}
 			else {
 				$this->Session->setFlash(__('Empresa NÃO cadastrado. Verifique os erros no formulário.', true));
-			}
-		}
-	}
-	public function admin_importar() {
-		if(!empty($this->request->data)) {
-			if($this->Empresa->importar($this->request->data)) {
-				$this->Session->setFlash(__('Empresas importados com sucesso!', true), 'flash/success');
-				$this->windowReload();
-			}
-			else {
-				$this->Session->setFlash(__('Empresas NÃO importados. Verifique os erros no formulário.', true));
 			}
 		}
 	}
@@ -93,19 +74,12 @@ class EmpresasController extends AppController {
 			$tokens = explode(' ', trim($this->request->params['named']['keyword']));
 			foreach($tokens as $token) {
 				$this->paginate['Empresa']['conditions'][]['OR'] = array(
-					'Empresa.codigo LIKE' => "%$token%",
-					'Empresa.principio_ativo LIKE' => "%$token%",
-					'Empresa.laboratorio LIKE' => "%$token%",
-					'Empresa.codigo_ggrem LIKE' => "%$token%",
 					'Empresa.nome LIKE' => "%$token%",
-					'Empresa.apresentacao LIKE' => "%$token%",
-					'Empresa.classe_terapeutica LIKE' => "%$token%",
 				);
 			}
 		}
 		$this->paginate['Empresa']['contain'] = false;
 		$this->set('empresas', $this->paginate('Empresa'));
-//		$this->set('pessoas', $this->Pessoa->listarMedicos());
 	}
 
 	// #########################################################################

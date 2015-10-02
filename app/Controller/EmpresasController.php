@@ -3,6 +3,14 @@ class EmpresasController extends AppController {
 
 	public $paginate;
 	
+	public function beforeFilter() {
+		AppController::beforeFilter();
+		$this->Auth->allow(array(
+			'index',
+			'registrar',
+		));
+	}
+	
 	// #########################################################################
 	// Ações ###################################################################
 	public function index() {
@@ -21,12 +29,13 @@ class EmpresasController extends AppController {
 
 	// #########################################################################
 	// Ações do admin ##########################################################
-	public function admin_excluir($ausenciaId) {
-		if (!$ausenciaId) {
+	public function admin_excluir($empresaId) {
+		if (!$empresaId) {
 			$this->Session->setFlash(__('Id inválido para a empresa', true));
 		}
 		else {
-			if ($this->Empresa->delete($ausenciaId, true)) {
+			$this->loadModel('Pessoa');
+			if ($this->Pessoa->delete($empresaId, true)) {
 				$this->Session->setFlash(__('Empresa excluída com sucesso!', true), 'flash/success');
 			}
 		}

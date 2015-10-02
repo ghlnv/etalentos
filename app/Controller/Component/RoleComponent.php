@@ -21,10 +21,10 @@ class RoleComponent extends Object {
    // ###############################################################
    // Verificações específicas ######################################
 	public function isAdmin() {
-		if(1 == AuthComponent::user('id')) {
-			return true;
-		}
-		return false;
+		return 1 == AuthComponent::user('id');
+	}
+	public function isEmpresa() {
+		return 'empresa' == AuthComponent::user('tipo');
 	}
 	public function getPessoa() {
 		if (SessionComponent::check('Usuario.Pessoa')) {

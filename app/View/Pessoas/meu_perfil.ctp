@@ -1,11 +1,10 @@
 <?php 
-echo $this->Html->tag('h3');
+echo $this->Html->tag('div', null, ['class' => 'container']);
+echo $this->Html->tag('h1');
 echo 'Minhas informações';
-echo $this->Html->tag('/h3');
+echo $this->Html->tag('/h1');
 
-echo $this->Html->tag('hr', null, array(
-	'style' => 'margin-top: 10px; margin-bottom: 0;',
-));
+echo $this->Html->tag('hr');
 
 echo $this->Form->create('Pessoa', array(
 	'url' => array(
@@ -62,13 +61,11 @@ echo $this->Form->submit('Salvar', array(
 ));
 echo $this->Form->end();
 
-echo $this->Html->tag('h3');
+echo $this->Html->tag('h1');
 echo 'Login e senha';
-echo $this->Html->tag('/h3');
+echo $this->Html->tag('/h1');
 
-echo $this->Html->tag('hr', null, array(
-	'style' => 'margin-top: 10px; margin-bottom: 0;',
-));
+echo $this->Html->tag('hr');
 
 echo $this->Form->create('Usuario', array(
 	'url' => array(
@@ -132,5 +129,6 @@ echo $this->Form->submit('Salvar', array(
 ));
 echo $this->Html->tag('div', '', array('class' => 'clear'));
 echo $this->Form->end();
+echo $this->Html->tag('/div');
 
 $this->Js->buffer("loadMeioMask()");

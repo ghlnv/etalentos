@@ -74,7 +74,6 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<?php
 					echo $this->element('menu');
-					echo $this->element('sessionUser');
 				?>
 			</div><!--/.nav-collapse -->
 		</div><!--/.container-fluid -->

@@ -71,6 +71,7 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->Html->tag('div', null, ['class' => 'container']);
 		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-8']);
 		$ret.= $this->Html->tag('h2', 'Registre sua empresa!');
+		$ret.= $this->Html->tag('hr');
 		$ret.= $this->Form->create('Empresa', array(
 			'url' => [
 				'controller' => 'empresas',

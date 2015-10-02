@@ -33,6 +33,7 @@ class Empresa extends AppModel {
 		return $this->save($data);
 	}
 	public function cadastrar($data) {
+		$data['Usuario']['tipo'] = 'empresa';
 		return $this->Pessoa->cadastrarUsuario($data);
 	}
 

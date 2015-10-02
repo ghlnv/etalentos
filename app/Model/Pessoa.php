@@ -20,6 +20,12 @@ class Pessoa extends AppModel {
 				'message' => 'Nome não pode ficar vazio',
 			),
 		),
+		'email' => array(
+			'notEmpty' => array(
+				'rule' => 'notempty',
+				'message' => 'Nome não pode ficar vazio',
+			),
+		),
 	);
 	
 	// #########################################################################

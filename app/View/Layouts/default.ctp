@@ -48,11 +48,15 @@
 		echo $this->Html->css('print');
 		echo $this->Html->css('responsive');
 		
+		// CKEditor
+		echo $this->Html->script('/vendor/ckeditor/ckeditor');
+		
 		// Javascript
 		echo $this->Html->script('jquery.mask');
 		echo $this->Html->script('custom-default');
 		echo $this->Html->script('custom-ajax');
 		echo $this->Html->script('custom-dialogs');
+		echo $this->Html->script('custom-ckeditor');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

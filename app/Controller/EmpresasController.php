@@ -70,5 +70,23 @@ class EmpresasController extends AppController {
 	}
 
 	// #########################################################################
+	// Ações da empresa ########################################################
+	public function empresa_gerenciar() {
+		if ($this->request->is('put')) {
+			if ($this->Empresa->atualizar($this->request->data)) {
+				$this->Session->setFlash(__('Empresa atualizada com sucesso.', true), 'flash/success');
+			}
+			else {
+				$this->Session->setFlash(__('Empresa NÃO atualizada. Verifique os erros no formulário.', true));
+			}
+		}
+		else {
+			$this->request->data = $this->Empresa->buscar(
+				$this->Empresa->buscarIdComPessoaId(AuthComponent::user('pessoa_id'))
+			);
+		}
+	}
+
+	// #########################################################################
 	// Métodos privados ########################################################
 }

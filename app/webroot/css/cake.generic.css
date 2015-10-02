@@ -59,7 +59,7 @@ div.view {
 	float:right;
 	width:76%;
 	border-left:1px solid #666;
-	padding:10px 2%;
+	padding:10px;
 }
 div.actions {
 	float:left;
@@ -247,13 +247,6 @@ label {
 	display: block;
 	font-size: 110%;
 	margin-bottom:3px;
-}
-input, textarea {
-	clear: both;
-	font-size: 140%;
-	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
-	padding: 1%;
-	width:98%;
 }
 select {
 	clear: both;

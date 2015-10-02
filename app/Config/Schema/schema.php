@@ -67,6 +67,52 @@ class AppSchema extends CakeSchema {
 			'engine' => 'MyISAM'
 		)
 	);
+	var $file_manager = array(
+		'id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'key' => 'primary',
+		),
+		'pessoa_id' => array(
+			'type' => 'integer',
+			'null' => false,
+		),
+		'path' => array(
+			'type' => 'string',
+			'null' => true,
+			'length' => 255,
+		),
+		'file_name' => array(
+			'type' => 'string',
+			'null' => true,
+			'length' => 255,
+		),
+		'created' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL,
+		),
+		'modified' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL,
+		),
+		'indexes' => array(
+			'PRIMARY' => array(
+				'column' => 'id',
+				'unique' => 1,
+			),
+			'fk_file_manager_pessoas' => array(
+				'column' => 'pessoa_id',
+				'unique' => 0,
+			),
+		),
+		'tableParameters' => array(
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci',
+			'engine' => 'InnoDB',
+		),
+	);
 	var $pessoas = array(
 		'id' => array(
 			'type' => 'integer',

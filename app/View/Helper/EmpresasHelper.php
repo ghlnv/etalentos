@@ -66,6 +66,48 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->Form->end();
 		return $ret;
 	}
+	public function inputDescricao() {
+		$inputId = 'EmpresaDescricao';
+		$config = $this->Js->object(array(
+			'height' => 600,
+			'removePlugins' => 'elementspath',
+			'toolbar' => 'Medium',
+			'filebrowserBrowseUrl' => $this->Html->url(array(
+				'empresa' => false,
+				'controller' => 'fileManager',
+				'action' => 'ckeditor',
+			), true),
+		));
+		$this->Js->buffer("loadGenericCkeditor('$inputId', $config);");
+
+		return $this->Form->input('Empresa.descricao', array(
+			'id' => $inputId,
+			'div' => array('class' => 'input textArea required'),
+			'type' => 'textArea',
+			'label' => 'Descricao',
+			'style' => 'width: 100%;',
+			'required' => false,
+		));
+	}
+	public function form() {
+		$ret = '';
+		$ret.= $this->Html->tag('div', null, ['class' => 'container']);
+		$ret.= $this->Form->create('Empresa', array(
+			'url' => [
+				'controller' => 'empresas',
+			],
+		));
+		$ret.= $this->Form->hidden('Empresa.id');
+		$ret.= $this->Form->input('Empresa.nome', array(
+			'div' => array('style' => ''),
+			'label' => 'Nome da empresa',
+		));
+		$ret.= $this->inputDescricao();
+		$ret.= $this->Form->submit('Salvar');
+		$ret.= $this->Form->end();
+		$ret.= $this->Html->tag('/div');
+		return $ret;
+	}
 	public function formRegistro() {
 		$ret = '';
 		$ret.= $this->Html->tag('div', null, ['class' => 'container']);

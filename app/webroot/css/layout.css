@@ -64,6 +64,13 @@ a img {
 	vertical-align: text-bottom;
 }
 
+input, textarea {
+	clear: both;
+	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
+	padding: 10px;
+	width: 100%;
+}
+
 form {
 	width: 100%;
 }
@@ -79,7 +86,6 @@ form input[type='password'] {
 	border: solid 1px #A3BAC0;
 	border-radius: 0.4em;
 	box-shadow: inset -2px 0 10px #ccc;
-	padding: 0.5em;
 }
 form input[type='file'] {
 	width: auto;

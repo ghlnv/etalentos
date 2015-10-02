@@ -12,7 +12,7 @@ foreach($vagas as $vaga) {
 	echo $this->Html->tag('tr');
 	echo $this->Html->tag('td', null, array('style' => 'width: 90%;'));
 	echo $this->Html->tag('div', null, array(
-		'style' => ''
+		'style' => 'font-size: 18px;'
 	));
 	echo $this->Html->tag('b');
 	echo $vaga['Vaga']['titulo'];

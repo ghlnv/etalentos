@@ -19,7 +19,7 @@ class VagasHelper extends AppHelper {
 		);
 	}
 	public function linkParaExcluir(&$vaga) {
-		return $this->Html->link($this->Html->image('icons/delete-16.png'),
+		return $this->Html->link($this->Html->image('icons/remove-32.png'),
 			array(
 				'controller' => 'vagas',
 				'action' => 'excluir',
@@ -34,7 +34,7 @@ class VagasHelper extends AppHelper {
 		);
 	}
 	public function linkParaEditar(&$vaga) {
-		return $this->Html->link($this->Html->image('icons/edit-16.png'),
+		return $this->Html->link($this->Html->image('icons/edit-32.png'),
 			array(
 				'controller' => 'vagas',
 				'action' => 'editar',

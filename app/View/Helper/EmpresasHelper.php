@@ -80,6 +80,13 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->Form->hidden('Empresa.id');
 		$ret.= $this->Form->input('Empresa.nome', array(
 			'div' => array('style' => ''),
+			'label' => 'Nome da empresa',
+		));
+		$ret.= $this->Form->input('Pessoa.nome', array(
+			'label' => 'Seu nome',
+		));
+		$ret.= $this->Form->input('Pessoa.email', array(
+			'div' => array('style' => ''),
 		));
 		$ret.= $this->Form->submit('Registrar');
 		$ret.= $this->Form->end();

@@ -23,11 +23,11 @@ class EmpresasController extends AppController {
 	// Ações do admin ##########################################################
 	public function admin_excluir($ausenciaId) {
 		if (!$ausenciaId) {
-			$this->Session->setFlash(__('Id inválido para o empresa', true));
+			$this->Session->setFlash(__('Id inválido para a empresa', true));
 		}
 		else {
 			if ($this->Empresa->delete($ausenciaId, true)) {
-				$this->Session->setFlash(__('Empresa excluído com sucesso!', true), 'flash/success');
+				$this->Session->setFlash(__('Empresa excluída com sucesso!', true), 'flash/success');
 			}
 		}
 		$this->redirect($this->referer());
@@ -35,12 +35,12 @@ class EmpresasController extends AppController {
 	public function admin_editar($id) {
 		if (!empty($this->request->data)) {
 			if ($this->Empresa->atualizar($this->request->data)) {
-				$this->Session->setFlash(__('Empresa atualizado com sucesso.', true), 'flash/success');
+				$this->Session->setFlash(__('Empresa atualizada com sucesso.', true), 'flash/success');
 				$this->contentReload();
 				$this->fecharDialog();
 			}
 			else {
-				$this->Session->setFlash(__('Empresa NÃO atualizado. Verifique os erros no formulário.', true));
+				$this->Session->setFlash(__('Empresa NÃO atualizada. Verifique os erros no formulário.', true));
 			}
 		}
 		else {

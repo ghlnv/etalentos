@@ -8,6 +8,9 @@ class Pessoa extends AppModel {
 		'Usuario' => array(
 			'dependent' => true,
 		),
+		'Empresa' => array(
+			'dependent' => true,
+		),
 	);
 	
 	public $validate = array(
@@ -17,134 +20,22 @@ class Pessoa extends AppModel {
 				'message' => 'Nome não pode ficar vazio',
 			),
 		),
-		'telefone' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
-				'message' => 'Campo obrigatório',
-			),
-		),
-		'nascimento' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
-				'message' => 'Campo obrigatório',
-			),
-		),
 	);
 	
 	// #########################################################################
 	// Métodos #################################################################
-	public function buscarPacientesIdsDoMedico($medicoId) {
-		return Set::extract('/Pessoa/id', $this->find('all', array(
-			'fields' => array(
-				'Pessoa.id',
-			),
-			'conditions' => array(),
-			'contain' => array(),
-			'joins' => array(
-				array(
-					'table' => 'consultas',
-					'alias' => 'Consulta',
-					'type' => 'INNER',
-					'conditions' => array(
-						'Pessoa.id = Consulta.pessoa_id',
-						'Consulta.medico_id' => $medicoId,
-					),
-				),
-			),
-			'group' => array('Pessoa.id'),
-		)));
-	}
-	public function iniciaisDePacientes() {
-		$fields = array();
-		$letras = range('A', 'Z');
-		foreach($letras as $letra) {
-			$fields[] = "SUM(IF(LEFT(Pessoa.nome, 1) = '$letra', 1,0)) AS $letra";
-		}
-		
-		return reset($this->find('first', array(
-			'fields' => $fields,
-			'conditions' => array(
-				'Pessoa.id <>' => 1,
-				'OR' => array(
-					'Usuario.id IS NULL',
-					'Usuario.tipo IS NULL',
-				),
-			),
-			'contain' => array('Usuario'),
-		)));
-	}
-	public function buscarPacienteFicha($pessoaId) {
-		return $this->find('first', array(
-			'conditions' => array(
-				'Pessoa.id' => $pessoaId,
-			),
-			'contain' => false,
-		));
-	}
-	public function idDoUltimoPaciente() {
-		$pessoa = $this->find('first', array(
-			'fields' => array('Pessoa.id'),
-			'conditions' => array(
-				'Pessoa.id <>' => 1,
-				'OR' => array(
-					'Usuario.id IS NULL',
-					'Usuario.tipo IS NULL',
-				),
-			),
-			'contain' => array('Usuario'),
-			'order' => array('Pessoa.modified' => 'DESC'),
-		));
-		if(empty($pessoa)) {
-			return false;
-		}
-		return $pessoa['Pessoa']['id'];
-	}
-	public function listarMedicos() {
-		return $this->find('list', array(
-			'conditions' => array(
-				'OR' => array(
-					array('Usuario.tipo' => 'Saude'),
-					array('Usuario.tipo' => 'Saude Basica'),
-				),
-			),
-			'contain' => array('Usuario.tipo'),
-		));
-	}
-	public function listarPacientes() {
-		return $this->find('list', array(
-			'conditions' => array(
-				'Pessoa.id <>' => 1,
-				'OR' => array(
-					'Usuario.id IS NULL',
-					'Usuario.tipo IS NULL',
-				),
-			),
-			'contain' => array('Usuario'),
-		));
-	}
-	public function cadastrarPaciente($pessoa) {
-		if(!empty($pessoa['Pessoa']['nascimento'])) {
-			$this->beforeSaveBrDatetime($pessoa['Pessoa']['nascimento']);
-		}
-		
+	public function cadastrarUsuario($pessoa) {
+		$pessoa['Usuario']['login'] = $pessoa['Pessoa']['email'];
+		$pessoa['Usuario']['senha'] = AuthComponent::password($pessoa['Pessoa']['email']);
 		$this->create();
-		if(!$this->save($pessoa)) {
+		if(!$this->saveAll($pessoa, array('validate' => 'first'))) {
+		debug($pessoa);
 			return false;
 		}
 		$pessoa['Pessoa']['id'] = $this->getLastInsertID();
-		return $this->salvarFotoWebcam($pessoa);
+		return $pessoa;
 	}
-	public function cadastrarStaff($pessoa) {
-		$pessoa['Usuario']['login'] = $pessoa['Pessoa']['email'];
-		$pessoa['Usuario']['senha'] = AuthComponent::password($pessoa['Pessoa']['email']);
-		
-		$this->create();
-		if(!$this->saveAll($pessoa, array('validate' => 'first'))) {
-			return false;
-		}
-		return true;
-	}
-	public function cadastrarUsuario($pessoa) {
+	public function cadastrarUsuarioConfirm($pessoa) {
 		if(!$this->Usuario->verificarNovaSenha($pessoa)) {
 			return false;
 		}

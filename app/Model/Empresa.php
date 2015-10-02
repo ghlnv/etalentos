@@ -5,6 +5,10 @@ class Empresa extends AppModel {
 	public $order = array(
 		'Empresa.nome' => 'ASC',
 	);
+	
+	public $belongsTo = array(
+		'Pessoa',
+	);
 
 	public $validate = array(
 		'nome' => array(
@@ -29,8 +33,7 @@ class Empresa extends AppModel {
 		return $this->save($data);
 	}
 	public function cadastrar($data) {
-		$this->create();
-		return $this->save($data);
+		return $this->Pessoa->cadastrarUsuario($data);
 	}
 
 	// #########################################################################

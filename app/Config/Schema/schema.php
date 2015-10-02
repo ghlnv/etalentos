@@ -16,6 +16,12 @@ class AppSchema extends CakeSchema {
 			'default' => NULL,
 			'key' => 'primary'
 		),
+		'pessoa_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
 		'nome' => array(
 			'type' => 'string',
 			'null' => false,
@@ -35,6 +41,10 @@ class AppSchema extends CakeSchema {
 			'PRIMARY' => array(
 				'column' => 'id',
 				'unique' => 1
+			),
+			'fk_empresas_pessoas' => array(
+				'column' => 'pessoa_id',
+				'unique' => 0
 			),
 			'index_nome' => array(
 				'column' => 'nome',
@@ -275,87 +285,6 @@ class AppSchema extends CakeSchema {
 			'charset' => 'utf8',
 			'collate' => 'utf8_general_ci',
 			'engine' => 'MyISAM'
-		)
-	);
-	var $usuarios_logs = array(
-		'id' => array(
-			'type' => 'integer',
-			'null' => false,
-			'default' => NULL,
-			'key' => 'primary'
-		),
-		'usuario_id' => array(
-			'type' => 'integer',
-			'null' => false,
-			'default' => NULL,
-			'key' => 'index'
-		),
-		'ip' => array(
-			'type' => 'string',
-			'null' => false,
-			'length' => 64,
-			'key' => 'index',
-		),
-		'url' => array(
-			'type' => 'string',
-			'null' => true,
-			'length' => 1024,
-			'key' => 'index',
-		),
-		'referer' => array(
-			'type' => 'string',
-			'null' => true,
-			'length' => 1024,
-		),
-		'descricao' => array(
-			'type' => 'string',
-			'null' => true,
-			'length' => 1024,
-		),
-		'post' => array(
-			'type' => 'text',
-			'null' => true,
-		),
-		'created' => array(
-			'type' => 'datetime',
-			'null' => true,
-			'default' => NULL
-		),
-		'modified' => array(
-			'type' => 'datetime',
-			'null' => true,
-			'default' => NULL
-		),
-		'indexes' => array(
-			'PRIMARY' => array(
-				'column' => 'id',
-				'unique' => 1
-			),
-			'fk_sessoes_usuarios1' => array(
-				'column' => 'usuario_id',
-				'unique' => 0
-			),
-			'index_url' => array(
-				'column' => 'url',
-				'unique' => 0
-			),
-			'index_ip' => array(
-				'column' => 'ip',
-				'unique' => 0
-			),
-			'index_descricao' => array(
-				'column' => 'descricao',
-				'unique' => 0
-			),
-			'index_created' => array(
-				'column' => 'created',
-				'unique' => 0
-			),
-		),
-		'tableParameters' => array(
-			'charset' => 'utf8',
-			'collate' => 'utf8_general_ci',
-			'engine' => 'InnoDB'
 		)
 	);
 }

@@ -53,7 +53,6 @@ class AppController extends Controller {
 		'Role',
 		'RequestHandler',
 		'DebugKit.Toolbar' => array('panels' => array('history' => false)),
-//		'Captcha',
 	);
 	public $helpers = array(
 		'Html',
@@ -82,6 +81,9 @@ class AppController extends Controller {
 		$this->paramToData();
 	}
 	public function isAuthorized($user = null) {
+		if (isset($this->request->params['empresa'])) {
+			return $this->Role->isEmpresa();
+		}
 		if (isset($this->request->params['admin'])) {
 			return $this->Role->isAdmin();
 		}

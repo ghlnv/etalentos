@@ -25,7 +25,7 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		// CSS
+		// Default CSS
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('jquery-ui.min');
 		echo $this->Html->css('jquery-ui.structure.min');
@@ -33,13 +33,15 @@
 		
 		// JQuery
 		echo $this->Html->script('jquery-2.1.4.min');
-		echo $this->Html->script('jquery-ui.min');
 		
 		// Bootstrap
 		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap.min');
 		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap-theme.min');
 		echo $this->Html->css('http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
 		echo $this->Html->script('/vendor/bootstrap-3.3.5/js/bootstrap.min.js');
+		
+		// JQuery-UI
+		echo $this->Html->script('jquery-ui.min');
 		
 		// Custom CSS
 		echo $this->Html->css('layout');

@@ -158,51 +158,6 @@ table {
 	width: 130px;
 }
 
-table.realce {
-	border-spacing: 0;
-	border-bottom: #030406 1px solid;
-}
-table.realce>tbody>tr>td {
-	margin-top: 0;
-	margin-bottom: 0;
-	border-top: #CCC 2px solid;
-	border-bottom: transparent 2px solid;
-	border-left: transparent 2px solid;
-	margin: 0;
-	padding: 1em 0.5em;
-}
-table.realce>tbody>tr {
-	padding-top: -4px;
-}
-table.realce>tbody>tr:nth-child(2n) td {
-	background: #FAF5FD;
-}
-table.realce>tbody>tr:hover>td {
-	border-top: #60858C 2px solid;
-	border-bottom: #60858C 2px solid;
-	background-color: #D5EBD5;
-}
-table.realce>tbody>tr:hover>td:first-child {
-	border-left: #880000 2px solid;
-}
-div.realce {
-	border-left: transparent 2px solid;
-}
-div.realce:hover {
-	background-color: #D5EBD5 !important;
-	border-left: #880000 2px solid;
-}
-
-.zebra {
-	margin: 0;
-	padding: 0;
-}
-.zebra>div {
-	background: #fff;
-}
-.zebra>div:nth-child(2n) {
-	background: #efefef;
-}
 .linhas>div {
 	border-top: 0.2em solid #EEE;
 	border-bottom: 0.2em solid #CCC;

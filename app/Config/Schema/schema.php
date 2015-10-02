@@ -27,6 +27,16 @@ class AppSchema extends CakeSchema {
 			'null' => false,
 			'default' => NULL
 		),
+		'twitter' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL
+		),
+		'descricao' => array(
+			'type' => 'text',
+			'null' => false,
+			'default' => NULL
+		),
 		'created' => array(
 			'type' => 'datetime',
 			'null' => true,
@@ -279,6 +289,59 @@ class AppSchema extends CakeSchema {
 			'fk_usuarios_pessoas' => array(
 				'column' => 'pessoa_id',
 				'unique' => 0
+			),
+		),
+		'tableParameters' => array(
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci',
+			'engine' => 'MyISAM'
+		)
+	);
+	var $vagas = array(
+		'id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'primary'
+		),
+		'empresa_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
+		'titulo' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL
+		),
+		'descricao' => array(
+			'type' => 'text',
+			'null' => false,
+			'default' => NULL
+		),
+		'created' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'modified' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'indexes' => array(
+			'PRIMARY' => array(
+				'column' => 'id',
+				'unique' => 1
+			),
+			'fk_vagas_empresas' => array(
+				'column' => 'empresa_id',
+				'unique' => 0
+			),
+			'index_titulo' => array(
+				'column' => 'titulo',
+				'unique' => 0,
 			),
 		),
 		'tableParameters' => array(

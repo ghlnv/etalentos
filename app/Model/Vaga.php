@@ -1,17 +1,17 @@
 <?php
-class Empresa extends AppModel {
+class Vaga extends AppModel {
 
 	public $displayField = 'nome';
 	public $order = array(
-		'Empresa.nome' => 'ASC',
+		'Vaga.id' => 'DESC',
 	);
 	
 	public $belongsTo = array(
-		'Pessoa',
+		'Empresa',
 	);
 
 	public $validate = array(
-		'nome' => array(
+		'titulo' => array(
 			'notEmpty' => array(
 				'rule' => 'notempty',
 				'message' => 'Campo obrigatório',
@@ -21,13 +21,10 @@ class Empresa extends AppModel {
 	
 	// #########################################################################
 	// Métodos #################################################################
-	public function buscarIdComPessoaId($pessoaId) {
-		return $this->field('id', ['pessoa_id' => $pessoaId]);
-	}
 	public function buscar($id) {
 		return $this->find('first', array(
 			'conditions' => array(
-				'Empresa.id' => $id,
+				'Vaga.id' => $id,
 			),
 			'contain' => false,
 		));
@@ -35,9 +32,11 @@ class Empresa extends AppModel {
 	public function atualizar($data) {
 		return $this->save($data);
 	}
-	public function cadastrar($data) {
-		$data['Usuario']['tipo'] = 'empresa';
-		return $this->Pessoa->cadastrarUsuario($data);
+	public function cadastrarPelaEmpresa($data) {
+		$data['Vaga']['empresa_id'] = $this->Empresa->buscarIdComPessoaId(AuthComponent::user('pessoa_id'));
+		
+		$this->create();
+		return $this->save($data);
 	}
 
 	// #########################################################################

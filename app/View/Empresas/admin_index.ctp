@@ -1,11 +1,11 @@
 <?php
+echo $this->Html->tag('div', null, ['class' => 'container']);
 echo $this->Html->tag('h1');
 echo __('Empresas');
 echo $this->Html->tag('/h1');
 echo $this->Empresas->formBuscaPadrao();
-echo $this->Html->tag('hr');
 
-echo $this->Html->tag('table', null, ['class' => 'table realce']);
+echo $this->Html->tag('table', null, ['class' => 'table table-striped table-hover']);
 foreach($empresas as $empresa) {
 	echo $this->Html->tag('tr');
 	echo $this->Html->tag('td', null, array('style' => 'width: 90%;'));
@@ -25,6 +25,7 @@ foreach($empresas as $empresa) {
 }
 echo $this->Html->tag('/table');
 echo $this->element('paginator/navigation');
+echo $this->Html->tag('/div');
 
 $this->Js->buffer('loadDlgEditarPadrao();');
 $this->Js->buffer('loadDlgCadastrarPadrao();');

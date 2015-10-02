@@ -5,7 +5,7 @@ echo $this->Html->tag('/h1');
 echo $this->Empresas->formBuscaPadrao();
 echo $this->Html->tag('hr');
 
-echo $this->Html->tag('table');
+echo $this->Html->tag('table', null, ['class' => 'table realce']);
 foreach($empresas as $empresa) {
 	echo $this->Html->tag('tr');
 	echo $this->Html->tag('td', null, array('style' => 'width: 90%;'));

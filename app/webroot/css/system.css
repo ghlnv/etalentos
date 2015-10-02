@@ -1,0 +1,58 @@
+@charset "utf-8";
+/**
+ *
+ * Generic CSS for CakePHP
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       app.webroot.css
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+html, body {
+	height: 100%;
+}
+header {
+	background: none;
+	border: 0;
+	padding: 0;
+}
+header .navbar {
+	background: transparent;
+	border: none;
+	margin: 5px;
+	box-shadow: none;
+}
+header .navbar-default .navbar-nav > li:hover {
+	background-color: #040;
+}
+header .navbar-default .navbar-nav > li > a {
+	color: #ddd;
+}
+header .navbar-default .navbar-nav > li > a:hover {
+	color: #fff;
+}
+.navbar-default .navbar-brand {
+	color: #ddd;
+	padding: 15px 15px;
+}
+.navbar-default .navbar-brand:hover {
+	color: #fff;
+	background-color: #040;
+}
+footer {
+	background: transparent;
+}
+.telefone {
+	width: 130px;
+}
+.maps {
+	min-height: 800px;
+}

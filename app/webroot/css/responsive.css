@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+@media only screen and (max-width: 1200px) {
+	.mainMenu>ul>li:first-child {
+		display: block;
+		float: left;
+		height: 135px;
+	}
+	.homeSejaUmParceiro {
+		text-align: center;
+	}
+	.homeSejaUmParceiro img:last-child {
+		margin: 1em 0 0;
+	}
+}
+@media only screen and (max-width: 1050px) {
+	.jcarousel-control-prev {
+		left: 0;
+	}
+	.jcarousel-control-next {
+		right: 0;
+	}
+}
+@media only screen and (max-width: 800px) {
+	#content>.direita {
+		float: none;
+		width: 100%;
+	}
+	#content>.esquerda {
+		float: none;
+		width: 100%;
+	}
+	
+	.homeSistemaClinimap>div {
+		display: block;
+		width: 100%;
+		padding: 0.5em;
+	}
+	.homeSync img:nth-child(2) {
+		margin-top: -1em;
+	}
+	.homeSync img:nth-child(3) {
+		margin-top: -5em;
+	}
+	.homeInformacoesEContato>div {
+		display: block;
+		width: 100%;
+	}
+	.homeInformacoesEContato>div:first-child {
+		margin-bottom: 3em;
+	}
+	.homeInformacoesEContato>div:nth-child(2) img {
+		margin-bottom: 0.5em;
+	}
+	.maps {
+		min-height: 500px;
+	}
+}
+@media only screen and (max-width: 650px) {
+	.mainMenu>ul {
+		text-align: center;
+	}
+	.mainMenu>ul>li:first-child {
+		float: none;
+		width: 100% !important;
+	}
+	.mainMenu>ul>li:first-child img {
+		position: initial;
+	}
+	.maps {
+		min-height: 400px;
+	}
+}
+@media only screen and (max-width: 550px) {
+/*	.mainMenu>ul>li:first-child {
+		margin-top: 2em;
+		margin-bottom: 3em;
+	}*/
+}
+@media only screen and (max-width: 400px) {
+	.homeSejaUmParceiro img:last-child {
+		margin: 1em 0 0;
+	}
+	.maps {
+		min-height: 300px;
+	}
+}

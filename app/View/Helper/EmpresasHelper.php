@@ -4,6 +4,36 @@ class EmpresasHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function formBuscaPadrao() {
+		$ret = '';
+		$ret.= $this->Form->create('Filtro', array(
+			'url' => [
+				'controller' => $this->request->params['controller'],
+			],
+			'class' => 'form-inline',
+			'style' => 'margin-bottom: 10px; padding: 10px;',
+		));
+		$ret.= $this->Form->input('Filtro.keywords', array(
+			'div' => [
+				'class' => 'form-group col-md-3',
+				'style' => 'display: inline-block; float: none; padding: 0 5px 0 0; min-width: 200px;',
+			],
+			'label' => false,
+			'placeholder' => 'Palavras-chaves...',
+			'title' => 'Palavras-chaves...',
+			'class' => 'form-control',
+			'style' => 'width: 100%',
+		));
+		$ret.= $this->Form->submit('Buscar', array(
+			'div' => [
+				'class' => 'form-group col-md-2',
+				'style' => 'display: inline-block; float: none; padding: 0;',
+			],
+			'class' => 'btn btn-default',
+		));
+		$ret.= $this->Form->end();
+		return $ret;
+	}
 	public function formImport() {
 		$ret = '';
 		$ret.= $this->Form->create('Empresa', array(

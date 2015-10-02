@@ -25,11 +25,26 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('layout');
+		// CSS
+		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('jquery-ui.min');
 		echo $this->Html->css('jquery-ui.structure.min');
 		echo $this->Html->css('jquery-ui.theme.min');
 		
+		// Bootstrap
+		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap.min');
+		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap-theme.min');
+		echo $this->Html->css('http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+		echo $this->Html->script('/vendor/bootstrap-3.3.5/js/bootstrap.min.js');
+		
+		// Custom CSS
+		echo $this->Html->css('layout');
+		echo $this->Html->css('system');
+		echo $this->Html->css('menu');
+		echo $this->Html->css('print');
+		echo $this->Html->css('responsive');
+		
+		// Javascript
 		echo $this->Html->script('jquery-2.1.4.min');
 		echo $this->Html->script('jquery-ui.min');
 		echo $this->Html->script('jquery.mask');
@@ -43,31 +58,39 @@
 	?>
 </head>
 <body>
-	<div id="container">
-		<header>
-			<h1><?php echo $this->Html->link('eTalentos', '/', array(
-				'alt' => 'eTalentos',
-				'escape' => false,
-				'title' => 'Voltar para página inicial',
-			)); ?></h1>
-			<div><?php if(AuthComponent::user('id')) { 
-				echo $this->element('html/user');
-			}
-			?></div>
-		</header>
-		<div id="content">
-			<?php
-				echo $this->Session->flash();
-				echo $this->fetch('content');
-			?>
-		</div>
-		<footer>
-			<div class="clearfix">
-				<span><a href="http://www.facebook.com/medqme" target="_blank">Facebook</a> • <a href="http://twitter.com/medqme" target="_blank">Twitter</a> • <a href="mailto:contato@medqme.com.br">contato@medqme.com.br</a></span>
-				<small>©<?php echo date('Y'); ?> — <b>eTalentos</b></small>
+	<header class="container">
+	<!-- Static navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				  <span class="sr-only">Toggle navigation</span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="<?php echo $this->Html->url('/'); ?>">eTalentos</a>
 			</div>
-		</footer>
+			<div id="navbar" class="navbar-collapse collapse">
+				<?php
+					echo $this->element('menu');
+					echo $this->element('sessionUser');
+				?>
+			</div><!--/.nav-collapse -->
+		</div><!--/.container-fluid -->
+	</nav>
+	</header>
+	<div id="content">
+		<?php
+			echo $this->Session->flash();
+			echo $this->fetch('content');
+		?>
 	</div>
+	<footer>
+	<div class="centralizarComTamanhoMaximo">
+	<span>© <?php echo date("Y"); ?> <strong>etalentos.com.br</strong>. Todos os direitos reservados.</span>
+	</div>
+	</footer>
 	<?php
 		echo $this->element('sql_dump');
 		echo $this->Js->writeBuffer();

@@ -1,7 +1,7 @@
 <?php 
-echo $this->Html->tag('h1');
+echo $this->Html->tag('h3');
 echo 'Minhas informações';
-echo $this->Html->tag('/h1');
+echo $this->Html->tag('/h3');
 
 echo $this->Html->tag('hr', null, array(
 	'style' => 'margin-top: 10px; margin-bottom: 0;',
@@ -12,94 +12,47 @@ echo $this->Form->create('Pessoa', array(
 		'controller' => 'pessoas',
 		'action' => 'meuPerfil',
 	),
-	'class' => 'cakeForm centralizarComTamanhoMaximo',
+	'class' => 'centralizarComTamanhoMaximo',
 	'style' => 'padding: 1em 2em;',
 ));
 
-echo $this->Form->input('Pessoa.id', array(
-	'style' => ''
-));
+echo $this->Form->input('Pessoa.id');
 echo $this->Form->input('Pessoa.nome', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'style' => 'width: 20em;'
-));
-echo $this->Form->input('Pessoa.cpf', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'label' => 'CPF',
-	'style' => 'width: 9em;',
-	'class' => 'mask',
-	'alt' => 'cpf',
+	'div' => ['class' => 'input text required form-group'],
+	'class' => 'form-control',
+	'style' => 'width: 30em;'
 ));
 echo $this->Form->input('Pessoa.email', array(
-	'div' => array(
-		'style' => 'clear: left; float: left; margin-right: 1em;',
-	),
+	'div' => ['class' => 'input text required form-group'],
 	'label' => 'E-mail',
+	'class' => 'form-control',
 	'style' => 'width: 300px;'
 ));
 echo $this->Form->input('Pessoa.telefone', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'class' => 'mask telefone',
+	'div' => [
+		'class' => 'input text form-group',
+		'style' => 'display: inline-block; margin-right: 0.5em;'
+	],
+	'class' => 'form-control mask telefone',
 	'alt' => 'phone',
-));
-echo $this->Form->input('Pessoa.celular', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'class' => 'mask telefone',
-	'alt' => 'phone',
-));
-
-echo $this->Form->input('Pessoa.logradouro', array(
-	'div' => array(
-		'style' => 'clear: left; float: left; margin-right: 1em;',
-	),
-	'style' => 'width: 14em;',
-));
-echo $this->Form->input('Pessoa.numero', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'label' => 'Número',
-	'style' => 'width: 4em;',
-));
-echo $this->Form->input('Pessoa.complemento', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'style' => 'width: 8em;',
-));
-echo $this->Form->input('Pessoa.bairro', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'style' => 'width: 12em;',
+	'style' => 'text-align: center;',
 ));
 
 echo $this->Form->input('Pessoa.cidade', array(
-	'div' => array(
-		'style' => 'clear: left; float: left; margin-right: 20px;'
-	),
+	'div' => [
+		'class' => 'input text form-group',
+		'style' => 'display: inline-block; margin-right: 0.5em;'
+	],
+	'class' => 'form-control',
 	'style' => 'width: 12em;',
 ));
 echo $this->Form->input('Pessoa.estado', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 20px;'
-	),
-	'style' => 'width: 2em; text-align: center;'
-));
-
-echo $this->Form->input('Pessoa.cep', array(
-	'div' => array(
-		'style' => 'float: left; margin-right: 1em;',
-	),
-	'style' => 'width: 6em; text-align: center;'
+	'div' => [
+		'class' => 'input text form-group',
+		'style' => 'display: inline-block;'
+	],
+	'class' => 'form-control',
+	'style' => 'width: 3em; text-align: center;'
 ));
 
 echo $this->Form->submit('Salvar', array(
@@ -109,9 +62,9 @@ echo $this->Form->submit('Salvar', array(
 ));
 echo $this->Form->end();
 
-echo $this->Html->tag('h1');
+echo $this->Html->tag('h3');
 echo 'Login e senha';
-echo $this->Html->tag('/h1');
+echo $this->Html->tag('/h3');
 
 echo $this->Html->tag('hr', null, array(
 	'style' => 'margin-top: 10px; margin-bottom: 0;',
@@ -129,32 +82,45 @@ echo $this->Form->hidden('Usuario.pessoa_id');
 
 echo $this->Html->tag('div', null, array('style' => 'float: left; margin: 0 1em 0 0; padding: 0;'));
 echo $this->Form->input('Usuario.login', array(
+	'div' => [
+		'class' => 'input text form-group',
+	],
 	'label' => 'Login',
+	'class' => 'form-control',
 	'style' => 'width: 200px;',
 	'readonly' => true,
 ));
 echo $this->Form->input('senha_atual', array(
+	'div' => [
+		'class' => 'input text form-group',
+	],
 	'label'=> 'Senha atual',
 	'type' => 'password',
 	'size' => 20,
-	'class' => 'empty',
+	'class' => 'form-control empty',
 	'style' => 'width: 200px;',
 ));
 echo $this->Html->tag('/div');
 
 echo $this->Html->tag('div', null, array('style' => 'float: left; margin: 0; padding: 0;'));
 echo $this->Form->input('nova_senha', array(
+	'div' => [
+		'class' => 'input text form-group',
+	],
 	'label'=> 'Nova senha',
 	'type' => 'password',
 	'size' => 20,
-	'class' => 'empty',
+	'class' => 'form-control empty',
 	'style' => 'width: 200px;',
 ));
 echo $this->Form->input('confirm', array(
+	'div' => [
+		'class' => 'input text form-group',
+	],
 	'label'=> 'Confirme a nova senha',
 	'type' => 'password',
 	'size' => 20,
-	'class' => 'empty',
+	'class' => 'form-control empty',
 	'style' => 'width: 200px;',
 ));  
 echo $this->Html->tag('/div');

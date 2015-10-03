@@ -8,6 +8,7 @@ class EmpresasController extends AppController {
 		$this->Auth->allow(array(
 			'index',
 			'registrar',
+			'ver',
 		));
 	}
 	
@@ -25,6 +26,11 @@ class EmpresasController extends AppController {
 				$this->Session->setFlash(__('Empresa NÃO cadastrada. Verifique os erros no formulário.', true));
 			}
 		}
+	}
+	public function ver($empresaId){
+		$this->set([
+			'empresa' => $this->Empresa->buscar($empresaId),
+		]);
 	}
 
 	// #########################################################################

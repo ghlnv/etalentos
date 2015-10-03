@@ -36,6 +36,22 @@ class EmpresasHelper extends AppHelper {
 			)
 		);
 	}
+	public function linkPagina(&$empresa) {
+		return $this->Html->link("Ver página da empresa &#10095;",
+			array(
+				'admin' => false,
+				'controller' => 'empresas',
+				'action' => 'ver',
+				$empresa['id'],
+			),
+			array(
+				'class' => 'btn btn-primary',
+				'title' => 'Ver página da empresa',
+				'style' => 'float: right; margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
 	public function formBuscaPadrao() {
 		$ret = '';
 		$ret.= $this->Form->create('Filtro', array(
@@ -91,7 +107,6 @@ class EmpresasHelper extends AppHelper {
 	}
 	public function form() {
 		$ret = '';
-		$ret.= $this->Html->tag('div', null, ['class' => 'container']);
 		$ret.= $this->Form->create('Empresa', array(
 			'url' => [
 				'controller' => 'empresas',
@@ -105,7 +120,6 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->inputDescricao();
 		$ret.= $this->Form->submit('Salvar');
 		$ret.= $this->Form->end();
-		$ret.= $this->Html->tag('/div');
 		return $ret;
 	}
 	public function formRegistro() {

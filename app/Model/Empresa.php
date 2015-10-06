@@ -17,6 +17,12 @@ class Empresa extends AppModel {
 				'message' => 'Campo obrigatório',
 			),
 		),
+		'localizacao' => array(
+			'notBlank' => array(
+				'rule' => 'notBlank',
+				'message' => 'Campo obrigatório',
+			),
+		),
 	);
 	
 	// #########################################################################

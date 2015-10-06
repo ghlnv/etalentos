@@ -1,10 +1,14 @@
 <?php
 echo $this->Html->tag('div', null, ['class' => 'container']);
 echo $this->Empresas->header($empresa);
-echo $this->Html->tag('h1');
+echo $this->Html->tag('div', null, ['class' => 'box']);
+echo $this->Html->tag('h2', null, ['class' => 'marginLeft marginRight']);
 echo 'Vagas';
-echo $this->Html->tag('/h1');
+echo $this->Html->tag('/h2');
 
+echo $this->Html->tag('div', null, [
+	'class' => 'zebra',
+]);
 foreach ($vagas as $vaga) {
 	echo $this->Html->tag('div', null, [
 		'class' => 'box box-default',
@@ -37,10 +41,12 @@ foreach ($vagas as $vaga) {
 	echo $this->Html->tag('span', null, [
 		'class' => 'smallText',
 	]);
-	echo 'Localização';
+	echo $vaga['Vaga']['localizacao'];
 	echo $this->Html->tag('/span');
 	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 }
+echo $this->Html->tag('/div');
+echo $this->Html->tag('/div');
 echo $this->Html->tag('/div');

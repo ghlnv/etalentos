@@ -1,6 +1,6 @@
 <?php
 class VagasHelper extends AppHelper { 
-    var $helpers = array('Html', 'Js', 'Form', 'Text', 'Number'); 
+    var $helpers = array('Html', 'Js', 'Form', 'Gerar'); 
 
 	// #########################################################################
 	// Métodos #################################################################
@@ -11,7 +11,7 @@ class VagasHelper extends AppHelper {
 				'action' => 'cadastrar',
 			),
 			array(
-				'class' => 'botao dlgCadastrarPadrao',
+				'class' => 'btn btn-primary',
 				'title' => 'Cadastrar nova vaga',
 				'style' => 'float: right; display: inline-block; font-size: 16px; margin: 10px 10px 0;',
 				'escape' => false
@@ -41,12 +41,50 @@ class VagasHelper extends AppHelper {
 				$vaga['id'],
 			),
 			array(
-				'class' => 'dlgEditarPadrao',
 				'title' => 'Editar vaga',
 				'style' => 'margin: 0 0.5em;',
 				'escape' => false
 			)
 		);
+	}
+	public function linkPagina(&$vaga) {
+		return $this->Html->link("Ver página da vaga &#10095;",
+			array(
+				'admin' => false,
+				'controller' => 'vagas',
+				'action' => 'ver',
+				$vaga['id'],
+			),
+			array(
+				'class' => 'btn btn-primary',
+				'title' => 'Ver página da vaga',
+				'style' => 'float: right; margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
+	public function inputDescricao() {
+		$inputId = 'VagaDescricao';
+		$config = $this->Js->object(array(
+			'height' => 600,
+			'removePlugins' => 'elementspath',
+			'toolbar' => 'Medium',
+			'filebrowserBrowseUrl' => $this->Html->url(array(
+				'empresa' => false,
+				'controller' => 'fileManager',
+				'action' => 'ckeditor',
+			), true),
+		));
+		$this->Js->buffer("loadGenericCkeditor('$inputId', $config);");
+
+		return $this->Form->input('Vaga.descricao', array(
+			'id' => $inputId,
+			'div' => array('class' => 'input textArea required'),
+			'type' => 'textArea',
+			'label' => 'Descricao',
+			'style' => 'width: 100%;',
+			'required' => false,
+		));
 	}
 	public function formBuscaPadrao() {
 		$ret = '';
@@ -79,6 +117,8 @@ class VagasHelper extends AppHelper {
 		return $ret;
 	}
 	public function form() {
+		$this->Js->buffer("loadDatePicker();");
+		
 		$ret = '';
 		$ret.= $this->Form->create('Vaga', array(
 			'url' => [
@@ -90,10 +130,31 @@ class VagasHelper extends AppHelper {
 		$ret.= $this->Form->input('Vaga.titulo', array(
 			'div' => array('style' => ''),
 			'label' => 'Título',
+			'class' => 'form-control',
 		));
-		$ret.= $this->Form->input('Vaga.descricao', array(
-			'label' => 'Descrição',
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Form->input('Vaga.localizacao', array(
+			'div' => array('class' => 'input text form-group col-md-8'),
+			'label' => 'Localização',
+			'class' => 'form-control',
 		));
+		$ret.= $this->Form->input('Vaga.remuneracao', array(
+			'div' => array('class' => 'input text form-group col-md-2'),
+			'label' => 'Remuneração',
+			'class' => 'form-control',
+		));
+		$ret.= $this->Form->input('Vaga.data_limite', array(
+			'div' => array('class' => 'input text form-group col-md-2'),
+			'label' => 'Data limite',
+			'type' => 'text',
+			'class' => 'date form-control',
+			'style' => 'width: 120px;',
+			'value' => !empty($this->request->data['Vaga']['data_limite']) ? $this->Gerar->brDate($this->request->data['Vaga']['data_limite'], 'd-m-Y') : null,
+		));
+		$ret.= $this->Html->tag('/div');
+		
+		$ret.= $this->inputDescricao();
+		$ret.= $this->Form->submit('Salvar');
 		$ret.= $this->Form->end();
 		return $ret;
 	}

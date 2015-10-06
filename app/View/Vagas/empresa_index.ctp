@@ -29,6 +29,3 @@ echo $this->Html->tag('/table');
 echo $this->element('paginator/navigation');
 echo $this->Html->tag('/div');
 echo $this->Html->tag('/div');
-
-$this->Js->buffer('loadDlgCadastrarPadrao();');
-$this->Js->buffer('loadDlgEditarPadrao();');

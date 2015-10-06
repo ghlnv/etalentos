@@ -12,8 +12,26 @@ class Vaga extends AppModel {
 
 	public $validate = array(
 		'titulo' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
+				'message' => 'Campo obrigatório',
+			),
+		),
+		'descricao' => array(
+			'notBlank' => array(
+				'rule' => 'notBlank',
+				'message' => 'Campo obrigatório',
+			),
+		),
+		'localizacao' => array(
+			'notBlank' => array(
+				'rule' => 'notBlank',
+				'message' => 'Campo obrigatório',
+			),
+		),
+		'data_limite' => array(
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
@@ -30,11 +48,17 @@ class Vaga extends AppModel {
 		));
 	}
 	public function atualizar($data) {
+		if(!empty($data['Vaga']['data_limite'])) {
+			$this->beforeSaveBrDate($data['Vaga']['data_limite']);
+		}
 		return $this->save($data);
 	}
 	public function cadastrarPelaEmpresa($data) {
 		$data['Vaga']['empresa_id'] = $this->Empresa->buscarIdComPessoaId(AuthComponent::user('pessoa_id'));
 		
+		if(!empty($data['Vaga']['data_limite'])) {
+			$this->beforeSaveBrDate($data['Vaga']['data_limite']);
+		}
 		$this->create();
 		return $this->save($data);
 	}

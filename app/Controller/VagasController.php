@@ -74,8 +74,11 @@ class VagasController extends AppController {
 		if($this->request->is('post')) {
 			if($this->Vaga->cadastrarPelaEmpresa($this->request->data)) {
 				$this->Session->setFlash(__('Vaga cadastrada com sucesso!', true), 'flash/success');
-				$this->contentReload();
-				$this->fecharDialog();
+				$this->redirect([
+					'empresa' => false,
+					'action' => 'ver',
+					$this->Vaga->getLastInsertID(),
+				]);
 			}
 			else {
 				$this->Session->setFlash(__('Vaga NÃO cadastrada. Verifique os erros no formulário.', true));

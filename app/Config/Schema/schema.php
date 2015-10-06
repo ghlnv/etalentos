@@ -383,6 +383,21 @@ class AppSchema extends CakeSchema {
 			'null' => false,
 			'default' => NULL
 		),
+		'localizacao' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL
+		),
+		'remuneracao' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
+		'data_limite' => array(
+			'type' => 'date',
+			'null' => false,
+			'default' => NULL
+		),
 		'descricao' => array(
 			'type' => 'text',
 			'null' => false,

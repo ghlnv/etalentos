@@ -66,7 +66,43 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->Html->tag('/div');
 		
 		$ret.= $this->Html->tag('/div');
+		$ret.= $this->navBar($empresa);
 		$ret.= $this->Html->tag('/div');
+		return $ret;
+	}
+	public function navBar(&$empresa) {
+		$ret = '';
+		$ret.= $this->Html->tag('nav', null, ['class' => 'box-nav']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Html->tag('div', '', ['class' => 'col-md-3 col-xs-hidden']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-9']);
+		$ret.= $this->Html->tag('ul');
+		$ret.= $this->Html->tag('li');
+		$ret.= $this->Html->link('Sobre',
+			[
+				'empresa' => false,
+				'controller' => 'empresas',
+				'action' => 'ver',
+				$empresa['Empresa']['id']
+			],
+			[]
+		);
+		$ret.= $this->Html->tag('/li');
+		$ret.= $this->Html->tag('li');
+		$ret.= $this->Html->link('Vagas',
+			[
+				'empresa' => false,
+				'controller' => 'empresas',
+				'action' => 'vagas',
+				$empresa['Empresa']['id']
+			],
+			[]
+		);
+		$ret.= $this->Html->tag('/li');
+		$ret.= $this->Html->tag('/ul');
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Html->tag('/nav');
 		return $ret;
 	}
 	public function linkParaExcluir(&$empresa) {

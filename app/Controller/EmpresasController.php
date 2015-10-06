@@ -32,6 +32,17 @@ class EmpresasController extends AppController {
 			'empresa' => $this->Empresa->buscar($empresaId),
 		]);
 	}
+	public function vagas($empresaId){
+		$this->loadModel('Vaga');
+		$this->paginate['Vaga']['conditions'] = [
+			'Vaga.empresa_id' => $empresaId,
+		];
+		
+		$this->set([
+			'vagas' => $this->paginate('Vaga'),
+			'empresa' => $this->Empresa->buscar($empresaId),
+		]);
+	}
 
 	// #########################################################################
 	// Ações do admin ##########################################################

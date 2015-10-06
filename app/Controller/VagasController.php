@@ -7,12 +7,21 @@ class VagasController extends AppController {
 		AppController::beforeFilter();
 		$this->Auth->allow(array(
 			'index',
+			'ver',
 		));
 	}
 	
 	// #########################################################################
 	// Ações ###################################################################
 	public function index() {
+	}
+	public function ver($vagaId) {
+		$this->loadModel('Empresa');
+		$vaga = $this->Vaga->buscar($vagaId);
+		$this->set([
+			'vaga' => $vaga,
+			'empresa' => $this->Empresa->buscar($vaga['Vaga']['empresa_id']),
+		]);
 	}
 
 	// #########################################################################

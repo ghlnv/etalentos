@@ -102,7 +102,7 @@ table tr td {
 	text-align: left;
 	vertical-align: top;
 }
-table tr:nth-child(even) {
+table.cake-sql-log tr:nth-child(even) {
 	background: #f9f9f9;
 }
 td.actions {

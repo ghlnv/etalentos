@@ -112,14 +112,14 @@ class VagasHelper extends AppHelper {
 		));
 		$ret.= $this->Form->input('Filtro.keywords', array(
 			'div' => [
-				'class' => 'form-group col-md-3',
+				'class' => 'form-group',
 				'style' => 'display: inline-block; float: none; padding: 0 5px 0 0; min-width: 200px;',
 			],
 			'label' => false,
 			'placeholder' => 'Palavras-chaves...',
 			'title' => 'Palavras-chaves...',
 			'class' => 'form-control',
-			'style' => 'width: 100%',
+			'style' => 'min-width: 250px;',
 		));
 		$ret.= $this->Form->submit('Buscar', array(
 			'div' => [
@@ -171,6 +171,49 @@ class VagasHelper extends AppHelper {
 		$ret.= $this->inputDescricao();
 		$ret.= $this->Form->submit('Salvar');
 		$ret.= $this->Form->end();
+		return $ret;
+	}
+	public function linkParaVer($vaga) {
+		return $this->Html->link($vaga['Vaga']['titulo'],
+			[
+				'controller' => 'vagas',
+				'action' => 'ver',
+				$vaga['Vaga']['id']
+			],
+			[
+				'style' => 'font-size: 16px; font-weight: 400; letter-spacing: .3px;'
+			]
+		);
+	}
+	public function descricaoComLink($vaga) {
+		$ret = '';
+		$ret.= $this->Html->tag('div', null, [
+			'class' => 'col-md-7 col-xs-12 col-md-height col-middle',
+		]);
+		$ret.= $this->Html->link($vaga['Vaga']['titulo'],
+			[
+				'controller' => 'vagas',
+				'action' => 'ver',
+				$vaga['Vaga']['id']
+			],
+			[
+				'style' => 'font-size: 16px; font-weight: 400; letter-spacing: .3px;'
+			]
+		);
+		$ret.= $this->Html->tag('/div');
+
+		$ret.= $this->Html->tag('div', null, [
+			'class' => 'col-md-4 col-xs-8 col-md-height col-middle wrapper',
+		]);
+		$ret.= $this->Html->tag('span', '', [
+			'class' => 'meta-icon fa fa-map-marker',
+		]);
+		$ret.= $this->Html->tag('span', null, [
+			'class' => 'smallText',
+		]);
+		$ret.= $vaga['Vaga']['localizacao'];
+		$ret.= $this->Html->tag('/span');
+		$ret.= $this->Html->tag('/div');
 		return $ret;
 	}
 	

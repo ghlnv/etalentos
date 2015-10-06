@@ -31,7 +31,7 @@ foreach ($vagas as $vaga) {
 		]
 	);
 	echo $this->Html->tag('/div');
-	
+
 	echo $this->Html->tag('div', null, [
 		'class' => 'col-md-4 col-xs-8 col-md-height col-middle wrapper',
 	]);
@@ -48,6 +48,8 @@ foreach ($vagas as $vaga) {
 	echo $this->Html->tag('/div');
 }
 echo $this->Html->tag('/div');
+
+echo $this->element('paginator/navigation');
 echo $this->Html->tag('/div');
 echo $this->Html->tag('/div');
 

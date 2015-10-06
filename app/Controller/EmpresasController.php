@@ -16,6 +16,18 @@ class EmpresasController extends AppController {
 	// #########################################################################
 	// Ações ###################################################################
 	public function index() {
+		if(!empty($this->request->params['named']['keywords'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
+			foreach($tokens as $token) {
+				$this->paginate['Empresa']['conditions'][]['OR'] = array(
+					'Empresa.nome LIKE' => "%$token%",
+					'Empresa.localizacao LIKE' => "%$token%",
+					'Empresa.descricao LIKE' => "%$token%",
+				);
+			}
+		}
+		$this->paginate['Empresa']['contain'] = false;
+		$this->set('empresas', $this->paginate('Empresa'));
 	}
 	public function registrar() {
 		if($this->request->is('post')) {

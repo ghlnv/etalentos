@@ -9,7 +9,7 @@ if($empresa['Empresa']['twitter_widget']) {
 }
 echo $this->Html->tag('/div');
 
-echo $this->Html->tag('div', null, ['class' => 'col-md-8']);
+echo $this->Html->tag('div', null, ['class' => 'col-md-9']);
 echo $empresa['Empresa']['descricao'];
 echo $this->Html->tag('/div');
 echo $this->Html->tag('/div');

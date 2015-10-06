@@ -14,6 +14,20 @@ class VagasController extends AppController {
 	// #########################################################################
 	// Ações ###################################################################
 	public function index() {
+		if(!empty($this->request->params['named']['keywords'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
+			foreach($tokens as $token) {
+				$this->paginate['Vaga']['conditions'][]['OR'] = array(
+					'Vaga.titulo LIKE' => "%$token%",
+					'Vaga.descricao LIKE' => "%$token%",
+					'Vaga.localizacao LIKE' => "%$token%",
+					'Empresa.nome LIKE' => "%$token%",
+					'Empresa.descricao LIKE' => "%$token%",
+				);
+			}
+		}
+		$this->paginate['Vaga']['contain'] = ['Empresa'];
+		$this->set('vagas', $this->paginate('Vaga'));
 	}
 	public function ver($vagaId) {
 		$this->loadModel('Empresa');

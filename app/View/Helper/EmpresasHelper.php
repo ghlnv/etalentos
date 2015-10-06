@@ -4,22 +4,50 @@ class EmpresasHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
-	public function header($empresa) {
-		$headerImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_header']);
+	public function avatarSmall(&$empresa) {
 		$avatarImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_avatar']);
-		
-		$ret = '';
-		$ret.= $this->Html->tag('div', null, ['class' => 'box box-default box-header']);
-		$ret.= $this->Html->tag('div', '', [
+		return $this->Html->tag('div', '', [
+			'class' => 'box-avatar-small',
+			'style' => "background-image: url('$avatarImageUrl'); display: inline-block; margin: 5px;",
+		]);
+	}
+	public function boxImage(&$empresa) {
+		$headerImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_header']);
+		return $this->Html->tag('div', '', [
 			'class' => 'box-image',
 			'style' => "background-image: url('$headerImageUrl');",
 		]);
-		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
-		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-3 col-xs-12']);
-		$ret.= $this->Html->tag('div', '', [
+	}
+	public function boxAvatar(&$empresa) {
+		$avatarImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_avatar']);
+		return $this->Html->tag('div', '', [
 			'class' => 'box-avatar',
 			'style' => "background-image: url('$avatarImageUrl');",
 		]);
+	}
+	public function linkAvatar(&$empresa) {
+		$avatarImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_avatar']);
+		return $this->Html->link('',
+			[
+				'admin' => false,
+				'controller' => 'empresas',
+				'action' => 'ver',
+				$empresa['Empresa']['id'],
+			],
+			[
+				'class' => 'box-avatar',
+				'style' => "background-image: url('$avatarImageUrl');",
+			]
+		);
+	}
+	public function header(&$empresa) {
+		$ret = '';
+		$ret.= $this->Html->tag('div', null, ['class' => 'box box-default box-header']);
+		$ret.= $this->boxImage($empresa);
+		
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-3 col-xs-12']);
+		$ret.= $this->boxAvatar($empresa);
 		$ret.= $this->Html->tag('/div');
 		
 		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-9 col-xs-12']);
@@ -136,6 +164,34 @@ class EmpresasHelper extends AppHelper {
 			)
 		);
 	}
+	public function linkParaVer($empresa) {
+		return $this->Html->link($empresa['Empresa']['nome'],
+			[
+				'admin' => false,
+				'controller' => 'empresas',
+				'action' => 'ver',
+				$empresa['Empresa']['id']
+			],
+			[
+				'style' => 'font-size: 16px; font-weight: 400; letter-spacing: .3px;'
+			]
+		);
+	}
+	public function linkParaVerBotao($empresa) {
+		return $this->Html->link("Sobre a empresa &#10097;",
+			[
+				'admin' => false,
+				'controller' => 'empresas',
+				'action' => 'ver',
+				$empresa['Empresa']['id']
+			],
+			[
+				'class' => 'btn btn-info',
+				'style' => 'text-align: right; width: 100%;',
+				'escape' => false,
+			]
+		);
+	}
 	public function linkPagina(&$empresa) {
 		return $this->Html->link("Ver página da empresa &#10095;",
 			array(
@@ -163,7 +219,7 @@ class EmpresasHelper extends AppHelper {
 		));
 		$ret.= $this->Form->input('Filtro.keywords', array(
 			'div' => [
-				'class' => 'form-group col-md-3',
+				'class' => 'form-group col-md-4',
 				'style' => 'display: inline-block; float: none; padding: 0 5px 0 0; min-width: 200px;',
 			],
 			'label' => false,

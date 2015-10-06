@@ -37,6 +37,11 @@ class AppSchema extends CakeSchema {
 			'null' => false,
 			'default' => NULL
 		),
+		'twitter_widget' => array(
+			'type' => 'text',
+			'null' => false,
+			'default' => NULL
+		),
 		'facebook' => array(
 			'type' => 'string',
 			'null' => false,

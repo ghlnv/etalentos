@@ -248,6 +248,11 @@ class EmpresasHelper extends AppHelper {
 		));
 		$ret.= $this->Html->tag('/div');
 		
+		$ret.= $this->Form->input('Empresa.twitter_widget', array(
+			'label' => 'Twitter-Widget',
+			'rows' => 2,
+		));
+		
 		$ret.= $this->inputDescricao();
 		$ret.= $this->Form->submit('Salvar');
 		$ret.= $this->Form->end();

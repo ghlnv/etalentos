@@ -4,6 +4,71 @@ class EmpresasHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function header($empresa) {
+		$headerImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_header']);
+		$avatarImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_avatar']);
+		
+		$ret = '';
+		$ret.= $this->Html->tag('div', null, ['class' => 'box box-default box-header']);
+		$ret.= $this->Html->tag('div', '', [
+			'class' => 'box-image',
+			'style' => "background-image: url('$headerImageUrl');",
+		]);
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-3 col-xs-12']);
+		$ret.= $this->Html->tag('div', '', [
+			'class' => 'box-avatar',
+			'style' => "background-image: url('$avatarImageUrl');",
+		]);
+		$ret.= $this->Html->tag('/div');
+		
+		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-9 col-xs-12']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'box-details on-sm-down-padding-sm-left']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-8']);
+		$ret.= $this->Html->tag('div', $empresa['Empresa']['nome'], ['class' => 'box-details-title']);
+		$ret.= $this->Html->tag('span', $empresa['Empresa']['localizacao'], [
+			'class' => 'summary',
+			'title' => 'Sede',
+		]);
+		$ret.= $this->Html->tag('/div');
+
+		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-4 text-right']);
+		$ret.= $this->Html->tag('div', null, ['class' => 'element-xs']);
+		$ret.= $this->Html->tag('br');
+		if($empresa['Empresa']['twitter']) {
+			$ret.= $this->Html->link($this->Html->tag('i', '', ['class' => 'fa fa-twitter']),
+				'https://twitter.com/'.$empresa['Empresa']['twitter'],
+				[
+					'title' => 'Visite nosso twitter',
+					'class' => 'btn btn-default btn-icon',
+					'target' => '_blank',
+					'escape' => false,
+				]
+			);
+		}
+		if($empresa['Empresa']['facebook']) {
+			$ret.= ' ';
+			$ret.= $this->Html->link($this->Html->tag('i', '', ['class' => 'fa fa-facebook']),
+				'https://www.facebook.com/'.$empresa['Empresa']['facebook'],
+				[
+					'title' => 'Visite nosso facebook',
+					'class' => 'btn btn-default btn-icon',
+					'target' => '_blank',
+					'escape' => false,
+				]
+			);
+		}
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Html->tag('/div');
+		
+		$ret.= $this->Html->tag('/div');
+		$ret.= $this->Html->tag('/div');
+		return $ret;
+	}
 	public function linkParaExcluir(&$empresa) {
 		return $this->Html->link($this->Html->image('icons/delete-16.png'),
 			array(
@@ -111,12 +176,43 @@ class EmpresasHelper extends AppHelper {
 			'url' => [
 				'controller' => 'empresas',
 			],
+			'type' => 'file',
 		));
 		$ret.= $this->Form->hidden('Empresa.id');
+		
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Form->input('Empresa.image_header', array(
+			'div' => array('class' => 'input file col-xs-6'),
+			'type' => 'file',
+			'label' => 'Imagem do cabeçalho',
+		));
+		$ret.= $this->Form->input('Empresa.image_avatar', array(
+			'div' => array('class' => 'input file col-xs-6'),
+			'type' => 'file',
+			'label' => 'Imagem do avatar',
+		));
+		$ret.= $this->Html->tag('/div');
+		
 		$ret.= $this->Form->input('Empresa.nome', array(
 			'div' => array('style' => ''),
 			'label' => 'Nome da empresa',
 		));
+		$ret.= $this->Form->input('Empresa.localizacao', array(
+			'div' => array('style' => ''),
+			'label' => 'Localização da empresa',
+		));
+		
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Form->input('Empresa.twitter', array(
+			'div' => array('class' => 'input text col-xs-6'),
+			'label' => 'Twitter',
+		));
+		$ret.= $this->Form->input('Empresa.facebook', array(
+			'div' => array('class' => 'input text col-xs-6'),
+			'label' => 'Facebook',
+		));
+		$ret.= $this->Html->tag('/div');
+		
 		$ret.= $this->inputDescricao();
 		$ret.= $this->Form->submit('Salvar');
 		$ret.= $this->Form->end();

@@ -27,7 +27,17 @@ class AppSchema extends CakeSchema {
 			'null' => false,
 			'default' => NULL
 		),
+		'localizacao' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL
+		),
 		'twitter' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL
+		),
+		'facebook' => array(
 			'type' => 'string',
 			'null' => false,
 			'default' => NULL
@@ -36,6 +46,18 @@ class AppSchema extends CakeSchema {
 			'type' => 'text',
 			'null' => false,
 			'default' => NULL
+		),
+		'image_header' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+			'length' => 512
+		),
+		'image_avatar' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL,
+			'length' => 512
 		),
 		'created' => array(
 			'type' => 'datetime',

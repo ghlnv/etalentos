@@ -86,11 +86,9 @@ class EmpresasController extends AppController {
 				$this->Session->setFlash(__('Empresa NÃO atualizada. Verifique os erros no formulário.', true));
 			}
 		}
-		else {
-			$this->request->data = $this->Empresa->buscar(
-				$this->Empresa->buscarIdComPessoaId(AuthComponent::user('pessoa_id'))
-			);
-		}
+		$this->request->data = $this->Empresa->buscar(
+			$this->Empresa->buscarIdComPessoaId(AuthComponent::user('pessoa_id'))
+		);
 	}
 
 	// #########################################################################

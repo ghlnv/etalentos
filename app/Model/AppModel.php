@@ -31,6 +31,93 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
 	
+	var $allowedFileTypes = array(
+		'jpg' => array('image/jpeg', 'image/pjpeg'),
+		'jpeg' => array('image/jpeg', 'image/pjpeg'),
+		'gif' => array('image/gif'),
+		'png' => array('image/png','image/x-png'),
+		'pdf' => array('application/pdf'),
+		'bmp' => array(),
+		'doc' => array(),
+		'docx' => array(),
+	);
+	
+	// #########################################################################
+	// Métodos #################################################################
+	public function deleteFile($filePath) {
+		if(file_exists($filePath)) {
+			if(!unlink($filePath)) {
+				return false;
+			}
+		}
+		
+		$file = substr(strrchr($filePath, '/'), 1);
+		$path = substr($filePath, 0, -(strlen($file)+1));
+		$childrenPath = scandir($path);
+		foreach($childrenPath as $childPath) {
+			if(is_file($childPath)) {
+				continue;
+			}
+			$filePath = "$path/$childPath/$file";
+			if(file_exists($filePath)) {
+				if(!unlink($filePath)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	public function getUploadedFilePath($file, $path) {
+		if(empty($file['size'])) {
+			return false;
+		}
+		if($file['size'] > 3000000) {
+			return false;
+		}
+		
+		$filePath = $this->getNewFilePath($path, $file['name']);
+		if(!$filePath) {
+			return false;
+		}
+		
+		if(!move_uploaded_file($file['tmp_name'], $filePath)){
+			return false;
+		}
+		return $filePath;
+	}
+	public function beforeSaveBrFloat(&$floatInput) {
+		if(!$floatInput) {
+			return true;
+		}
+		$floatInput = str_replace('.', '', $floatInput);
+		$floatInput = str_replace(',', '.', $floatInput);
+	}
+	public function beforeSaveBrDate(&$dateTimeInput) {
+		if(!$dateTimeInput) {
+			$dateTimeInput = null;
+			return true;
+		}
+		$dateTimeInput = date('Y-m-d', strtotime(str_replace('/', '-', $dateTimeInput)));
+	}
+	public function beforeSaveBrDatetime(&$dateTimeInput) {
+		if(!$dateTimeInput) {
+			$dateTimeInput = null;
+			return true;
+		}
+		$dateTimeInput = date('Y-m-d G:i:s', strtotime(str_replace('/', '-', $dateTimeInput)));
+	}
+	public function beforeSaveBrDatetimeMax(&$dateTimeInput) {
+		if(!$dateTimeInput) {
+			$dateTimeInput = null;
+			return true;
+		}
+		$dateTimeInput = date('Y-m-d 23:59:59', strtotime(str_replace('/', '-', $dateTimeInput)));
+	}
+	public function loadModel($modelName) {
+		App::import('Model', $modelName);
+		$this->$modelName = new $modelName();
+	}
+	
 	public function fixBrNumber($number) {
 		return str_replace(',', '.', str_replace('.', '', $number));
 	}
@@ -39,5 +126,36 @@ class AppModel extends Model {
 			return true;
 		}
 		return false;
+	}
+	
+	// #########################################################################
+	// Métodos privados ########################################################
+	private function getExtension($fileName) {
+		$exploded = explode(".", $fileName);
+		return strtolower(end($exploded));
+	}
+	private function getNewFilePath($path, $fileName) {
+		$extension = $this->getExtension($fileName);
+		if(!isset($this->allowedFileTypes[$extension])) {
+			return false;
+		}
+		
+		$finalPath = "files/$path";
+		
+		if(!file_exists($finalPath)) {
+			mkdir($finalPath);
+		}
+		
+		$count = 0;
+		$sluggedName = Inflector::slug(substr($fileName, 0, -1-strlen($extension)));
+		$filePath = "$finalPath/$sluggedName.$extension";
+		
+		while(file_exists($filePath)) {
+			$count++;
+			
+			$filePath = "files/$path/$sluggedName";
+			$filePath.= "_$count.$extension";
+		}
+		return $filePath;
 	}
 }

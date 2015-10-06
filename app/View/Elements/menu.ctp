@@ -1,9 +1,10 @@
 <?php
 if(AuthComponent::user()) {
 	// logado ##################################################################
+	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
+	
 	// admin ###############################################################
 	if($role->isAdmin()) {
-		echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
 		echo $this->Menu->li('Empresas',
 			[
 				'admin' => true,
@@ -14,12 +15,30 @@ if(AuthComponent::user()) {
 				'title' => 'Gerenciar empresas',
 			]
 		);
-		echo $this->Html->tag('/ul');
 	}
 	// empresa #############################################################
 	else if ($role->isEmpresa()) {
-		echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
-		echo $this->Menu->li('Empresa',
+		echo $this->Menu->li('Empresas',
+			[
+				'empresa' => false,
+				'controller' => 'empresas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Empresas',
+			]
+		);
+		echo $this->Menu->li('Vagas',
+			[
+				'empresa' => false,
+				'controller' => 'vagas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Vagas',
+			]
+		);
+		echo $this->Menu->li('Minha Empresa',
 			[
 				'empresa' => true,
 				'controller' => 'empresas',
@@ -29,7 +48,7 @@ if(AuthComponent::user()) {
 				'title' => 'Gerenciar página da empresa',
 			]
 		);
-		echo $this->Menu->li('Vagas',
+		echo $this->Menu->li('Minhas Vagas',
 			[
 				'empresa' => true,
 				'controller' => 'vagas',
@@ -39,8 +58,8 @@ if(AuthComponent::user()) {
 				'title' => 'Gerenciar vagas',
 			]
 		);
-		echo $this->Html->tag('/ul');
 	}
+	echo $this->Html->tag('/ul');
 	
 	// perfil e logout #########################################################
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);

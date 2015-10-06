@@ -4,6 +4,30 @@ class MenuHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function empresas() {
+		return $this->li('Empresas',
+			[
+				'admin' => false,
+				'controller' => 'empresas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Empresas',
+			]
+		);
+	}
+	public function vagas() {
+		return $this->li('Vagas',
+			[
+				'admin' => false,
+				'controller' => 'vagas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Vagas',
+			]
+		);
+	}
 	public function li($label, $url, $options = []) {
 		$ret = '';
 		$ret.= $this->Html->tag('li');

@@ -9,6 +9,7 @@ class EmpresasController extends AppController {
 			'index',
 			'registrar',
 			'ver',
+			'vagas',
 		));
 	}
 	

@@ -18,26 +18,9 @@ if(AuthComponent::user()) {
 	}
 	// empresa #############################################################
 	else if ($role->isEmpresa()) {
-		echo $this->Menu->li('Empresas',
-			[
-				'empresa' => false,
-				'controller' => 'empresas',
-				'action' => 'index',
-			],
-			[
-				'title' => 'Empresas',
-			]
-		);
-		echo $this->Menu->li('Vagas',
-			[
-				'empresa' => false,
-				'controller' => 'vagas',
-				'action' => 'index',
-			],
-			[
-				'title' => 'Vagas',
-			]
-		);
+		echo $this->Menu->empresas();
+		echo $this->Menu->vagas();
+		
 		echo $this->Menu->li('Minha Empresa',
 			[
 				'empresa' => true,
@@ -70,16 +53,8 @@ if(AuthComponent::user()) {
 else {
 	// deslogado ###############################################################
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
-	echo $this->Menu->li('Empresas',
-		[
-			'admin' => false,
-			'controller' => 'empresas',
-			'action' => 'index',
-		],
-		[
-			'title' => 'Empresas',
-		]
-	);
+	echo $this->Menu->empresas();
+	echo $this->Menu->vagas();
 	echo $this->Html->tag('/ul');
 
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);

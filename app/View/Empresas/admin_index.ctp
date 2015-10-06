@@ -26,6 +26,3 @@ foreach($empresas as $empresa) {
 echo $this->Html->tag('/table');
 echo $this->element('paginator/navigation');
 echo $this->Html->tag('/div');
-
-$this->Js->buffer('loadDlgEditarPadrao();');
-$this->Js->buffer('loadDlgCadastrarPadrao();');

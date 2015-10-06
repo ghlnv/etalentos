@@ -27,6 +27,13 @@ class Empresa extends AppModel {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function excluir($empresaId) {
+		$pessoaId = $this->field('pessoa_id', ['id' => $empresaId]);
+		if($this->Pessoa->delete($pessoaId, true)) {
+			return true;
+		}
+		return $this->delete($empresaId);
+	}
 	public function buscarIdComPessoaId($pessoaId) {
 		return $this->field('id', ['pessoa_id' => $pessoaId]);
 	}

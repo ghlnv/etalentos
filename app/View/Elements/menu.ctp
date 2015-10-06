@@ -2,10 +2,12 @@
 if(AuthComponent::user()) {
 	// logado ##################################################################
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
+	echo $this->Menu->empresas();
+	echo $this->Menu->vagas();
 	
 	// admin ###############################################################
 	if($role->isAdmin()) {
-		echo $this->Menu->li('Empresas',
+		echo $this->Menu->li('Gerenciar Empresas',
 			[
 				'admin' => true,
 				'controller' => 'empresas',
@@ -18,9 +20,6 @@ if(AuthComponent::user()) {
 	}
 	// empresa #############################################################
 	else if ($role->isEmpresa()) {
-		echo $this->Menu->empresas();
-		echo $this->Menu->vagas();
-		
 		echo $this->Menu->li('Minha Empresa',
 			[
 				'empresa' => true,

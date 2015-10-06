@@ -77,7 +77,7 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->Html->tag('div', '', ['class' => 'col-md-3 col-xs-hidden']);
 		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-9']);
 		$ret.= $this->Html->tag('ul');
-		$ret.= $this->Html->tag('li');
+		$ret.= $this->Html->tag('li', null, ['class' => 'empresaSobre']);
 		$ret.= $this->Html->link('Sobre',
 			[
 				'empresa' => false,
@@ -88,7 +88,7 @@ class EmpresasHelper extends AppHelper {
 			[]
 		);
 		$ret.= $this->Html->tag('/li');
-		$ret.= $this->Html->tag('li');
+		$ret.= $this->Html->tag('li', null, ['class' => 'empresaVagas']);
 		$ret.= $this->Html->link('Vagas',
 			[
 				'empresa' => false,
@@ -106,7 +106,7 @@ class EmpresasHelper extends AppHelper {
 		return $ret;
 	}
 	public function linkParaExcluir(&$empresa) {
-		return $this->Html->link($this->Html->image('icons/delete-16.png'),
+		return $this->Html->link($this->Html->image('icons/remove-32.png'),
 			array(
 				'admin' => true,
 				'controller' => 'empresas',
@@ -122,7 +122,7 @@ class EmpresasHelper extends AppHelper {
 		);
 	}
 	public function linkParaEditar(&$empresa) {
-		return $this->Html->link($this->Html->image('icons/edit-16.png'),
+		return $this->Html->link($this->Html->image('icons/edit-32.png'),
 			array(
 				'admin' => true,
 				'controller' => 'empresas',
@@ -130,7 +130,6 @@ class EmpresasHelper extends AppHelper {
 				$empresa['id'],
 			),
 			array(
-				'class' => 'dlgEditarPadrao',
 				'title' => 'Editar empresa',
 				'style' => 'margin: 0 0.5em;',
 				'escape' => false

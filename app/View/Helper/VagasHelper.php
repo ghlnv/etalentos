@@ -4,6 +4,21 @@ class VagasHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function linkVoltarParaMinhasVagas() {
+		return $this->Html->link("&#10096;",
+			array(
+				'empresa' => true,
+				'controller' => 'vagas',
+				'action' => 'index',
+			),
+			array(
+				'class' => 'navLinks',
+				'title' => 'Voltar para minhas vagas',
+				'style' => '',
+				'escape' => false
+			)
+		);
+	}
 	public function linkParaCadastrar() {
 		return $this->Html->link('Cadastrar nova vaga',
 			array(

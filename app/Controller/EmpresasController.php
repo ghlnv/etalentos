@@ -52,8 +52,7 @@ class EmpresasController extends AppController {
 			$this->Session->setFlash(__('Id inválido para a empresa', true));
 		}
 		else {
-			$this->loadModel('Pessoa');
-			if ($this->Pessoa->delete($empresaId, true)) {
+			if ($this->Empresa->excluir($empresaId)) {
 				$this->Session->setFlash(__('Empresa excluída com sucesso!', true), 'flash/success');
 			}
 		}

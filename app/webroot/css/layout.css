@@ -226,6 +226,9 @@ table {
 .paddingBottom {
 	padding-bottom: 20px;
 }
+.navLinks:hover {
+	text-decoration: none;
+}
 
 /******************************************************************************/
 /* Empresa header *************************************************************/
@@ -310,6 +313,7 @@ table {
 }
 .box .box-nav ul li a {
 	display: inline-block;
+	font-size: 16px;
 	padding: 16px;
 	border-bottom: 1px solid transparent;
 	color: rgba(0,0,0,.5);

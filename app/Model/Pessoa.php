@@ -15,14 +15,14 @@ class Pessoa extends AppModel {
 	
 	public $validate = array(
 		'nome' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Nome não pode ficar vazio',
 			),
 		),
 		'email' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Nome não pode ficar vazio',
 			),
 		),

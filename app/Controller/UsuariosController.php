@@ -109,41 +109,6 @@ class UsuariosController extends AppController {
 	}	
 
 	// #########################################################################
-	// Ações de saúde ##########################################################
-	public function saude_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações de saúde ##########################################################
-	public function saudebasica_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações do recepcionista ##################################################
-	public function recepcionista_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações da atendente ######################################################
-	public function atendente_login() {
-		$this->login();
-		$this->render('login');
-	}
-
-	// #########################################################################
-	// Ações do gerente ########################################################
-	public function gerente_login() {
-		$this->login();
-		$this->render('login');
-	}
-	
-	// #########################################################################
 	// Ações do admin ##########################################################
 	public function admin_relatorioLogins() {
 		$this->layout = 'popup';
@@ -181,10 +146,6 @@ class UsuariosController extends AppController {
 		else {
 			$this->request->data = $this->Usuario->buscarParaEditar($usuarioId);
 		}
-	}
-	function admin_login() {
-		$this->login();
-		$this->render('login');
 	}
 
 	// #########################################################################

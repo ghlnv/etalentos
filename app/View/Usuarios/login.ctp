@@ -27,4 +27,17 @@ echo $this->Form->submit('Entrar', array(
 ));
 
 echo $this->Form->end();
+
+echo $this->Html->tag('br');
+echo $this->Html->tag('br');
+echo $this->Html->link("Não possui login? Registre-se &#10097;",
+	[
+		'controller' => 'pessoas',
+		'action' => 'registrar',
+	],
+	[
+		'class' => 'btn btn-primary btn-lg btn-block',
+		'escape' => false,
+	]
+);
 echo $this->Html->tag('/div');

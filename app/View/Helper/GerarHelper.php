@@ -4,17 +4,9 @@ class GerarHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
-	public function imagemLateral() {
-		if(!file_exists($this->request->clinimapConfig['Config']['imagem_lateral'])) {
-			$imagemLateral = 'logo-lateral.png';
-		}
-		else {
-			$imagemLateral = '/';
-			$imagemLateral.= $this->request->clinimapConfig['Config']['imagem_lateral'];
-		}
-		return $this->Html->image($imagemLateral, array(
-			'class' => 'imagemLateral imagemLateralPrincipal',
-		));
+	public function explodeReset($string) {
+		$string = explode(' ', $string);
+		return reset($string);
 	}
 	public function playBeep() {
 		$ret = '';

@@ -39,9 +39,12 @@
  */
 class EmailConfig {
 
-	public $default = array(
-		'transport' => 'Mail',
-		'from' => 'you@localhost',
+public $default = array(
+//		'transport' => 'Mail',
+		'transport' => 'Debug',
+		'from' => array('noreply@etalentos.com.br' => 'eTalentos'),
+		'emailFormat' => 'html',
+		'log' => true,
 		//'charset' => 'utf-8',
 		//'headerCharset' => 'utf-8',
 	);

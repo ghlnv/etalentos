@@ -4,6 +4,19 @@ class VagasHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function linkCandidatar(&$vaga) {
+		return $this->Html->link("Demonstrar interesse &#10097;",
+			[
+				'controller' => 'vagas',
+				'action' => 'interessar',
+				$vaga['Vaga']['id'],
+			],
+			[
+				'class' => 'btn btn-warning btn-lg',
+				'escape' => false,
+			]
+		);
+	}
 	public function linkVoltarParaMinhasVagas() {
 		return $this->Html->link("&#10096;",
 			array(

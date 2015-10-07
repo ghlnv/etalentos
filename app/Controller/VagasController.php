@@ -37,6 +37,9 @@ class VagasController extends AppController {
 			'empresa' => $this->Empresa->buscar($vaga['Vaga']['empresa_id']),
 		]);
 	}
+	public function interessar($vagaId) {
+		
+	}
 
 	// #########################################################################
 	// Ações do admin ##########################################################

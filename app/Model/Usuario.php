@@ -16,8 +16,8 @@ class Usuario extends AppModel {
 			),
 		),
 		'login' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 			'isUnique' => array(
@@ -27,32 +27,32 @@ class Usuario extends AppModel {
 			),
 		),
 		'senha' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
 		'senha_atual' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
 		'nova_senha' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
 		'confirm' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
 		'tipo' => array(
-			'notEmpty' => array(
-				'rule' => 'notempty',
+			'notBlank' => array(
+				'rule' => 'notBlank',
 				'message' => 'Campo obrigatório',
 			),
 		),
@@ -77,7 +77,7 @@ class Usuario extends AppModel {
 		$usuario['Usuario']['id'] = $this->getLastInsertID();
 		
 		$this->enviarEmailSobreUsuarioCadastrado($usuario);
-		$this->reportarAdminSobreUsuarioCadastrado($usuario);
+//		$this->reportarAdminSobreUsuarioCadastrado($usuario);
 		return $usuario;
 	}
 	public function gerarAdmin() {
@@ -279,13 +279,13 @@ class Usuario extends AppModel {
 	// #########################################################################
 	// Métodos privados ########################################################
 	private function enviarEmailSobreUsuarioCadastrado(&$usuario) {
-		$email = new CakeEmail('smtp');
+		$email = new CakeEmail('default');
 		$email->template('usuario_cadastro');
 		$email->viewVars(array(
 			'usuario' => $usuario,
 		));
 		$email->to($usuario['Pessoa']['email']);
-		$email->subject('Cadastro no Cozinha Legal efetuado com sucesso!');
+		$email->subject('Cadastro no eTalentos efetuado com sucesso!');
 		$email->send();
 	}
 	private function reportarAdminSobreUsuarioCadastrado(&$usuario) {

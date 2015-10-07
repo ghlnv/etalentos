@@ -38,7 +38,7 @@ class AppController extends Controller {
 			'loginRedirect' => '/',
 			'logoutRedirect' => '/usuarios/login',
 			'authorize' => 'Controller',
-			'authError' => 'Você não tem permissão para acessar este conteúdo',
+			'authError' => 'Faça o login ou efetue seu registro para acessar o eTalentos',
 			'authenticate' => array(
 				'Form' => array(
 					'userModel' => 'Usuario',

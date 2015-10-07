@@ -24,7 +24,12 @@ echo $vaga['Vaga']['localizacao'];
 echo $this->Html->tag('/div');
 echo $this->Html->tag('/span');
 
-echo $this->Html->tag('hr');
+echo $this->Html->tag('hr', null, ['style' => 'margin-bottom: 0;']);
+echo $this->Html->tag('div', null, ['style' => 'text-align: right;']);
+echo $this->Vagas->linkCandidatar($vaga);
+echo $this->Html->tag('/div');
+echo $this->Html->tag('hr', null, ['style' => 'margin-top: 0;']);
+
 echo $this->Html->tag('div', null, ['class' => 'paddingLeft paddingRight paddingBottom']);
 echo $vaga['Vaga']['descricao'];
 echo $this->Html->tag('/div');

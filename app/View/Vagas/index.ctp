@@ -14,10 +14,10 @@ echo $this->Html->tag('/div');
 echo $this->Html->tag('div', null, ['class' => 'zebra row']);
 foreach($vagas as $vaga) {
 	echo $this->Html->tag('div', null, [
-		'class' => 'col-md-6 box realce',
+		'class' => 'col-md-4 box realce box-profile',
 		'style' => 'padding: 0 5px;',
 	]);
-	echo $this->Empresas->avatarSmall($vaga);
+	echo $this->Empresas->linkAvatar($vaga, 'position: static;');
 	
 	echo $this->Html->tag('div', null, [
 		'style' => 'display: inline-block; vertical-align: top; padding: 5px;',

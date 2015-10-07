@@ -32,6 +32,11 @@ class AppSchema extends CakeSchema {
 			'null' => false,
 			'default' => NULL
 		),
+		'ramo' => array(
+			'type' => 'string',
+			'null' => false,
+			'default' => NULL
+		),
 		'twitter' => array(
 			'type' => 'string',
 			'null' => false,

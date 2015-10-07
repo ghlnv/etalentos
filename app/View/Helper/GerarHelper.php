@@ -322,7 +322,7 @@ class GerarHelper extends AppHelper {
 		$ret.= $this->Html->tag('/span');
 		return $ret;
 	}
-	function sumarizar($paragraph, $limit = 100) {
+	function sumarizar($paragraph, $limit = 200) {
 		return $this->Text->truncate(trim(strip_tags($paragraph)), $limit, array(
 			'ellipsis' => '...',
 			'exact' => true,

@@ -25,7 +25,7 @@ class EmpresasHelper extends AppHelper {
 			'style' => "background-image: url('$avatarImageUrl');",
 		]);
 	}
-	public function linkAvatar(&$empresa) {
+	public function linkAvatar(&$empresa, $style = '') {
 		$avatarImageUrl = $this->Html->url('/'.$empresa['Empresa']['image_avatar']);
 		return $this->Html->link('',
 			[
@@ -36,7 +36,7 @@ class EmpresasHelper extends AppHelper {
 			],
 			[
 				'class' => 'box-avatar',
-				'style' => "background-image: url('$avatarImageUrl');",
+				'style' => "background-image: url('$avatarImageUrl'); $style",
 			]
 		);
 	}
@@ -288,10 +288,17 @@ class EmpresasHelper extends AppHelper {
 			'div' => array('style' => ''),
 			'label' => 'Nome da empresa',
 		));
+		
+		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
+		$ret.= $this->Form->input('Empresa.ramo', array(
+			'div' => array('class' => 'input text col-md-4'),
+			'label' => 'Ramo de atividade',
+		));
 		$ret.= $this->Form->input('Empresa.localizacao', array(
-			'div' => array('style' => ''),
+			'div' => array('class' => 'input text col-md-8'),
 			'label' => 'Localização da empresa',
 		));
+		$ret.= $this->Html->tag('/div');
 		
 		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
 		$ret.= $this->Form->input('Empresa.twitter', array(

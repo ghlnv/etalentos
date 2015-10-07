@@ -14,7 +14,7 @@ echo $this->Html->tag('/div');
 echo $this->Html->tag('div', null, ['class' => 'zebra row']);
 foreach($empresas as $empresa) {
 	echo $this->Html->tag('div', null, [
-		'class' => 'col-md-4 box box-profile realce',
+		'class' => 'col-md-4 box box-profile',
 		'style' => 'padding: 0;',
 	]);
 	echo $this->Empresas->boxImage($empresa);
@@ -36,10 +36,16 @@ foreach($empresas as $empresa) {
 	echo $this->Html->tag('/span');
 	echo $this->Html->tag('/div');
 	echo $this->Html->tag('hr', '', ['style' => 'margin: 0']);
+	echo $this->Html->tag('div', null, ['class' => 'box-padding smallText']);
+	echo $this->Html->tag('span', '', ['class' => 'meta-icon fa fa-cogs']);
+	echo $empresa['Empresa']['ramo'];
+	echo $this->Html->tag('/div');
+
+	echo $this->Html->tag('hr', '', ['style' => 'margin: 0']);
 	echo $this->Html->tag('div', null, [
 		'style' => 'color: #999; font-size: 16px; padding: 5px;',
 	]);
-	echo $this->Gerar->sumarizar($empresa['Empresa']['descricao'], 100);
+	echo $this->Gerar->sumarizar($empresa['Empresa']['descricao'], 200);
 	echo $this->Html->tag('/div');
 	
 	echo $this->Empresas->linkParaVerBotao($empresa);

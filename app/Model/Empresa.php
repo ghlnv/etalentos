@@ -54,9 +54,20 @@ class Empresa extends AppModel {
 		}
 		return $this->save($requestData);
 	}
-	public function cadastrar($data) {
-		$data['Usuario']['tipo'] = 'empresa';
-		return $this->Pessoa->cadastrarUsuario($data);
+	public function cadastrar($requestData) {
+		$this->loadModel('Usuario');
+		$requestData['Usuario']['tipo'] = 'empresa';
+		
+		$usuario = $this->Usuario->cadastrar($requestData);
+		if(!$usuario) {
+			return false;
+		}
+		
+		$requestData['Empresa']['pessoa_id'] = $usuario['Usuario']['pessoa_id'];
+		if(!$this->save($requestData['Empresa'])) {
+			return false;
+		}
+		return $usuario;
 	}
 
 	// #########################################################################

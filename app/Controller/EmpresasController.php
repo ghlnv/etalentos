@@ -31,9 +31,14 @@ class EmpresasController extends AppController {
 	}
 	public function registrar() {
 		if($this->request->is('post')) {
-			if($this->Empresa->cadastrar($this->request->data)) {
-				$this->Session->setFlash(__('Empresa cadastrada com sucesso!', true), 'flash/success');
-				$this->redirect($this->referer());
+			$usuario = $this->Empresa->cadastrar($this->request->data);
+			if($usuario) {
+				$this->Auth->login($usuario['Usuario']);
+				$this->Session->setFlash("Seu cadastrado foi realizado com sucesso! Sua senha inicial foi enviada para seu e-mail. Obrigado!", 'flash/success');
+				$this->redirect([
+					'empresa' => true,
+					'action' => 'gerenciar',
+				]);
 			}
 			else {
 				$this->Session->setFlash(__('Empresa NÃO cadastrada. Verifique os erros no formulário.', true));

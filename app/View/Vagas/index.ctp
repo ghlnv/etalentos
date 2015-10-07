@@ -14,7 +14,10 @@ echo $this->Html->tag('/div');
 echo $this->Html->tag('div', null, ['class' => 'zebra row']);
 foreach($vagas as $vaga) {
 	echo $this->Html->tag('div', null, [
-		'class' => 'col-md-4 box realce box-profile',
+		'class' => 'col-md-4',
+	]);
+	echo $this->Html->tag('div', null, [
+		'class' => 'box realce box-profile',
 		'style' => 'padding: 0 5px;',
 	]);
 	echo $this->Empresas->linkAvatar($vaga, 'position: static;');
@@ -40,6 +43,7 @@ foreach($vagas as $vaga) {
 	]);
 	echo $vaga['Vaga']['localizacao'];
 	echo $this->Html->tag('/span');
+	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 }

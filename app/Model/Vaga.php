@@ -9,6 +9,9 @@ class Vaga extends AppModel {
 	public $belongsTo = array(
 		'Empresa',
 	);
+	public $hasMany = array(
+		'Interessado',
+	);
 
 	public $validate = array(
 		'titulo' => array(
@@ -39,6 +42,14 @@ class Vaga extends AppModel {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function buscarVagaEmpresa($id) {
+		return $this->find('first', array(
+			'conditions' => array(
+				'Vaga.id' => $id,
+			),
+			'contain' => ['Empresa'],
+		));
+	}
 	public function buscar($id) {
 		return $this->find('first', array(
 			'conditions' => array(

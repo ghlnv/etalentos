@@ -38,7 +38,33 @@ class VagasController extends AppController {
 		]);
 	}
 	public function interessar($vagaId) {
+		$this->loadModel('Interessado');
+		$this->loadModel('Pessoa');
+		$this->request->data['Interessado']['vaga_id'] = $vagaId;
+		$this->request->data['Interessado']['pessoa_id'] = AuthComponent::user('pessoa_id');
+		$this->request->data['Pessoa']['id'] = $this->request->data['Interessado']['pessoa_id'];
+				
+		if(!empty($this->request->is('put'))) {
+			if ($this->Interessado->atualizar($this->request->data)) {
+				$this->Session->setFlash(__('Interesse enviado com sucesso!', true), 'flash/success');
+				$this->contentReload();
+				$this->fecharDialog();
+			}
+			else {
+				$this->Session->setFlash(__('Interesse NÃO enviado. Verifique os erros no formulário.', true));
+			}
+		}
 		
+		$pessoa = $this->Pessoa->buscarPerfil($this->request->data['Interessado']['pessoa_id']);
+		$interessado = $this->Interessado->buscarPorVagaEPessoa(
+			$vagaId,
+			$pessoa['Pessoa']['id']
+		);
+		$this->request->data = array_merge($pessoa, $interessado);
+		
+		$this->set([
+			'vaga' => $this->Vaga->buscarVagaEmpresa($vagaId),
+		]);
 	}
 
 	// #########################################################################

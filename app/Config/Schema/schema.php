@@ -145,6 +145,60 @@ class AppSchema extends CakeSchema {
 			'engine' => 'InnoDB',
 		),
 	);
+	var $interessados = array(
+		'id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'primary'
+		),
+		'pessoa_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
+		'vaga_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
+		'mensagem' => array(
+			'type' => 'text',
+			'null' => true,
+			'default' => NULL,
+		),
+		'created' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'modified' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'indexes' => array(
+			'PRIMARY' => array(
+				'column' => 'id',
+				'unique' => 1
+			),
+			'fk_interessados_pessoas' => array(
+				'column' => 'pessoa_id',
+				'unique' => 0
+			),
+			'fk_interessados_vagas' => array(
+				'column' => 'vaga_id',
+				'unique' => 0
+			),
+		),
+		'tableParameters' => array(
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci',
+			'engine' => 'MyISAM'
+		)
+	);
 	var $pessoas = array(
 		'id' => array(
 			'type' => 'integer',
@@ -197,22 +251,47 @@ class AppSchema extends CakeSchema {
 			'default' => NULL,
 			'length' => 64
 		),
-		'cr_documento' => array(
-			'type' => 'string',
-			'null' => true,
-			'default' => NULL,
-			'length' => 8
-		),
-		'cr' => array(
-			'type' => 'string',
-			'null' => true,
-			'default' => NULL,
-			'length' => 64
-		),
 		'assinatura' => array(
 			'type' => 'text',
 			'null' => true,
 			'default' => NULL,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'curriculo_objetivo' => array(
+			'type' => 'text',
+			'null' => true,
+			'default' => NULL,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'curriculo_formacao' => array(
+			'type' => 'text',
+			'null' => true,
+			'default' => NULL,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'curriculo_experiencia' => array(
+			'type' => 'text',
+			'null' => true,
+			'default' => NULL,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'curriculo_atividades_complementares' => array(
+			'type' => 'text',
+			'null' => true,
+			'default' => NULL,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'curriculo_informacoes_adicionais' => array(
+			'type' => 'text',
+			'null' => true,
+			'default' => NULL,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
 		),
 		'telefone' => array(
 			'type' => 'string',

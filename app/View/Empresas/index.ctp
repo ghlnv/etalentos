@@ -14,7 +14,10 @@ echo $this->Html->tag('/div');
 echo $this->Html->tag('div', null, ['class' => 'zebra row']);
 foreach($empresas as $empresa) {
 	echo $this->Html->tag('div', null, [
-		'class' => 'col-md-4 box box-profile',
+		'class' => 'col-md-4',
+	]);
+	echo $this->Html->tag('div', null, [
+		'class' => 'box box-profile',
 		'style' => 'padding: 0;',
 	]);
 	echo $this->Empresas->boxImage($empresa);
@@ -49,6 +52,7 @@ foreach($empresas as $empresa) {
 	echo $this->Html->tag('/div');
 	
 	echo $this->Empresas->linkParaVerBotao($empresa);
+	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 }
 echo $this->Html->tag('/div');

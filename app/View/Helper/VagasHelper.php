@@ -32,6 +32,22 @@ class VagasHelper extends AppHelper {
 			)
 		);
 	}
+	public function linkVoltarParaDescricao(&$vaga) {
+		return $this->Html->link("&#10096;",
+			array(
+				'empresa' => false,
+				'controller' => 'vagas',
+				'action' => 'ver',
+				$vaga['Vaga']['id'],
+			),
+			array(
+				'class' => 'navLinks',
+				'title' => 'Voltar para descricao da vaga',
+				'style' => '',
+				'escape' => false
+			)
+		);
+	}
 	public function linkParaCadastrar() {
 		return $this->Html->link('Cadastrar nova vaga',
 			array(

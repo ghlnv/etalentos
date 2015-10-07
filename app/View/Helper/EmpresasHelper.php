@@ -54,11 +54,16 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->Html->tag('div', null, ['class' => 'box-details on-sm-down-padding-sm-left']);
 		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
 		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-8']);
-		$ret.= $this->Html->tag('div', $empresa['Empresa']['nome'], ['class' => 'box-details-title']);
-		$ret.= $this->Html->tag('span', $empresa['Empresa']['localizacao'], [
-			'class' => 'summary',
-			'title' => 'Sede',
-		]);
+
+		if($empresa['Empresa']['nome']) {
+			$ret.= $this->Html->tag('div', $empresa['Empresa']['nome'], ['class' => 'box-details-title']);
+		}
+		if($empresa['Empresa']['localizacao']) {
+			$ret.= $this->Html->tag('span', $empresa['Empresa']['localizacao'], [
+				'class' => 'summary',
+				'title' => 'Sede',
+			]);
+		}
 		$ret.= $this->Html->tag('/div');
 
 		$ret.= $this->Html->tag('div', null, ['class' => 'col-md-4 text-right']);

@@ -84,7 +84,7 @@ class PessoasHelper extends AppHelper {
 			'size' => 20,
 			'class' => 'form-control empty',
 			'style' => 'width: 200px;',
-		));  
+		));
 		$ret.= $this->Html->tag('/div');
 
 		$ret.= $this->Form->submit('Salvar', array(
@@ -96,12 +96,51 @@ class PessoasHelper extends AppHelper {
 		$ret.= $this->Form->end();
 		return $ret;
 	}
+	public function formEditarLoginSenhaAdmin() {
+		$ret = '';
+		$ret.= $this->Form->create('Usuario', array(
+			'url' => array(
+				'controller' => 'pessoas',
+			),
+			'class' => 'cakeForm centralizarComTamanhoMaximo',
+			'style' => 'max-width: 300px; padding: 0 2em;',
+		));
+		$ret.= $this->Form->input('id');
+		$ret.= $this->Form->input('Usuario.login', array(
+			'div' => [
+				'class' => 'input text form-group',
+			],
+			'label' => 'Login',
+			'class' => 'form-control',
+			'readonly' => true,
+		));
+		$ret.= $this->Form->input('nova_senha', array(
+			'div' => [
+				'class' => 'input text form-group',
+			],
+			'label'=> 'Nova Senha',
+			'type' => 'password',
+			'size' => 20,
+			'class' => 'form-control empty',
+		));
+		$ret.= $this->Form->input('confirm', array(
+			'div' => [
+				'class' => 'input text form-group',
+			],
+			'label'=> 'Confirme a nova senha',
+			'type' => 'password',
+			'size' => 20,
+			'class' => 'form-control empty',
+		));
+		$ret.= $this->Form->submit('Salvar');
+		$ret.= $this->Form->end();
+		return $ret;
+	}
 	public function formPerfil() {
 		$ret = '';
 		$ret.= $this->Form->create('Pessoa', array(
 			'url' => array(
 				'controller' => 'pessoas',
-				'action' => 'meuPerfil',
 			),
 			'class' => 'centralizarComTamanhoMaximo',
 			'style' => 'max-width: 700px; padding: 0 2em;',
@@ -208,6 +247,36 @@ class PessoasHelper extends AppHelper {
 		$ret.= $this->Form->end();
 		return $ret;
 	}
+	public function formBuscaPadrao() {
+		$ret = '';
+		$ret.= $this->Form->create('Filtro', array(
+			'url' => [
+				'controller' => $this->request->params['controller'],
+			],
+			'class' => 'form-inline',
+			'style' => 'margin-bottom: 10px; padding: 10px;',
+		));
+		$ret.= $this->Form->input('Filtro.keywords', array(
+			'div' => [
+				'class' => 'form-group col-md-4',
+				'style' => 'display: inline-block; float: none; padding: 0 5px 0 0; min-width: 200px;',
+			],
+			'label' => false,
+			'placeholder' => 'Palavras-chaves...',
+			'title' => 'Palavras-chaves...',
+			'class' => 'form-control',
+			'style' => 'width: 100%',
+		));
+		$ret.= $this->Form->submit('Buscar', array(
+			'div' => [
+				'class' => 'form-group col-md-2',
+				'style' => 'display: inline-block; float: none; padding: 0;',
+			],
+			'class' => 'btn btn-default',
+		));
+		$ret.= $this->Form->end();
+		return $ret;
+	}
 	public function linkPagina(&$pessoa) {
 		return $this->Html->link("Ver página de currículo &#10095;",
 			array(
@@ -221,6 +290,52 @@ class PessoasHelper extends AppHelper {
 				'class' => 'btn btn-primary',
 				'title' => 'Veja e compartilhe seu currículo',
 				'style' => 'float: right; margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
+	public function linkParaExcluir(&$pessoa) {
+		return $this->Html->link($this->Html->image('icons/remove-32.png'),
+			array(
+				'admin' => true,
+				'controller' => 'pessoas',
+				'action' => 'excluir',
+				$pessoa['id'],
+			),
+			array(
+				'title' => 'Excluir pessoa',
+				'style' => 'margin: 0 0.5em;',
+				'confirm' => 'Tem certeza que deseja excluir esta pessoa?',
+				'escape' => false
+			)
+		);
+	}
+	public function linkParaEditar(&$pessoa) {
+		return $this->Html->link($this->Html->image('icons/edit-32.png'),
+			array(
+				'admin' => true,
+				'controller' => 'pessoas',
+				'action' => 'editar',
+				$pessoa['id'],
+			),
+			array(
+				'title' => 'Editar pessoa',
+				'style' => 'margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
+	public function linkVoltarParaPessoas() {
+		return $this->Html->link("&#10096;",
+			array(
+				'admin' => true,
+				'controller' => 'pessoas',
+				'action' => 'index',
+			),
+			array(
+				'class' => 'navLinks',
+				'title' => 'Voltar para gerenciar pessoas',
+				'style' => '',
 				'escape' => false
 			)
 		);

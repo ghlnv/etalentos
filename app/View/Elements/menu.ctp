@@ -17,6 +17,16 @@ if(AuthComponent::user()) {
 				'title' => 'Gerenciar empresas',
 			]
 		);
+		echo $this->Menu->li('Pessoas',
+			[
+				'admin' => true,
+				'controller' => 'pessoas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Gerenciar pessoas',
+			]
+		);
 	}
 	// empresa #############################################################
 	else if ($role->isEmpresa()) {

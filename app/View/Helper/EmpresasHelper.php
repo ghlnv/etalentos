@@ -152,7 +152,7 @@ class EmpresasHelper extends AppHelper {
 			array(
 				'title' => 'Excluir empresa',
 				'style' => 'margin: 0 0.5em;',
-				'confirm' => 'Tem certeza que deseja excluir este empresa?',
+				'confirm' => 'Tem certeza que deseja excluir esta empresa?',
 				'escape' => false
 			)
 		);

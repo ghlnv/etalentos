@@ -69,7 +69,7 @@ class EmpresasController extends AppController {
 			$this->Session->setFlash(__('Id inválido para a empresa', true));
 		}
 		else {
-			if ($this->Empresa->excluir($empresaId)) {
+			if ($this->Empresa->delete($empresaId)) {
 				$this->Session->setFlash(__('Empresa excluída com sucesso!', true), 'flash/success');
 			}
 		}
@@ -91,8 +91,8 @@ class EmpresasController extends AppController {
 		}
 	}
 	public function admin_index() {
-		if(!empty($this->request->params['named']['keyword'])) {
-			$tokens = explode(' ', trim($this->request->params['named']['keyword']));
+		if(!empty($this->request->params['named']['keywords'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
 			foreach($tokens as $token) {
 				$this->paginate['Empresa']['conditions'][]['OR'] = array(
 					'Empresa.nome LIKE' => "%$token%",

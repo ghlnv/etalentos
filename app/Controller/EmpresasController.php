@@ -54,6 +54,7 @@ class EmpresasController extends AppController {
 		$this->loadModel('Vaga');
 		$this->paginate['Vaga']['conditions'] = [
 			'Vaga.empresa_id' => $empresaId,
+			'Vaga.data_limite >' => date('Y-m-d'),
 		];
 		
 		$this->set([

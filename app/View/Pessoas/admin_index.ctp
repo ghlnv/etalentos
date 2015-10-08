@@ -18,6 +18,7 @@ foreach($pessoas as $pessoa) {
 		'class' => 'col-md-2',
 		'style' => 'text-align: right;',
 	]);
+	echo $this->Pessoas->linkCurriculo($pessoa['Pessoa']);
 	echo $this->Pessoas->linkParaEditar($pessoa['Pessoa']);
 	echo $this->Pessoas->linkParaExcluir($pessoa['Pessoa']);
 	echo $this->Html->tag('/div');

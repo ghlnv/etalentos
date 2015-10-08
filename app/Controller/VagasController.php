@@ -15,6 +15,7 @@ class VagasController extends AppController {
 	// Ações ###################################################################
 	public function index() {
 		$this->paginateConditions();
+		$this->paginate['Vaga']['conditions']['Vaga.data_limite >'] = date('Y-m-d');
 		$this->paginate['Vaga']['contain'] = ['Empresa'];
 		$this->set('vagas', $this->paginate('Vaga'));
 	}

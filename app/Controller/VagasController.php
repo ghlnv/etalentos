@@ -33,7 +33,8 @@ class VagasController extends AppController {
 		$this->request->data['Interessado']['pessoa_id'] = AuthComponent::user('pessoa_id');
 		$this->request->data['Pessoa']['id'] = $this->request->data['Interessado']['pessoa_id'];
 		
-		if($this->request->is('post')) {
+		if($this->request->is('post')
+		|| $this->request->is('put')) {
 			if ($this->Interessado->atualizar($this->request->data)) {
 				$this->Session->setFlash(__('Interesse enviado com sucesso!', true), 'flash/success');
 				$this->contentReload();

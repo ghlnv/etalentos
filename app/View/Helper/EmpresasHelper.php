@@ -209,7 +209,7 @@ class EmpresasHelper extends AppHelper {
 				'controller' => 'empresas',
 				'action' => 'ver',
 				$empresa['id'],
-				Inflector::slug($empresa['Empresa']['nome'], '-'),
+				Inflector::slug($empresa['nome'], '-'),
 			),
 			array(
 				'class' => 'btn btn-primary',

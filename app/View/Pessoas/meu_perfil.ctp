@@ -6,60 +6,7 @@ echo $this->Html->tag('/h1');
 
 echo $this->Html->tag('hr');
 
-echo $this->Form->create('Pessoa', array(
-	'url' => array(
-		'controller' => 'pessoas',
-		'action' => 'meuPerfil',
-	),
-	'class' => 'centralizarComTamanhoMaximo',
-	'style' => 'padding: 1em 2em;',
-));
-
-echo $this->Form->input('Pessoa.id');
-echo $this->Form->input('Pessoa.nome', array(
-	'div' => ['class' => 'input text required form-group'],
-	'class' => 'form-control',
-	'style' => 'width: 30em;'
-));
-echo $this->Form->input('Pessoa.email', array(
-	'div' => ['class' => 'input text required form-group'],
-	'label' => 'E-mail',
-	'class' => 'form-control',
-	'style' => 'width: 300px;'
-));
-echo $this->Form->input('Pessoa.telefone', array(
-	'div' => [
-		'class' => 'input text form-group',
-		'style' => 'display: inline-block; margin-right: 0.5em;'
-	],
-	'class' => 'form-control mask telefone',
-	'alt' => 'phone',
-	'style' => 'text-align: center;',
-));
-
-echo $this->Form->input('Pessoa.cidade', array(
-	'div' => [
-		'class' => 'input text form-group',
-		'style' => 'display: inline-block; margin-right: 0.5em;'
-	],
-	'class' => 'form-control',
-	'style' => 'width: 12em;',
-));
-echo $this->Form->input('Pessoa.estado', array(
-	'div' => [
-		'class' => 'input text form-group',
-		'style' => 'display: inline-block;'
-	],
-	'class' => 'form-control',
-	'style' => 'width: 3em; text-align: center;'
-));
-
-echo $this->Form->submit('Salvar', array(
-	'div' => array(
-		'style' => 'clear: both;',
-	),
-));
-echo $this->Form->end();
+echo $this->Pessoas->formPerfil();
 
 echo $this->Html->tag('h1');
 echo 'Login e senha';
@@ -131,4 +78,4 @@ echo $this->Html->tag('div', '', array('class' => 'clear'));
 echo $this->Form->end();
 echo $this->Html->tag('/div');
 
-$this->Js->buffer("loadMeioMask()");
+$this->Js->buffer("loadMask()");

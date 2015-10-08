@@ -227,6 +227,11 @@ class AppSchema extends CakeSchema {
 			'null' => true, 
 			'default' => NULL
 		),
+		'nacionalidade' => array(
+			'type' => 'date', 
+			'null' => true, 
+			'default' => NULL
+		),
 		'estado_civil' => array(
 			'type' => 'string',
 			'null' => true,

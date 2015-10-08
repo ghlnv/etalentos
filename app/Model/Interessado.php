@@ -13,6 +13,17 @@ class Interessado extends AppModel {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function completarCountInteressados(&$vagas) {
+		foreach($vagas as $key => $vaga) {
+			$vaga['Vaga']['count_interessados'] = $this->find('count', [
+				'conditions' => [
+					'Interessado.vaga_id' => $vaga['Vaga']['id'],
+				],
+				'contain' => false,
+			]);
+			$vagas[$key] = $vaga;
+		}
+	}
 	public function buscarPorVagaEPessoa($vagaId, $pessoaId) {
 		return $this->find('first', array(
 			'conditions' => array(

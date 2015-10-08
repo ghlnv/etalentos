@@ -256,12 +256,10 @@ p.error em {
 	width: 9em;
 	text-align: center;
 }
-.phone {
-	width: 8em;
-	text-align: center;
-}
+.phone,
 .telefone {
-	width: 130px;
+	width: 150px;
+	text-align: center;
 }
 
 .smallText {

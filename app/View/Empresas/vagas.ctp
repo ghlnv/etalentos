@@ -1,7 +1,6 @@
 <?php
 echo $this->Html->tag('div', null, ['class' => 'container']);
 echo $this->Empresas->header($empresa);
-echo $this->Html->tag('div', null, ['class' => 'box']);
 echo $this->Html->tag('h2', null, ['class' => 'marginLeft marginRight']);
 echo 'Vagas';
 echo $this->Html->tag('/h2');
@@ -20,16 +19,7 @@ foreach ($vagas as $vaga) {
 	echo $this->Html->tag('div', null, [
 		'class' => 'col-md-7 col-xs-12 col-md-height col-middle',
 	]);
-	echo $this->Html->link($vaga['Vaga']['titulo'],
-		[
-			'controller' => 'vagas',
-			'action' => 'ver',
-			$vaga['Vaga']['id']
-		],
-		[
-			'style' => 'font-size: 16px; font-weight: 400; letter-spacing: .3px;'
-		]
-	);
+	echo $this->Vagas->linkParaVer($vaga);
 	echo $this->Html->tag('/div');
 
 	echo $this->Html->tag('div', null, [
@@ -47,7 +37,6 @@ foreach ($vagas as $vaga) {
 	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 }
-echo $this->Html->tag('/div');
 
 echo $this->element('paginator/navigation');
 echo $this->Html->tag('/div');

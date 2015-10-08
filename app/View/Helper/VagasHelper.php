@@ -205,12 +205,30 @@ class VagasHelper extends AppHelper {
 	public function linkParaVer($vaga) {
 		return $this->Html->link($vaga['Vaga']['titulo'],
 			[
+				'empresa' => false,
 				'controller' => 'vagas',
 				'action' => 'ver',
 				$vaga['Vaga']['id']
 			],
 			[
-				'style' => 'font-size: 16px; font-weight: 400; letter-spacing: .3px;'
+				'style' => 'font-size: 18px; font-weight: 400; letter-spacing: .3px;'
+			]
+		);
+	}
+	public function linkInteressados($vaga) {
+		if(!$vaga['count_interessados']) {
+			return false;
+		}
+		$countInteressados = $vaga['count_interessados'];
+		return $this->Html->link("$countInteressados interessado(s)",
+			[
+				'controller' => 'interessados',
+				'action' => 'vaga',
+				$vaga['id']
+			],
+			[
+				'class' => 'btn btn-info',
+				'style' => 'margin: 0 0.5em; vertical-align: top;',
 			]
 		);
 	}

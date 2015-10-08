@@ -14,18 +14,7 @@ class VagasController extends AppController {
 	// #########################################################################
 	// Ações ###################################################################
 	public function index() {
-		if(!empty($this->request->params['named']['keywords'])) {
-			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
-			foreach($tokens as $token) {
-				$this->paginate['Vaga']['conditions'][]['OR'] = array(
-					'Vaga.titulo LIKE' => "%$token%",
-					'Vaga.descricao LIKE' => "%$token%",
-					'Vaga.localizacao LIKE' => "%$token%",
-					'Empresa.nome LIKE' => "%$token%",
-					'Empresa.descricao LIKE' => "%$token%",
-				);
-			}
-		}
+		$this->paginateConditions();
 		$this->paginate['Vaga']['contain'] = ['Empresa'];
 		$this->set('vagas', $this->paginate('Vaga'));
 	}
@@ -100,18 +89,14 @@ class VagasController extends AppController {
 	}
 	public function empresa_index() {
 		$this->loadModel('Empresa');
-		$this->paginate['Vaga']['conditions']['Vaga.empresa_id'] = $this->Empresa->buscarIdComPessoaId(AuthComponent::user('pessoa_id'));
+		$this->loadModel('Interessado');
 		
-		if(!empty($this->request->params['named']['keyword'])) {
-			$tokens = explode(' ', trim($this->request->params['named']['keyword']));
-			foreach($tokens as $token) {
-				$this->paginate['Vaga']['conditions'][]['OR'] = array(
-					'Vaga.titulo LIKE' => "%$token%",
-				);
-			}
-		}
+		$this->paginateConditions();
+		$this->paginate['Vaga']['conditions']['Vaga.empresa_id'] = $this->Empresa->buscarIdComPessoaId(AuthComponent::user('pessoa_id'));
 		$this->paginate['Vaga']['contain'] = false;
-		$this->set('vagas', $this->paginate('Vaga'));
+		$vagas = $this->paginate('Vaga');
+		$this->Interessado->completarCountInteressados($vagas);
+		$this->set('vagas', $vagas);
 	}
 	public function empresa_cadastrar() {
 		if($this->request->is('post')) {
@@ -131,4 +116,18 @@ class VagasController extends AppController {
 
 	// #########################################################################
 	// Métodos privados ########################################################
+	private function paginateConditions() {
+		if(!empty($this->request->params['named']['keywords'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
+			foreach($tokens as $token) {
+				$this->paginate['Vaga']['conditions'][]['OR'] = array(
+					'Vaga.titulo LIKE' => "%$token%",
+					'Vaga.descricao LIKE' => "%$token%",
+					'Vaga.localizacao LIKE' => "%$token%",
+					'Empresa.nome LIKE' => "%$token%",
+					'Empresa.descricao LIKE' => "%$token%",
+				);
+			}
+		}
+	}
 }

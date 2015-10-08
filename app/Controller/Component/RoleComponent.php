@@ -27,13 +27,13 @@ class RoleComponent extends Object {
 		return 'empresa' == AuthComponent::user('tipo');
 	}
 	public function getPessoa() {
-		if (SessionComponent::check('Usuario.Pessoa')) {
-			return SessionComponent::read('Usuario.Pessoa');
+		if (SessionComponent::check('Pessoa')) {
+			return SessionComponent::read('Pessoa');
 		}
 		$this->controller->loadModel('Pessoa');
 		$pessoa = $this->controller->Pessoa->getRole(AuthComponent::user('pessoa_id'));
 		if(!empty($pessoa)) {
-			SessionComponent::write('Usuario.Pessoa', $pessoa);
+			SessionComponent::write('Pessoa', $pessoa);
 			return $pessoa;
 		}
 		return false;

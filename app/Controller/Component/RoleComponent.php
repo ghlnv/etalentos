@@ -27,13 +27,13 @@ class RoleComponent extends Object {
 		return 'empresa' == AuthComponent::user('tipo');
 	}
 	public function getPessoa() {
-		if (SessionComponent::check('Pessoa')) {
-			return SessionComponent::read('Pessoa');
+		if ($this->controller->Session->check('Pessoa')) {
+			return $this->controller->Session->read('Pessoa');
 		}
 		$this->controller->loadModel('Pessoa');
 		$pessoa = $this->controller->Pessoa->getRole(AuthComponent::user('pessoa_id'));
 		if(!empty($pessoa)) {
-			SessionComponent::write('Pessoa', $pessoa);
+			$this->controller->Session->write('Pessoa', $pessoa);
 			return $pessoa;
 		}
 		return false;
@@ -42,7 +42,7 @@ class RoleComponent extends Object {
 		$this->controller->loadModel('Pessoa');
 		$pessoa = $this->controller->Pessoa->getRole(AuthComponent::user('pessoa_id'));
 		if(!empty($pessoa)) {
-			SessionComponent::write('Usuario.Pessoa', $pessoa);
+			$this->controller->Session->write('Pessoa', $pessoa);
 		}
 	}
 	public function error() {

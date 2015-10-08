@@ -26,6 +26,25 @@ function loadCaptchaImage(imageSelector, url) {
 	url+= Math.round(Math.random(0)*1000)+1;
 	$(imageSelector).attr('src', url);
 }
+function loadBirthPicker() {
+	$(".birth").unbind();
+	$(".birth").datepicker({
+		dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+		dateFormat: 'dd-mm-yy',
+		changeMonth: true,
+		changeYear: true,
+		monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+		monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+		yearRange: '-100:-0',
+		showOn:'focus',
+		nextText: 'Próximo',  
+		prevText: 'Anterior',
+		currentText: 'Hoje',
+		inline: true,
+		showButtonPanel: true,
+		closeText: 'Fechar'
+	});
+}
 function loadDatePicker() {
 	$.datepicker._gotoToday = function (id) { 
 		$(id).datepicker('setDate', new Date()).datepicker('hide').blur().change();

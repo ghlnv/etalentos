@@ -228,7 +228,7 @@ class AppSchema extends CakeSchema {
 			'default' => NULL
 		),
 		'nacionalidade' => array(
-			'type' => 'date', 
+			'type' => 'string', 
 			'null' => true, 
 			'default' => NULL
 		),

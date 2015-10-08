@@ -40,7 +40,7 @@ class PessoasController extends AppController {
 	private function salvarMeuPerfil() {
 		if (!empty($this->request->data)) {
 			if(!empty($this->request->data['Pessoa'])) {
-				if ($this->Pessoa->save($this->request->data['Pessoa'])) {
+				if ($this->Pessoa->atualizar($this->request->data)) {
 					$this->Session->setFlash(__('Perfil atualizado com sucesso.', true), 'flash/success');
 				}
 				else {

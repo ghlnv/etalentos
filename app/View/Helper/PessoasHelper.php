@@ -1,6 +1,6 @@
 <?php
 class PessoasHelper extends AppHelper { 
-    var $helpers = array('Html', 'Js', 'Form', 'Text', 'Number'); 
+    var $helpers = array('Html', 'Js', 'Form', 'Gerar'); 
 
 	// #########################################################################
 	// Métodos #################################################################
@@ -64,6 +64,30 @@ class PessoasHelper extends AppHelper {
 			],
 			'class' => 'form-control phone',
 			'style' => 'text-align: center;',
+		));
+		$ret.= $this->Html->tag('br');
+		
+		$ret.= $this->Form->input('Pessoa.nacionalidade', array(
+			'div' => [
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'style' => 'width: 13em;',
+		));
+		$ret.= $this->Form->input('Pessoa.nascimento', array(
+			'div' => [
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'type' => 'text',
+			'class' => 'form-control birth date',
+			'value' => $this->Gerar->brDate($this->request->data['Pessoa']['nascimento']),
+		));
+		$ret.= $this->Form->input('Pessoa.estado_civil', array(
+			'div' => [
+				'style' => 'display: inline-block; margin-right: 0.5em;'
+			],
+			'class' => 'form-control',
+			'style' => 'width: 13em;',
 		));
 		$ret.= $this->Html->tag('br');
 

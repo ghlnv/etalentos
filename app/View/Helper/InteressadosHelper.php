@@ -205,7 +205,7 @@ class InteressadosHelper extends AppHelper {
 			array(
 				'title' => 'Excluir interessado',
 				'style' => 'margin: 0 0.5em;',
-				'confirm' => 'Tem certeza que deseja excluir este vaga?',
+				'confirm' => 'Tem certeza que deseja excluir este interessado?',
 				'escape' => false
 			)
 		);

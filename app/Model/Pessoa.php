@@ -94,6 +94,15 @@ class Pessoa extends AppModel {
 		}
 		return $this->salvarFotoWebcam($pessoa);
 	}
+	public function atualizar($pessoa) {
+		if(!empty($pessoa['Pessoa']['nascimento'])) {
+			$this->beforeSaveBrDatetime($pessoa['Pessoa']['nascimento']);
+		}
+		if(!$this->save($pessoa)) {
+			return false;
+		}
+		return true;
+	}
 	function atualizarPerfil($pessoa) {
 		if(empty($pessoa['Pessoa']['foto'])) {
 			unset($pessoa['Pessoa']['foto']);

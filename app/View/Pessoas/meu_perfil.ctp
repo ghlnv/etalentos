@@ -79,3 +79,4 @@ echo $this->Form->end();
 echo $this->Html->tag('/div');
 
 $this->Js->buffer("loadMask()");
+$this->Js->buffer("loadBirthPicker()");

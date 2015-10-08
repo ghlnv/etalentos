@@ -208,7 +208,8 @@ class VagasHelper extends AppHelper {
 				'empresa' => false,
 				'controller' => 'vagas',
 				'action' => 'ver',
-				$vaga['Vaga']['id']
+				$vaga['Vaga']['id'],
+				Inflector::slug($vaga['Empresa']['nome'], '-'),
 			],
 			[
 				'style' => 'font-size: 18px; font-weight: 400; letter-spacing: .3px;'

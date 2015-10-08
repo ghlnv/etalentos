@@ -44,6 +44,72 @@ class AppModel extends Model {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function imageCrop($fullPath, $newFileFullPath, $options) {  
+		$filetype = exif_imagetype($fullPath);
+		$allowedTypes = array( 
+			1,	// gif 
+			2,	// jpg 
+			3,	// png 
+//			6	// bmp 
+		);
+		if(!in_array($filetype, $allowedTypes)) { 
+			return false; 
+		} 
+		switch($filetype){
+			case 1:
+				$imgSrc = imagecreatefromgif($fullPath);
+			break;
+			case 2:
+				$imgSrc = imagecreatefromjpeg($fullPath);
+			break;
+			case 3:
+				$imgSrc = imagecreatefrompng($fullPath);
+			break;
+		}
+
+		$width = imagesx($imgSrc);
+		$height = imagesy($imgSrc);
+
+		$originalAspect = $width / $height;
+		$thumbAspect = $options['width'] / $options['height'];
+
+		if($originalAspect >= $thumbAspect) {
+			// If image is wider than thumbnail (in aspect ratio sense)
+			$newHeight = $options['height'];
+			$newWidth = $width / ($height / $options['height']);
+		}
+		else {
+			// If the thumbnail is wider than the image
+			$newWidth = $options['width'];
+			$newHeight = $height / ($width / $options['width']);
+		}
+
+		//-- Calculate cropping (division by zero)
+		$cropX = ($newWidth - $options['width'] != 0) ? ($newWidth - $options['width']) / 2 : 0;
+		$cropY = ($newHeight - $options['height'] != 0) ? ($newHeight - $options['height']) / 2 : 0;
+
+		//-- Setup Resample & Crop buffers
+		$resampled = imagecreatetruecolor($newWidth, $newHeight);
+		$cropped = imagecreatetruecolor($options['width'], $options['height']);
+
+		//-- Resample
+		imagecopyresampled($resampled, $imgSrc, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+		//-- Crop
+		imagecopy($cropped, $resampled, 0, 0, $cropX, $cropY, $newWidth, $newHeight);
+
+		// Save the cropped image
+		switch($filetype) {
+			case 1:
+				imagegif($cropped,$newFileFullPath);
+			break;
+			case 2:
+				imagejpeg($cropped,$newFileFullPath,100);
+			break;
+			case 3:
+				imagepng($cropped,$newFileFullPath,9);
+			break;
+		}
+	}
 	public function deleteFile($filePath) {
 		if(file_exists($filePath)) {
 			if(!unlink($filePath)) {

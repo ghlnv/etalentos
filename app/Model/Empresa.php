@@ -49,6 +49,27 @@ class Empresa extends AppModel {
 		$this->salvarImagem($requestData, 'image_header');
 		$this->salvarImagem($requestData, 'image_avatar');
 		
+		if(!empty($requestData['Empresa']['image_header'])) {
+			$this->imageCrop(
+				$requestData['Empresa']['image_header'],
+				$requestData['Empresa']['image_header'],
+				[
+					'width' => '1138',
+					'height' => '353',
+				]
+			);
+		}
+		if(!empty($requestData['Empresa']['image_avatar'])) {
+			$this->imageCrop(
+				$requestData['Empresa']['image_avatar'],
+				$requestData['Empresa']['image_avatar'],
+				[
+					'width' => '160',
+					'height' => '160',
+				]
+			);
+		}
+		
 		if(!$this->validates()) {
 			return false;
 		}

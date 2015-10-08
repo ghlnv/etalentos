@@ -6,12 +6,18 @@ class PessoasController extends AppController {
 	public function beforeFilter() {
 		AppController::beforeFilter();
 		$this->Auth->allow(array(
+			'curriculo',
 			'registrar',
 		));
 	}
 	
 	// #########################################################################
 	// Ações ###################################################################
+	public function curriculo($pessoaId) {
+		$this->set([
+			'pessoa' => $this->Pessoa->buscarPerfil($pessoaId),
+		]);
+	}
 	public function registrar() {
 		$this->loadModel('Usuario');
 		if(AuthComponent::user('id')) {

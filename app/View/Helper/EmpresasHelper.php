@@ -33,6 +33,7 @@ class EmpresasHelper extends AppHelper {
 				'controller' => 'empresas',
 				'action' => 'ver',
 				$empresa['Empresa']['id'],
+				Inflector::slug($empresa['Empresa']['nome'], '-'),
 			],
 			[
 				'class' => 'box-avatar',
@@ -116,7 +117,8 @@ class EmpresasHelper extends AppHelper {
 				'empresa' => false,
 				'controller' => 'empresas',
 				'action' => 'ver',
-				$empresa['Empresa']['id']
+				$empresa['Empresa']['id'],
+				Inflector::slug($empresa['Empresa']['nome'], '-'),
 			],
 			[]
 		);
@@ -127,7 +129,8 @@ class EmpresasHelper extends AppHelper {
 				'empresa' => false,
 				'controller' => 'empresas',
 				'action' => 'vagas',
-				$empresa['Empresa']['id']
+				$empresa['Empresa']['id'],
+				Inflector::slug($empresa['Empresa']['nome'], '-'),
 			],
 			[]
 		);
@@ -175,7 +178,8 @@ class EmpresasHelper extends AppHelper {
 				'admin' => false,
 				'controller' => 'empresas',
 				'action' => 'ver',
-				$empresa['Empresa']['id']
+				$empresa['Empresa']['id'],
+				Inflector::slug($empresa['Empresa']['nome'], '-'),
 			],
 			[
 				'style' => 'font-size: 16px; font-weight: 400; letter-spacing: .3px;'
@@ -188,7 +192,8 @@ class EmpresasHelper extends AppHelper {
 				'admin' => false,
 				'controller' => 'empresas',
 				'action' => 'ver',
-				$empresa['Empresa']['id']
+				$empresa['Empresa']['id'],
+				Inflector::slug($empresa['Empresa']['nome'], '-'),
 			],
 			[
 				'class' => 'btn btn-info',
@@ -204,6 +209,7 @@ class EmpresasHelper extends AppHelper {
 				'controller' => 'empresas',
 				'action' => 'ver',
 				$empresa['id'],
+				Inflector::slug($empresa['Empresa']['nome'], '-'),
 			),
 			array(
 				'class' => 'btn btn-primary',
@@ -280,12 +286,12 @@ class EmpresasHelper extends AppHelper {
 		$ret.= $this->Form->input('Empresa.image_header', array(
 			'div' => array('class' => 'input file col-xs-6'),
 			'type' => 'file',
-			'label' => 'Imagem do cabeçalho',
+			'label' => 'Imagem do cabeçalho (1138x353)',
 		));
 		$ret.= $this->Form->input('Empresa.image_avatar', array(
 			'div' => array('class' => 'input file col-xs-6'),
 			'type' => 'file',
-			'label' => 'Imagem do avatar',
+			'label' => 'Imagem do avatar (160x160)',
 		));
 		$ret.= $this->Html->tag('/div');
 		

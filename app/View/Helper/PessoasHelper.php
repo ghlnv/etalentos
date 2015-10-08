@@ -30,6 +30,72 @@ class PessoasHelper extends AppHelper {
 		$ret.= $this->Html->tag('/div');
 		return $ret;
 	}
+	public function formEditarLoginSenha() {
+		$ret = '';
+		$ret.= $this->Form->create('Usuario', array(
+			'url' => array(
+				'controller' => 'pessoas',
+			),
+			'class' => 'cakeForm centralizarComTamanhoMaximo',
+			'style' => 'padding: 0 2em;',
+		));
+		$ret.= $this->Form->input('id');
+		$ret.= $this->Form->hidden('Usuario.pessoa_id');
+
+		$ret.= $this->Html->tag('div', null, array('style' => 'float: left; margin: 0 1em 0 0; padding: 0;'));
+		$ret.= $this->Form->input('Usuario.login', array(
+			'div' => [
+				'class' => 'input text form-group',
+			],
+			'label' => 'Login',
+			'class' => 'form-control',
+			'style' => 'width: 200px;',
+			'readonly' => true,
+		));
+		$ret.= $this->Form->input('senha_atual', array(
+			'div' => [
+				'class' => 'input text form-group',
+			],
+			'label'=> 'Senha atual',
+			'type' => 'password',
+			'size' => 20,
+			'class' => 'form-control empty',
+			'style' => 'width: 200px;',
+		));
+		$ret.= $this->Html->tag('/div');
+
+		$ret.= $this->Html->tag('div', null, array('style' => 'float: left; margin: 0; padding: 0;'));
+		$ret.= $this->Form->input('nova_senha', array(
+			'div' => [
+				'class' => 'input text form-group',
+			],
+			'label'=> 'Nova senha',
+			'type' => 'password',
+			'size' => 20,
+			'class' => 'form-control empty',
+			'style' => 'width: 200px;',
+		));
+		$ret.= $this->Form->input('confirm', array(
+			'div' => [
+				'class' => 'input text form-group',
+			],
+			'label'=> 'Confirme a nova senha',
+			'type' => 'password',
+			'size' => 20,
+			'class' => 'form-control empty',
+			'style' => 'width: 200px;',
+		));  
+		$ret.= $this->Html->tag('/div');
+
+		$ret.= $this->Form->submit('Salvar', array(
+			'div' => array(
+				'style' => 'clear: both; float: left; margin-top: 0;',
+			),
+		));
+		$ret.= $this->Html->tag('div', '', array('class' => 'clear'));
+		$ret.= $this->Form->end();
+		return $ret;
+	}
 	public function formPerfil() {
 		$ret = '';
 		$ret.= $this->Form->create('Pessoa', array(
@@ -38,23 +104,21 @@ class PessoasHelper extends AppHelper {
 				'action' => 'meuPerfil',
 			),
 			'class' => 'centralizarComTamanhoMaximo',
-			'style' => 'padding: 1em 2em;',
+			'style' => 'max-width: 700px; padding: 0 2em;',
 		));
 
 		$ret.= $this->Form->input('Pessoa.id');
 		$ret.= $this->Form->input('Pessoa.nome', array(
 			'class' => 'form-control',
-			'style' => 'width: 30em;'
 		));
 		$ret.= $this->Form->input('Pessoa.email', array(
+			'div' => ['style' => 'display: inline-block; margin-right: 0.5em;'],
 			'label' => 'E-mail',
 			'class' => 'form-control',
 			'style' => 'width: 300px;'
 		));
 		$ret.= $this->Form->input('Pessoa.telefone', array(
-			'div' => [
-				'style' => 'display: inline-block; margin-right: 0.5em;'
-			],
+			'div' => ['style' => 'display: inline-block; margin-right: 0.5em;'],
 			'class' => 'form-control phone',
 			'style' => 'text-align: center;',
 		));
@@ -143,6 +207,23 @@ class PessoasHelper extends AppHelper {
 		));
 		$ret.= $this->Form->end();
 		return $ret;
+	}
+	public function linkPagina(&$pessoa) {
+		return $this->Html->link("Ver página de currículo &#10095;",
+			array(
+				'admin' => false,
+				'controller' => 'pessoas',
+				'action' => 'curriculo',
+				$pessoa['id'],
+				Inflector::slug($pessoa['nome'], '-'),
+			),
+			array(
+				'class' => 'btn btn-primary',
+				'title' => 'Veja e compartilhe seu currículo',
+				'style' => 'float: right; margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
 	}
 	public function idade($nascimento) {
 		$date = new DateTime( date('Y-m-d', strtotime($nascimento)) ); // data de nascimento

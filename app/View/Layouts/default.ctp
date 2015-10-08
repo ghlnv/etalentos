@@ -22,6 +22,7 @@
 		<?php echo $this->fetch('title'); ?> :
 		<?php echo 'eTalentos' ?>
 	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
 		echo $this->Html->meta('icon');
 

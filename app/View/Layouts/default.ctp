@@ -64,6 +64,7 @@
 	?>
 </head>
 <body>
+	<?php echo $this->element('google/analytics'); ?>
 	<header class="container">
 	<!-- Static navbar -->
 	<nav class="navbar navbar-default">

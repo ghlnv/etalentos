@@ -87,9 +87,7 @@ class EmpresasController extends AppController {
 				$this->Session->setFlash(__('Empresa NÃO atualizada. Verifique os erros no formulário.', true));
 			}
 		}
-		else {
-			$this->request->data = $this->Empresa->buscar($id);
-		}
+		$this->request->data = $this->Empresa->buscar($id);
 	}
 	public function admin_index() {
 		if(!empty($this->request->params['named']['keywords'])) {

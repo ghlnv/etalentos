@@ -12,6 +12,12 @@ echo $this->Html->tag('/div');
 echo $this->Html->tag('/div');
 
 echo $this->Html->tag('div', null, ['class' => 'zebra row']);
+if(empty($empresas)) {
+	echo $this->Html->tag('div', 'Infelizmente não encontramos nenhuma empresa para sua busca...', [
+		'class' => 'box',
+		'style' => 'padding: 10px; text-align: center;'
+	]);
+}
 foreach($empresas as $empresa) {
 	echo $this->Html->tag('div', null, [
 		'class' => 'col-md-4',

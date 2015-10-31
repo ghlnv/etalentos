@@ -18,6 +18,13 @@ echo $this->Html->tag('span', '', ['class' => 'meta-icon fa fa-usd']);
 echo $vaga['Vaga']['remuneracao'];
 echo $this->Html->tag('/div');
 
+if($vaga['Vaga']['carga_horaria']) {
+	echo $this->Html->tag('div', null, ['class' => 'inline marginLeft']);
+	echo $this->Html->tag('span', '', ['class' => 'meta-icon fa fa-hourglass-half']);
+	echo $vaga['Vaga']['carga_horaria'];
+	echo $this->Html->tag('/div');
+}
+
 echo $this->Html->tag('div', null, ['class' => 'inline marginLeft']);
 echo $this->Html->tag('span', '', ['class' => 'meta-icon fa fa-map-marker']);
 echo $vaga['Vaga']['localizacao'];

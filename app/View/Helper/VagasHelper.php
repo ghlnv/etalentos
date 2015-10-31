@@ -178,13 +178,18 @@ class VagasHelper extends AppHelper {
 		));
 		$ret.= $this->Html->tag('div', null, ['class' => 'row']);
 		$ret.= $this->Form->input('Vaga.localizacao', array(
-			'div' => array('class' => 'input text form-group col-md-8'),
+			'div' => array('class' => 'input text form-group col-md-6'),
 			'label' => 'Localização',
 			'class' => 'form-control',
 		));
 		$ret.= $this->Form->input('Vaga.remuneracao', array(
 			'div' => array('class' => 'input text form-group col-md-2'),
 			'label' => 'Remuneração',
+			'class' => 'form-control',
+		));
+		$ret.= $this->Form->input('Vaga.carga_horaria', array(
+			'div' => array('class' => 'input text form-group col-md-2'),
+			'label' => 'Carga horária',
 			'class' => 'form-control',
 		));
 		$ret.= $this->Form->input('Vaga.data_limite', array(

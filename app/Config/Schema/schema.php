@@ -492,6 +492,11 @@ class AppSchema extends CakeSchema {
 			'null' => true,
 			'default' => NULL
 		),
+		'carga_horaria' => array(
+			'type' => 'string',
+			'null' => true,
+			'default' => NULL
+		),
 		'data_limite' => array(
 			'type' => 'date',
 			'null' => false,

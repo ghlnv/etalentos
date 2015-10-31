@@ -38,7 +38,7 @@
 		// Bootstrap
 		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap.min');
 		echo $this->Html->css('/vendor/bootstrap-3.3.5/css/bootstrap-theme.min');
-		echo $this->Html->css('http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+		echo $this->Html->css('http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 		echo $this->Html->script('/vendor/bootstrap-3.3.5/js/bootstrap.min.js');
 		
 		// JQuery-UI

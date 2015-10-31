@@ -22,7 +22,7 @@ class Usuario extends AppModel {
 			),
 			'isUnique' => array(
 				'rule' => 'isUnique', 
-				'message' => 'Login já existente',
+				'message' => 'Usuário ou e-mail já utilizado',
 				'allowEmpty' => true
 			),
 		),
@@ -172,11 +172,14 @@ class Usuario extends AppModel {
 		return true;
 	}
 	public function requererNovaSenha($data) {
+		App::uses('CakeEmail', 'Network/Email');
+		
 		$usuario = $this->find('first', array(
 			'fields' => array(
 				'Usuario.id',
 				'Usuario.login',
 				'Usuario.senha',
+				'Pessoa.nome',
 			),
 			'conditions' => array(
 				'Usuario.login' => $data['Usuario']['login'],
@@ -185,7 +188,7 @@ class Usuario extends AppModel {
 					'Usuario.requerimento_senha <' => date('Y-m-d H:i:s', strtotime('-10 minutes')),
 				)
 			),
-			'contain' => array('Pessoa.nome'),
+			'contain' => array('Pessoa'),
 		));
 		
 		if(empty($usuario['Usuario']['id'])) {
@@ -225,6 +228,8 @@ class Usuario extends AppModel {
 		return $usuario;
 	}
 	public function gerarNovaSenha($data, $token) {
+		App::uses('CakeEmail', 'Network/Email');
+		
 		$usuario = $this->find('first', array(
 			'fields' => array(
 				'Usuario.id',
@@ -232,19 +237,16 @@ class Usuario extends AppModel {
 				'Usuario.login',
 				'Usuario.senha',
 				'Usuario.requerimento_senha',
+				'Pessoa.id',
+				'Pessoa.nome',
+				'Pessoa.email',
 			),
 			'conditions' => array(
 				'Usuario.id' => $data['Usuario']['id'],
 				'Usuario.login' => $data['Usuario']['login'],
 			),
 			'contain' => array(
-				'Pessoa' => array(
-					'fields' => array(
-						'Pessoa.id',
-						'Pessoa.nome',
-						'Pessoa.email',
-					),
-				),
+				'Pessoa',
 			),
 		));
 		if(empty($usuario['Usuario']['id'])) {
@@ -256,7 +258,6 @@ class Usuario extends AppModel {
 		if($this->gerarTokenParaTrocarSenha($usuario) != $token) {
 			return false;
 		}
-		
 		$usuario['Usuario']['nova_senha'] = $data['Usuario']['nova_senha'];
 		$usuario['Usuario']['confirm'] = $data['Usuario']['confirm'];
 		if(!$this->verificarNovaSenha($usuario)) {
@@ -311,7 +312,7 @@ class Usuario extends AppModel {
 	private function enviarEmailSobreLinkParaTrocarSenha(&$usuario) {
 		$token = $this->gerarTokenParaTrocarSenha($usuario);
 		
-		$this->Email = new CakeEmail('smtp');
+		$this->Email = new CakeEmail('default');
 		$this->Email->template('usuario_requerimento_senha');
 		$this->Email->viewVars(compact('usuario', 'token'));
 		$this->Email->subject('Nova senha para login no Clinimap requerida com sucesso!');
@@ -320,7 +321,7 @@ class Usuario extends AppModel {
 		$this->Email->send();
 	}
 	private function enviarEmailSobreNovaSenhaGerada(&$usuario) {
-		$this->Email = new CakeEmail('smtp');
+		$this->Email = new CakeEmail('default');
 		$this->Email->template('usuario_nova_senha');
 		$this->Email->viewVars(compact('usuario'));
 		$this->Email->subject('Nova senha para login no Clinimap cadastrada com sucesso!');

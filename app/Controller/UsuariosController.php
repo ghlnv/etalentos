@@ -45,7 +45,6 @@ class UsuariosController extends AppController {
 		if($this->request->is('post')) {
 			if ($this->Auth->login()) {
 				$this->loadModel('UsuariosLog');
-//				$this->UsuariosLog->insert('Login');
 				return $this->redirect($this->Auth->redirect());
 			}
 			else {
@@ -55,11 +54,8 @@ class UsuariosController extends AppController {
 		if(AuthComponent::user('id')) {
 			$this->redirect($this->Auth->redirect());
 		}
-//		$this->layout = 'login';
 	}
 	public function sair() {
-//		$this->loadModel('UsuariosLog');
-//		$this->UsuariosLog->insert('Logout');
 		$this->Session->destroy();
 		$this->Session->setFlash('Obrigado por usar nossos sistemas!', 'flash/success');
 		$this->redirect($this->Auth->logout());
@@ -91,7 +87,7 @@ class UsuariosController extends AppController {
 			if($usuario) {
 				$this->Session->setFlash("Sua nova senha foi gerada com sucesso!", 'flash/success');
 				$this->Auth->login($usuario['Usuario']);
-				$this->redirect('/painel');
+				$this->redirect($this->Auth->redirectUrl());
 			}
 			else {
 				$this->Session->setFlash(__('Sua nova senha não pode ser gerada, por favor confira seus dados e tente novamente...', true));
@@ -100,7 +96,7 @@ class UsuariosController extends AppController {
 		$this->request->data = $this->Usuario->buscarParaDefinirNovaSenha($usuarioId, $token);
 		
 		if(!$this->request->data) {
-			$this->redirect('/');
+			$this->redirect($this->Auth->redirectUrl());
 		}
 	}
 	public function captcha_image() { 
@@ -152,7 +148,8 @@ class UsuariosController extends AppController {
 	// Métodos privados ########################################################
 	private function verificarUsuarioDeslogado() {
 		if(AuthComponent::user('id')) {
-			$this->errorRedirect('Você precisa deslogar do sistema para informar senha perdida.');
+			$this->Session->setFlash(__('Você precisa deslogar do sistema para informar senha perdida.', true), 'Flash/error');
+			$this->redirect('/');
 		}
 	}
 }

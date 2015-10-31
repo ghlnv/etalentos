@@ -25,6 +25,11 @@ class Pessoa extends AppModel {
 				'rule' => 'notBlank',
 				'message' => 'Nome não pode ficar vazio',
 			),
+			'isUnique' => array(
+				'rule' => 'isUnique', 
+				'message' => 'E-mail já utilizado',
+				'allowEmpty' => true
+			),
 		),
 	);
 	

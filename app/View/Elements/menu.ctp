@@ -67,6 +67,16 @@ else {
 	echo $this->Html->tag('/ul');
 
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);
+	echo $this->Menu->li('Registro',
+		[
+			'admin' => false,
+			'controller' => 'pessoas',
+			'action' => 'registrar',
+		],
+		[
+			'title' => 'Registrar no eTalentos',
+		]
+	);
 	echo $this->Menu->login();
 	echo $this->Html->tag('/ul');
 }

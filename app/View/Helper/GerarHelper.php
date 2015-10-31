@@ -243,7 +243,7 @@ class GerarHelper extends AppHelper {
 		$options['div']['class'] = 'required';
 		
 		$options['label'] = 'Seis letras';
-		$options['style'] = 'text-align: center; width: 5em;';
+		$options['style'] = 'text-align: center; width: 90px;';
 		$options['value'] = '';
 		$options['required'] = true;
 		return $this->Form->input('captcha', $options);

@@ -21,7 +21,7 @@ echo $this->Form->input('senha', array(
 	'type' => 'password',
 	'style' => 'width: 98%;',
 ));
-
+echo $this->Usuarios->linkParaEsqueciMinhaSenha();
 echo $this->Form->submit('Entrar', array(
 	'div' => array('style' => 'clear: none; text-align: right'),
 ));

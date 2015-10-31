@@ -94,6 +94,31 @@ class PessoasController extends AppController {
 		}
 		$this->request->data = $this->Pessoa->buscarPerfil($pessoaId);
 	}
+	
+	// #########################################################################
+	// Ações da empresa ########################################################
+	public function empresa_talentos() {
+		if(!empty($this->request->params['named']['keywords'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
+			foreach($tokens as $token) {
+				$this->paginate['Pessoa']['conditions'][]['OR'] = array(
+					'Pessoa.nome LIKE' => "%$token%",
+					'Pessoa.logradouro LIKE' => "%$token%",
+					'Pessoa.cidade LIKE' => "%$token%",
+					'Pessoa.estado LIKE' => "%$token%",
+					'Pessoa.curriculo_objetivo LIKE' => "%$token%",
+					'Pessoa.curriculo_formacao LIKE' => "%$token%",
+				);
+			}
+		}
+		
+		$this->paginate['Pessoa']['conditions'][] = "(SELECT Empresa.id FROM empresas as Empresa WHERE Pessoa.id = Empresa.pessoa_id) IS NULL";
+		$this->paginate['Pessoa']['conditions']['NOT']['Pessoa.id'] = 1;
+		$this->paginate['Pessoa']['contain'] = false;
+		$this->set([
+			'pessoas' => $this->paginate('Pessoa'),
+		]);
+	}
 
 	// #########################################################################
 	// Métodos privados ########################################################

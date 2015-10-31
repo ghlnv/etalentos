@@ -30,6 +30,16 @@ if(AuthComponent::user()) {
 	}
 	// empresa #############################################################
 	else if ($role->isEmpresa()) {
+		echo $this->Menu->li('Talentos',
+			[
+				'empresa' => true,
+				'controller' => 'pessoas',
+				'action' => 'talentos',
+			],
+			[
+				'title' => 'Procurar talentos',
+			]
+		);
 		echo $this->Menu->li('Minha Empresa',
 			[
 				'empresa' => true,

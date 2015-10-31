@@ -8,6 +8,9 @@ echo $this->Html->tag('/h2');
 echo $this->Html->tag('div', null, [
 	'class' => 'zebra',
 ]);
+if(empty($vagas)) {
+	echo $this->Vagas->mensagemSemVagas();
+}
 foreach ($vagas as $vaga) {
 	echo $this->Html->tag('div', null, [
 		'class' => 'box box-default',

@@ -269,6 +269,12 @@ class VagasHelper extends AppHelper {
 		$ret.= $this->Html->tag('/div');
 		return $ret;
 	}
+	public function mensagemSemVagas() {
+		return $this->Html->tag('div', 'Infelizmente não encontramos nenhuma vaga para sua busca...', [
+			'class' => 'box',
+			'style' => 'padding: 10px; text-align: center;'
+		]);
+	}
 	
 	// #########################################################################
 	// Métodos privados ########################################################

@@ -30,6 +30,10 @@ class EmpresasController extends AppController {
 		$this->set('empresas', $this->paginate('Empresa'));
 	}
 	public function registrar() {
+		if(AuthComponent::user('id')) {
+			$this->Session->setFlash(__('Você precisa deslogar do sistema para registrar nova empresa.', true), 'Flash/error');
+			$this->redirect('/');
+		}
 		if($this->request->is('post')) {
 			$usuario = $this->Empresa->cadastrar($this->request->data);
 			if($usuario) {

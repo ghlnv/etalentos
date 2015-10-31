@@ -13,10 +13,7 @@ echo $this->Html->tag('/div');
 
 echo $this->Html->tag('div', null, ['class' => 'zebra row']);
 if(empty($vagas)) {
-	echo $this->Html->tag('div', 'Infelizmente não encontramos nenhuma vaga para sua busca...', [
-		'class' => 'box',
-		'style' => 'padding: 10px; text-align: center;'
-	]);
+	echo $this->Vagas->mensagemSemVagas();
 }
 foreach($vagas as $vaga) {
 	echo $this->Html->tag('div', null, [

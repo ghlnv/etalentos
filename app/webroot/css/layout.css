@@ -42,7 +42,9 @@ header .navbar-default .navbar-nav > li:hover {
 header .navbar-default .navbar-nav > li > a {
 	color: #ddd;
 }
-header .navbar-default .navbar-nav > li > a:hover {
+header .navbar-default .navbar-nav > li > a:hover,
+header .navbar-default .navbar-nav > li > a:focus,
+header .navbar-default .navbar-nav > li > a:active {
 	color: #fff;
 }
 .navbar-default .navbar-brand {

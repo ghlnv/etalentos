@@ -14,12 +14,10 @@ echo $this->Form->create('Usuario', array(
 
 echo $this->Form->input('login', array(
 	'label' => 'Login',
-	'style' => 'width: 98%;',
 ));
 echo $this->Form->input('senha', array(
 	'label' => 'Senha', 
 	'type' => 'password',
-	'style' => 'width: 98%;',
 ));
 echo $this->Usuarios->linkParaEsqueciMinhaSenha();
 echo $this->Form->submit('Entrar', array(

@@ -58,15 +58,14 @@ class InstituicoesController extends AppController {
 			'instituicao' => $this->Instituicao->buscar($instituicaoId),
 		]);
 	}
-	public function vagas($instituicaoId){
-		$this->loadModel('Vaga');
-		$this->paginate['Vaga']['conditions'] = [
-			'Vaga.instituicao_id' => $instituicaoId,
-			'Vaga.data_limite >' => date('Y-m-d'),
+	public function talentos($instituicaoId){
+		$this->loadModel('Pessoa');
+		$this->paginate['Pessoa']['conditions'] = [
+			'Pessoa.instituicao_id' => $instituicaoId,
 		];
 		
 		$this->set([
-			'vagas' => $this->paginate('Vaga'),
+			'pessoas' => $this->paginate('Pessoa'),
 			'instituicao' => $this->Instituicao->buscar($instituicaoId),
 		]);
 	}

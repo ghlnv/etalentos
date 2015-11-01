@@ -8,26 +8,6 @@ class GerarHelper extends AppHelper {
 		$string = explode(' ', $string);
 		return reset($string);
 	}
-	public function playBeep() {
-		$ret = '';
-		$ret.= $this->Html->tag('audio', null, array(
-			'controls' => true,
-			'autoplay' => true,
-			'style' => 'display: none;',
-		));
-		$ret.= $this->Html->tag('source', '', array(
-			'src' => $this->Html->url('/files/notify.mp3'),
-			'type' => 'audio/mpeg',
-		));
-		$ret.= $this->Html->tag('/audio');
-		return $ret;
-	}
-	public function chatRefresh($time = 10000) {
-		$divId = String::uuid();
-		$url = $this->Html->url();
-		$this->Js->buffer("loadRefreshChat('#$divId', '$url', $time);");
-		return $this->Html->tag('div', '', array('id' => $divId));
-	}
 	public function caixaConsultaSemEditar($consulta) {
 		$ret = '';
 		$ret.= $this->Html->tag('div', null, array('class' => 'caixa'));

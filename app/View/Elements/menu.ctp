@@ -96,8 +96,9 @@ if(AuthComponent::user()) {
 else {
 	// deslogado ###############################################################
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
-	echo $this->Menu->empresas();
+	echo $this->Menu->instituicoes();
 	echo $this->Menu->vagas();
+	echo $this->Menu->empresas();
 	echo $this->Html->tag('/ul');
 
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);

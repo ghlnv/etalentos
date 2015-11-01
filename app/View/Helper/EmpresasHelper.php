@@ -135,6 +135,18 @@ class EmpresasHelper extends AppHelper {
 			[]
 		);
 		$ret.= $this->Html->tag('/li');
+		$ret.= $this->Html->tag('li', null, ['class' => 'empresaContato']);
+		$ret.= $this->Html->link('Contato',
+			[
+				'empresa' => false,
+				'controller' => 'mensagens',
+				'action' => 'empresa',
+				$empresa['Empresa']['id'],
+				Inflector::slug($empresa['Empresa']['nome'], '-'),
+			],
+			[]
+		);
+		$ret.= $this->Html->tag('/li');
 		$ret.= $this->Html->tag('/ul');
 		$ret.= $this->Html->tag('/div');
 		$ret.= $this->Html->tag('/div');

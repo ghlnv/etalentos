@@ -21,6 +21,31 @@ function loadPopup($popupId) {
 		return false;
 	});
 }
+function loadChatMessages($targetSelector, $url) {
+	var $target = $($targetSelector);
+	$target.html(loadingstr);
+	$.ajax({
+		url: $url,
+		success: function(html) {
+			$target.html(html); 
+			loadAjaxActions($targetSelector);
+			window.scrollTo(0,document.body.scrollHeight);
+		}
+	});
+	
+	var conversaReload = setInterval(function(){
+		$.ajax({
+			url: $url+'/aberto:1',
+			success: function(html) {
+				if(html) {
+					$target.html(html); 
+					loadAjaxActions($targetSelector);
+					window.scrollTo(0,document.body.scrollHeight);
+				}
+			}
+		});
+	},20000);
+}
 function loadCaptchaImage(imageSelector, url) {
 	url+= '?';
 	url+= Math.round(Math.random(0)*1000)+1;

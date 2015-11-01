@@ -135,6 +135,18 @@ class InstituicoesHelper extends AppHelper {
 			[]
 		);
 		$ret.= $this->Html->tag('/li');
+		$ret.= $this->Html->tag('li', null, ['class' => 'instituicaoContato']);
+		$ret.= $this->Html->link('Contato',
+			[
+				'instituicao' => false,
+				'controller' => 'mensagens',
+				'action' => 'instituicao',
+				$instituicao['Instituicao']['id'],
+				Inflector::slug($instituicao['Instituicao']['nome'], '-'),
+			],
+			[]
+		);
+		$ret.= $this->Html->tag('/li');
 		$ret.= $this->Html->tag('/ul');
 		$ret.= $this->Html->tag('/div');
 		$ret.= $this->Html->tag('/div');

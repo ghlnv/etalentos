@@ -289,6 +289,94 @@ class AppSchema extends CakeSchema {
 			'engine' => 'MyISAM'
 		)
 	);
+	var $mensagens = array(
+		'id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'primary'
+		),
+		'remetente_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
+		'destinatario_id' => array(
+			'type' => 'integer',
+			'null' => false,
+			'default' => NULL,
+			'key' => 'index'
+		),
+		'texto' => array(
+			'type' => 'text',
+			'null' => false,
+			'default' => NULL,
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci'
+		),
+		'remetente_ocultou' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'destinatario_ocultou' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'lida' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'notificada' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'created' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'modified' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
+		'indexes' => array(
+			'PRIMARY' => array(
+				'column' => 'id',
+				'unique' => 1
+			),
+			'fk_mensagens_pessoas1' => array(
+				'column' => 'remetente_id',
+				'unique' => 0
+			),
+			'fk_mensagens_pessoas2' => array(
+				'column' => 'destinatario_id',
+				'unique' => 0
+			),
+			'index_remetente_ocultou' => array(
+				'column' => 'remetente_ocultou',
+				'unique' => 0
+			),
+			'index_destinatario_ocultou' => array(
+				'column' => 'destinatario_ocultou',
+				'unique' => 0
+			),
+			'index_lida' => array(
+				'column' => 'lida',
+				'unique' => 0
+			),
+		),
+		'tableParameters' => array(
+			'charset' => 'utf8',
+			'collate' => 'utf8_general_ci',
+			'engine' => 'MyISAM'
+		)
+	);
 	var $pessoas = array(
 		'id' => array(
 			'type' => 'integer',

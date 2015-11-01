@@ -4,6 +4,18 @@ class MenuHelper extends AppHelper {
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function instituicoes() {
+		return $this->li('Instituições',
+			[
+				'admin' => false,
+				'controller' => 'instituicoes',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Instituições',
+			]
+		);
+	}
 	public function empresas() {
 		return $this->li('Empresas',
 			[

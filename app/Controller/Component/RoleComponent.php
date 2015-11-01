@@ -26,6 +26,9 @@ class RoleComponent extends Object {
 	public function isEmpresa() {
 		return 'empresa' == AuthComponent::user('tipo');
 	}
+	public function isInstituicao() {
+		return 'instituicao' == AuthComponent::user('tipo');
+	}
 	public function getPessoa() {
 		if ($this->controller->Session->check('Pessoa')) {
 			return $this->controller->Session->read('Pessoa');

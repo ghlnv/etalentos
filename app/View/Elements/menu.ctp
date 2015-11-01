@@ -2,8 +2,9 @@
 if(AuthComponent::user()) {
 	// logado ##################################################################
 	echo $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
-	echo $this->Menu->empresas();
+	echo $this->Menu->instituicoes();
 	echo $this->Menu->vagas();
+	echo $this->Menu->empresas();
 	
 	// admin ###############################################################
 	if($role->isAdmin()) {
@@ -58,6 +59,29 @@ if(AuthComponent::user()) {
 			],
 			[
 				'title' => 'Gerenciar vagas',
+			]
+		);
+	}
+	// instituição #############################################################
+	else if ($role->isInstituicao()) {
+		echo $this->Menu->li('Minha Instituição',
+			[
+				'instituicao' => true,
+				'controller' => 'instituicoes',
+				'action' => 'gerenciar',
+			],
+			[
+				'title' => 'Gerenciar página da instituição',
+			]
+		);
+		echo $this->Menu->li('Meus Talentos',
+			[
+				'instituicao' => true,
+				'controller' => 'pessoas',
+				'action' => 'talentos',
+			],
+			[
+				'title' => 'Gerenciar talentos',
 			]
 		);
 	}

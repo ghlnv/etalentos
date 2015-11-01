@@ -84,6 +84,9 @@ class AppController extends Controller {
 		if (isset($this->request->params['empresa'])) {
 			return $this->Role->isEmpresa();
 		}
+		if (isset($this->request->params['instituicao'])) {
+			return $this->Role->isInstituicao();
+		}
 		if (isset($this->request->params['admin'])) {
 			return $this->Role->isAdmin();
 		}

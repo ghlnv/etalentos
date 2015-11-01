@@ -4,6 +4,9 @@ class Pessoa extends AppModel {
 	public $displayField = 'nome';
 	public $order = array('Pessoa.nome' => 'ASC');
 
+	public $belongsTo = array(
+		'Instituicao',
+	);
 	public $hasOne = array(
 		'Usuario' => array(
 			'dependent' => true,
@@ -83,7 +86,7 @@ class Pessoa extends AppModel {
 	function buscarPerfil($pessoaId) {
 		return $this->find('first', array(
 			'conditions' => array('Pessoa.id' => $pessoaId),
-			'contain' => array(),
+			'contain' => array('Instituicao'),
 		));
 	}
 	public function atualizarPessoaEUsuario($pessoa) {

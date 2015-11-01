@@ -20,8 +20,21 @@ class InteressadosHelper extends AppHelper {
 			'class' => 'form-control',
 			'rows' => 3,
 		));
+		$ret.= $this->Html->tag('h3', 'Reveja seu currículo');
 		$ret.= $this->curriculoInputs();
 		$ret.= $this->Form->submit('Enviar interesse');
+		$ret.= $this->Form->end();
+		return $ret;
+	}
+	public function formCurriculo() {
+		$this->Js->buffer("loadDatePicker();");
+		
+		$ret = '';
+		$ret.= $this->Form->create('Pessoa', array(
+			'class' => 'ajax',
+		));
+		$ret.= $this->curriculoInputs();
+		$ret.= $this->Form->submit('Salvar');
 		$ret.= $this->Form->end();
 		return $ret;
 	}
@@ -60,109 +73,122 @@ class InteressadosHelper extends AppHelper {
 		$ret = '';
 		$ret.= $this->Html->tag('div', null, ['style' => 'font-size: 16px; line-height: 30px;']);
 		$ret.= $this->Html->tag('span', null, ['class' => 'smallText']);
-		if($pessoa['nacionalidade']
-		|| $pessoa['estado_civil']
-		|| $pessoa['nascimento']) {
-			if($pessoa['nacionalidade']) {
-				$ret.= $pessoa['nacionalidade'];
+		if($pessoa['Pessoa']['nacionalidade']
+		|| $pessoa['Pessoa']['estado_civil']
+		|| $pessoa['Pessoa']['nascimento']) {
+			if($pessoa['Pessoa']['nacionalidade']) {
+				$ret.= $pessoa['Pessoa']['nacionalidade'];
 				$ret.= ', ';
 			}
-			if($pessoa['estado_civil']) {
-				$ret.= $pessoa['estado_civil'];
+			if($pessoa['Pessoa']['estado_civil']) {
+				$ret.= $pessoa['Pessoa']['estado_civil'];
 				$ret.= ', ';
 			}
-			if($pessoa['nascimento']) {
-				$ret.= $this->Pessoas->idade($pessoa['nascimento']);
+			if($pessoa['Pessoa']['nascimento']) {
+				$ret.= $this->Pessoas->idade($pessoa['Pessoa']['nascimento']);
 			}
 			$ret.= $this->Html->tag('br');
 		}
 		
-		if($pessoa['logradouro']
-		|| $pessoa['numero']
-		|| $pessoa['complemento']
-		|| $pessoa['bairro']
-		|| $pessoa['cidade']
-		|| $pessoa['estado']) {
-			if($pessoa['logradouro']) {
-				$ret.= $pessoa['logradouro'];
+		if($pessoa['Pessoa']['logradouro']
+		|| $pessoa['Pessoa']['numero']
+		|| $pessoa['Pessoa']['complemento']
+		|| $pessoa['Pessoa']['bairro']
+		|| $pessoa['Pessoa']['cidade']
+		|| $pessoa['Pessoa']['estado']) {
+			if($pessoa['Pessoa']['logradouro']) {
+				$ret.= $pessoa['Pessoa']['logradouro'];
 				$ret.= ', ';
 			}
-			if($pessoa['numero']) {
-				$ret.= $pessoa['numero'];
+			if($pessoa['Pessoa']['numero']) {
+				$ret.= $pessoa['Pessoa']['numero'];
 				$ret.= ', ';
 			}
-			if($pessoa['complemento']) {
-				$ret.= $pessoa['complemento'];
+			if($pessoa['Pessoa']['complemento']) {
+				$ret.= $pessoa['Pessoa']['complemento'];
 				$ret.= ', ';
 			}
-			if($pessoa['bairro']) {
-				$ret.= $pessoa['bairro'];
+			if($pessoa['Pessoa']['bairro']) {
+				$ret.= $pessoa['Pessoa']['bairro'];
 				$ret.= ', ';
 			}
 			$ret.= $this->Html->tag('b');
-			if($pessoa['cidade']) {
-				$ret.= $pessoa['cidade'];
+			if($pessoa['Pessoa']['cidade']) {
+				$ret.= $pessoa['Pessoa']['cidade'];
 				$ret.= ' / ';
 			}
-			if($pessoa['estado']) {
-				$ret.= $pessoa['estado'];
+			if($pessoa['Pessoa']['estado']) {
+				$ret.= $pessoa['Pessoa']['estado'];
 			}
 			$ret.= $this->Html->tag('/b');
 			$ret.= $this->Html->tag('br');
 		}
 		
-		if($pessoa['telefone']
-		|| $pessoa['telefone_alternativo']) {
+		if($pessoa['Pessoa']['telefone']
+		|| $pessoa['Pessoa']['telefone_alternativo']) {
 			$ret.= $this->Html->tag('b', 'Telefone: ');
-			if($pessoa['telefone']) {
-				$ret.= $pessoa['telefone'];
+			if($pessoa['Pessoa']['telefone']) {
+				$ret.= $pessoa['Pessoa']['telefone'];
 				$ret.= ' / ';
 			}
-			$ret.= $pessoa['telefone_alternativo'];
+			$ret.= $pessoa['Pessoa']['telefone_alternativo'];
 			$ret.= $this->Html->tag('br');
 		}
 		
 		$ret.= $this->Html->tag('b', 'E-mail: ');
-		$ret.= $pessoa['email'];
+		$ret.= $pessoa['Pessoa']['email'];
 		$ret.= $this->Html->tag('br');
 		$ret.= $this->Html->tag('/span');
 		
 		$ret.= $this->Html->tag('h3', 'Objetivo profissional');
 		$ret.= $this->Html->tag('hr', '', ['style' => 'margin-top: 0;']);
 		$ret.= $this->Html->tag('div', null, ['style' => 'padding: 0 20px 20px;']);
-		$ret.= $pessoa['curriculo_objetivo'];
+		$ret.= $pessoa['Pessoa']['curriculo_objetivo'];
 		$ret.= $this->Html->tag('/div');
+		
+		if(!empty($pessoa['Instituicao']['nome'])) {
+			$ret.= $this->Html->tag('h3', 'Instituição de ensino');
+			$ret.= $this->Html->tag('hr', '', ['style' => 'margin-top: 0;']);
+			$ret.= $this->Html->tag('div', null, ['style' => 'padding: 0 20px 20px;']);
+			$ret.= $pessoa['Instituicao']['nome'];
+			$ret.= $this->Html->tag('/div');
+		}
 		
 		$ret.= $this->Html->tag('h3', 'Formação acadêmica');
 		$ret.= $this->Html->tag('hr', '', ['style' => 'margin-top: 0;']);
 		$ret.= $this->Html->tag('div', null, ['style' => 'padding: 0 20px 20px;']);
-		$ret.= $pessoa['curriculo_formacao'];
+		$ret.= $pessoa['Pessoa']['curriculo_formacao'];
 		$ret.= $this->Html->tag('/div');
 		
 		$ret.= $this->Html->tag('h3', 'Experiência profissional');
 		$ret.= $this->Html->tag('hr', '', ['style' => 'margin-top: 0;']);
 		$ret.= $this->Html->tag('div', null, ['style' => 'padding: 0 20px 20px;']);
-		$ret.= $pessoa['curriculo_experiencia'];
+		$ret.= $pessoa['Pessoa']['curriculo_experiencia'];
 		$ret.= $this->Html->tag('/div');
 		
 		$ret.= $this->Html->tag('h3', 'Qualificações e atividades complementares');
 		$ret.= $this->Html->tag('hr', '', ['style' => 'margin-top: 0;']);
 		$ret.= $this->Html->tag('div', null, ['style' => 'padding: 0 20px 20px;']);
-		$ret.= $pessoa['curriculo_atividades_complementares'];
+		$ret.= $pessoa['Pessoa']['curriculo_atividades_complementares'];
 		$ret.= $this->Html->tag('/div');
 		
 		$ret.= $this->Html->tag('h3', 'Informações adicionais');
 		$ret.= $this->Html->tag('hr', '', ['style' => 'margin-top: 0;']);
 		$ret.= $this->Html->tag('div', null, ['style' => 'padding: 0 20px 0;']);
-		$ret.= $pessoa['curriculo_informacoes_adicionais'];
+		$ret.= $pessoa['Pessoa']['curriculo_informacoes_adicionais'];
 		$ret.= $this->Html->tag('/div');
 		$ret.= $this->Html->tag('/div');
 		return $ret;
 	}
 	public function curriculoInputs() {
 		$ret = '';
-		$ret.= $this->Html->tag('h3', 'Reveja seu currículo');
 		$ret.= $this->Form->hidden('Pessoa.id');
+		$ret.= $this->Form->input('Pessoa.instituicao_id', [
+			'label' => 'Instituição',
+			'empty' => '-- Defina sua instituição de ensino --',
+			'class' => 'form-control',
+			'options' => $this->_View->viewVars['instituicoes'],
+		]);
 		$ret.= $this->Form->input('Pessoa.curriculo_objetivo', array(
 			'label' => 'Objetivo profissional',
 			'type' => 'textArea',

@@ -44,6 +44,9 @@ class AppModel extends Model {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function buscarLista() {
+		return $this->find('list');
+	}
 	public function imageCrop($fullPath, $newFileFullPath, $options) {  
 		$filetype = exif_imagetype($fullPath);
 		$allowedTypes = array( 

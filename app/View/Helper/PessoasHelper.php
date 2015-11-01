@@ -294,6 +294,23 @@ class PessoasHelper extends AppHelper {
 			)
 		);
 	}
+	public function linkCurriculoEditar(&$pessoa) {
+		return $this->Html->link("Editar currículo",
+			array(
+				'admin' => false,
+				'controller' => 'pessoas',
+				'action' => 'editarCurriculo',
+				$pessoa['id'],
+				Inflector::slug($pessoa['nome'], '-'),
+			),
+			array(
+				'class' => 'btn btn-warning',
+				'title' => 'Editar seu currículo',
+				'style' => 'float: right; margin: 0 0.5em;',
+				'escape' => false
+			)
+		);
+	}
 	public function linkParaExcluir(&$pessoa) {
 		return $this->Html->link($this->Html->image('icons/remove-32.png'),
 			array(

@@ -6,5 +6,5 @@ echo ' ';
 echo $interessado['Pessoa']['nome'];
 echo $this->Html->tag('/h2');
 
-echo $this->Interessados->curriculo($interessado['Pessoa']);
+echo $this->Interessados->curriculo($interessado);
 echo $this->Html->tag('/div');

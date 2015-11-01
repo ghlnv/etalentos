@@ -296,6 +296,12 @@ class AppSchema extends CakeSchema {
 			'default' => NULL,
 			'key' => 'primary'
 		),
+		'instituicao_id' => array(
+			'type' => 'integer',
+			'null' => true,
+			'default' => NULL,
+			'key' => 'index'
+		),
 		'nome' => array(
 			'type' => 'string',
 			'null' => false,
@@ -484,7 +490,11 @@ class AppSchema extends CakeSchema {
 			'PRIMARY' => array(
 				'column' => 'id',
 				'unique' => 1
-			)
+			),
+			'fk_pessoas_instituicoes' => array(
+				'column' => 'instituicao_id',
+				'unique' => 0
+			),
 		),
 		'tableParameters' => array(
 			'charset' => 'utf8',

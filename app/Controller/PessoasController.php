@@ -36,9 +36,18 @@ class PessoasController extends AppController {
 			}
 		}
 	}
-	function meuPerfil() {
+	public function meuPerfil() {
 		$this->salvarMeuPerfil();
 		$this->request->data = $this->Pessoa->buscarPessoaEUsuario(AuthComponent::user('pessoa_id'));
+	}
+	public function editarCurriculo() {
+		$this->loadModel('Instituicao');
+		$this->salvarMeuPerfil();
+		$this->request->data = $this->Pessoa->buscarPessoaEUsuario(AuthComponent::user('pessoa_id'));
+		$this->set([
+			'pessoa' => $this->request->data,
+			'instituicoes' => $this->Instituicao->buscarLista(),
+		]);
 	}
 	
 	// #########################################################################
@@ -114,6 +123,31 @@ class PessoasController extends AppController {
 		
 		$this->paginate['Pessoa']['conditions'][] = "(SELECT Empresa.id FROM empresas as Empresa WHERE Pessoa.id = Empresa.pessoa_id) IS NULL";
 		$this->paginate['Pessoa']['conditions']['NOT']['Pessoa.id'] = 1;
+		$this->paginate['Pessoa']['contain'] = false;
+		$this->set([
+			'pessoas' => $this->paginate('Pessoa'),
+		]);
+	}
+	
+	// #########################################################################
+	// Ações da instituicao ####################################################
+	public function instituicao_talentos() {
+		$this->loadModel('Instituicao');
+		if(!empty($this->request->params['named']['keywords'])) {
+			$tokens = explode(' ', trim($this->request->params['named']['keywords']));
+			foreach($tokens as $token) {
+				$this->paginate['Pessoa']['conditions'][]['OR'] = array(
+					'Pessoa.nome LIKE' => "%$token%",
+					'Pessoa.logradouro LIKE' => "%$token%",
+					'Pessoa.cidade LIKE' => "%$token%",
+					'Pessoa.estado LIKE' => "%$token%",
+					'Pessoa.curriculo_objetivo LIKE' => "%$token%",
+					'Pessoa.curriculo_formacao LIKE' => "%$token%",
+				);
+			}
+		}
+		
+		$this->paginate['Pessoa']['conditions']['Pessoa.instituicao_id'] = $this->Instituicao->buscarIdComPessoaId(AuthComponent::user('pessoa_id'));
 		$this->paginate['Pessoa']['contain'] = false;
 		$this->set([
 			'pessoas' => $this->paginate('Pessoa'),

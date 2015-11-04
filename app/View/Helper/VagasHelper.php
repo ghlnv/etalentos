@@ -125,7 +125,7 @@ class VagasHelper extends AppHelper {
 			'id' => $inputId,
 			'div' => array('class' => 'input textArea required'),
 			'type' => 'textArea',
-			'label' => 'Descricao',
+			'label' => 'Descrição',
 			'style' => 'width: 100%;',
 			'required' => false,
 		));

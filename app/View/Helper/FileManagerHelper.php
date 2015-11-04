@@ -4,7 +4,7 @@ class FileManagerHelper extends AppHelper {
 	public $helpers = array('Html', 'Form', 'Js', 'Session');
 	
 	public function linkParaCriarDiretorio() {
-		$linkTxt = $this->Html->image('icones/toggle_add.png', array(
+		$linkTxt = $this->Html->image('icons/toggle_add.png', array(
 			'style' => 'vertical-align: text-bottom;',
 		));
 		return $this->Html->link($linkTxt, '#', array(
@@ -152,7 +152,7 @@ class FileManagerHelper extends AppHelper {
 	}
 	public function linkParaExcluirArquivo(&$path, &$file) {
 		$linkTxt = null;
-		$linkTxt.= $this->Html->image('icones/remover.png', array('style' => 'vertical-align: text-bottom;'));
+		$linkTxt.= $this->Html->image('icons/remover.png', array('style' => 'vertical-align: text-bottom;'));
 		$linkTxt.= ' excluir';
 
 		$filePath = null;

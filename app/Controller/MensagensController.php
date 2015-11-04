@@ -14,20 +14,18 @@ class MensagensController extends AppController {
 	
 	// #########################################################################
 	// Ações públicas ##########################################################
-	public function instituicao($instituicaoId) {
+	public function instituicao($pessoaId) {
 		$this->loadModel('Instituicao');
-		$instituicao = $this->Instituicao->buscar($instituicaoId);
-		$this->conversa($instituicao['Instituicao']['pessoa_id']);
+		$this->conversa($pessoaId);
 		$this->set([
-			'instituicao' => $instituicao,
+			'instituicao' => $this->Instituicao->buscarComPessoaId($pessoaId),
 		]);
 	}
-	public function empresa($empresaId) {
+	public function empresa($pessoaId) {
 		$this->loadModel('Empresa');
-		$empresa = $this->Empresa->buscar($empresaId);
-		$this->conversa($empresa['Empresa']['pessoa_id']);
+		$this->conversa($pessoaId);
 		$this->set([
-			'empresa' => $empresa,
+			'empresa' => $this->Empresa->buscarComPessoaId($pessoaId),
 		]);
 	}
 	public function mensagens($destinatarioId) {
@@ -77,31 +75,25 @@ class MensagensController extends AppController {
 				$this->Session->setFlash(__("A mensagem NÃO pode ser enviada, por favor tente novamente.", true));
 			}
 		}
+		
 		$destinatario = $this->Pessoa->buscarPerfil($destinatarioId);
-		
-		$this->set(compact('destinatarioId', 'destinatario'));
-		
-		$this->set('title_for_layout', $destinatario['Pessoa']['nome']);
+		$this->set([
+			'destinatarioId' => $destinatarioId,
+			'destinatario' => $destinatario,
+			'title_for_layout' => $destinatario['Pessoa']['nome'],
+		]);
 	}
 	public function index() {
 		$this->loadModel('Pessoa');
+		$pessoaId = AuthComponent::user('pessoa_id');
+		
 		$this->paginate['Pessoa']['conditions'] = array(
-			'Usuario.tipo IS NOT NULL',
 			'NOT' => array(
 				'Usuario.id' => AuthComponent::user('id'),
 			),
+			"Pessoa.id IN (SELECT DISTINCT Mensagem.remetente_id FROM mensagens Mensagem WHERE Mensagem.destinatario_id = $pessoaId)"
 		);
 		$this->paginate['Pessoa']['contain'] = false;
-		$this->paginate['Pessoa']['joins'] = array(
-			array(
-				'table' => 'usuarios',
-				'alias' => 'Usuario',
-				'type' => 'LEFT',
-				'conditions' => array(
-					'Pessoa.id = Usuario.pessoa_id',
-				),
-			),
-		);
 		$pessoas = $this->paginate('Pessoa');
 		foreach($pessoas as $key => $pessoa) {
 			$pessoas[$key]['Pessoa']['countNaoLidas'] = $this->Mensagem->countNaoLidas($pessoa['Pessoa']['id']);

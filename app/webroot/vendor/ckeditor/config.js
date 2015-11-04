@@ -38,6 +38,17 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'basicstyles', items : [ 'Bold','Italic','Strike','Subscript','Superscript','-','RemoveFormat' ] },
 		{ name: 'paragraph', items : ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
 	];
+	config.toolbar_Mensagem =	[
+		{ name: 'clipboard', items : [ 'Paste','-','Undo','Redo' ] },
+		{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','RemoveFormat','-','Scayt' ] },
+		{ name: 'insert', items : [ 'Image','HorizontalRule','SpecialChar']},
+		{ name: 'styles', items : [ 'Format','FontSize' ] },
+		{ name: 'paragraph', items : [ 
+				'NumberedList','BulletedList','-','Subscript','Superscript','-','Outdent','Indent','-','Blockquote','-',
+				'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
+				'/'
+		]}
+	];
 	config.toolbar_Medium =	[
 		{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
 		{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','RemoveFormat','-','Scayt' ] },

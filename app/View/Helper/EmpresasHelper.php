@@ -141,7 +141,7 @@ class EmpresasHelper extends AppHelper {
 				'empresa' => false,
 				'controller' => 'mensagens',
 				'action' => 'empresa',
-				$empresa['Empresa']['id'],
+				$empresa['Empresa']['pessoa_id'],
 				Inflector::slug($empresa['Empresa']['nome'], '-'),
 			],
 			[]

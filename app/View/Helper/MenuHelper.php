@@ -102,10 +102,9 @@ class MenuHelper extends AppHelper {
 				'title' => 'Gerenciar vagas',
 			]
 		);
-		$ret.= $this->Html->tag('li', '', [
-			'class' => 'divider',
-			'role' => 'separator',
-		]);
+		$ret.= $this->separator();
+		$ret.= $this->mensagens();
+		$ret.= $this->separator();
 		$ret.= $this->Html->tag('li', 'Meu perfil', [
 			'class' => 'dropdown-header',
 		]);
@@ -115,6 +114,12 @@ class MenuHelper extends AppHelper {
 		$ret.= $this->logout();
 		$ret.= $this->Html->tag('/ul');
 		return $ret;
+	}
+	public function separator() {
+		return $this->Html->tag('li', '', [
+			'class' => 'divider',
+			'role' => 'separator',
+		]);
 	}
 	public function instituicao() {
 		$ret = '';
@@ -150,10 +155,9 @@ class MenuHelper extends AppHelper {
 				'title' => 'Gerenciar talentos',
 			]
 		);
-		$ret.= $this->Html->tag('li', '', [
-			'class' => 'divider',
-			'role' => 'separator',
-		]);
+		$ret.= $this->separator();
+		$ret.= $this->mensagens();
+		$ret.= $this->separator();
 		$ret.= $this->Html->tag('li', 'Meu perfil', [
 			'class' => 'dropdown-header',
 		]);
@@ -187,6 +191,18 @@ class MenuHelper extends AppHelper {
 			],
 			[
 				'title' => 'Instituições',
+			]
+		);
+	}
+	public function mensagens() {
+		return $this->li('Mensagens',
+			[
+				'admin' => false,
+				'controller' => 'mensagens',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Mensagens',
 			]
 		);
 	}

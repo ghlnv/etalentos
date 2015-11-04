@@ -7,6 +7,59 @@ class MensagensHelper extends AppHelper {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function linkConversa(&$pessoa) {
+		$url = [
+			'controller' => 'mensagens',
+			'action' => 'conversa',
+			$pessoa['Pessoa']['id'],
+		];
+		if('instituicao' == $pessoa['Usuario']['tipo']) {
+			$url = [
+				'controller' => 'mensagens',
+				'action' => 'instituicao',
+				$pessoa['Pessoa']['id'],
+			];
+		}
+		else if('empresa' == $pessoa['Usuario']['tipo']) {
+			$url = [
+				'controller' => 'mensagens',
+				'action' => 'empresa',
+				$pessoa['Pessoa']['id'],
+			];
+		}
+
+		$linkTxt = '';
+		$linkTxt.= $this->Html->tag('div', null, array(
+			'style' => 'font-size: 1.1em; font-weight: bolder;',
+		));
+
+		if($pessoa['Pessoa']['countNaoLidas']) {
+			$linkTxt.= $this->Html->tag('span', null, array(
+				'class' => 'btn btn-danger',
+				'style' => 'float: right; margin-left: 0.5em;',
+			));
+			$linkTxt.= $pessoa['Pessoa']['countNaoLidas'];
+			if(1 == $pessoa['Pessoa']['countNaoLidas']) {
+				$linkTxt.= ' não lida';
+			}
+			else {
+				$linkTxt.= ' não lidas';
+			}
+			$linkTxt.= $this->Html->tag('/span');
+		}
+
+		$linkTxt.= $this->Html->image('icons/chat-16.png');
+		$linkTxt.= ' ';
+		$linkTxt.= $pessoa['Pessoa']['nome'];
+		$linkTxt.= $this->Html->tag('/div');
+		return $this->Html->link($linkTxt, $url,
+			array(
+				'title' => 'Mensagens com '.$pessoa['Pessoa']['nome'],
+				'class' => 'clean',
+				'escape' => false,
+			)
+		);
+	}
 	public function playBeep() {
 		$ret = '';
 		$ret.= $this->Html->tag('audio', null, array(
@@ -22,6 +75,7 @@ class MensagensHelper extends AppHelper {
 		return $ret;
 	}
 	public function refresh($time = 10000) {
+		App::uses('String', 'Utility');
 		$divId = String::uuid();
 		$url = $this->Html->url();
 		$this->Js->buffer("loadRefreshMensagem('#$divId', '$url', $time);");
@@ -42,9 +96,6 @@ class MensagensHelper extends AppHelper {
 	}
 	public function formDeResposta(&$destinatarioId) {
 		$formId = "FormResposta$destinatarioId";
-		$inputId = "InputCkeditor$destinatarioId";
-
-		$this->Js->buffer("$('#$inputId').focus();");
 
 		$ret = '';
 		$ret.= $this->Form->create('Mensagem', array(
@@ -64,17 +115,7 @@ class MensagensHelper extends AppHelper {
 		$ret.= $this->Form->hidden('Mensagem.destinatario_id', array(
 			'value' => $destinatarioId,
 		));
-		$ret.= $this->Form->input('Mensagem.texto', array(
-			'div' => array(
-				'class' => 'input text',
-				'style' => 'margin-bottom: 0;',
-			),
-			'id' => $inputId,
-			'type' => 'textArea',
-			'label' => false,
-			'style' => 'font-size: 0.9em; width: 100%;',
-			'required' => false,
-		));
+		$ret.= $this->inputTexto();
 		$ret.= $this->Form->submit('Enviar', array(
 			'div' => array(
 				'style' => 'margin: 0; padding-top: 0; text-align: right;',
@@ -82,6 +123,34 @@ class MensagensHelper extends AppHelper {
 		));
 		$ret.= $this->Form->end();
 		return $ret;
+	}
+	public function inputTexto() {
+		$inputId = 'MensagemTexto';
+		$config = $this->Js->object(array(
+			'height' => 200,
+			'removePlugins' => 'elementspath',
+			'toolbar' => 'Mensagem',
+			'filebrowserBrowseUrl' => $this->Html->url(array(
+				'empresa' => false,
+				'controller' => 'fileManager',
+				'action' => 'ckeditor',
+			), true),
+		));
+		$this->Js->buffer("loadGenericCkeditor('$inputId', $config);");
+		$this->Js->buffer("CKEDITOR.instances['$inputId'].on('instanceReady', function (event) {
+            this.focus();
+        });");
+		return $this->Form->input('Mensagem.texto', array(
+			'id' => $inputId,
+			'div' => array(
+				'class' => 'input textArea required',
+				'style' => 'margin-bottom: 0;',
+			),
+			'type' => 'textArea',
+			'label' => false,
+			'style' => 'width: 100%;',
+			'required' => false,
+		));
 	}
 	public function linha(&$mensagem) {
 		$ret = '';

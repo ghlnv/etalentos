@@ -45,6 +45,14 @@ class Empresa extends AppModel {
 			'contain' => false,
 		));
 	}
+	public function buscarComPessoaId($id) {
+		return $this->find('first', array(
+			'conditions' => array(
+				'pessoa_id' => $id,
+			),
+			'contain' => false,
+		));
+	}
 	public function atualizar($requestData) {
 		$this->salvarImagem($requestData, 'image_header');
 		$this->salvarImagem($requestData, 'image_avatar');

@@ -141,7 +141,7 @@ class InstituicoesHelper extends AppHelper {
 				'instituicao' => false,
 				'controller' => 'mensagens',
 				'action' => 'instituicao',
-				$instituicao['Instituicao']['id'],
+				$instituicao['Instituicao']['pessoa_id'],
 				Inflector::slug($instituicao['Instituicao']['nome'], '-'),
 			],
 			[]

@@ -76,6 +76,9 @@ footer {
 a img {
 	vertical-align: text-bottom;
 }
+img {
+	max-width: 100%;
+}
 
 input, textarea {
 	clear: both;

@@ -1,9 +1,183 @@
 <?php
 class MenuHelper extends AppHelper { 
-    var $helpers = array('Html', 'Js', 'Form', 'Text', 'Number'); 
+    var $helpers = array('Html', 'Js', 'Form', 'Text', 'Number');
+	
+	public $pessoa;
 
 	// #########################################################################
 	// Métodos #################################################################
+	public function setPessoa($pessoa) {
+		$this->pessoa = $pessoa;
+	}
+	public function admin() {
+		$ret = '';
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
+		$ret.= $this->instituicoes();
+		$ret.= $this->vagas();
+		$ret.= $this->empresas();
+		$ret.= $this->Html->tag('/ul');
+	
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);
+		$ret.= $this->Html->tag('li', null, [
+			'class' => 'dropdown',
+		]);
+		$ret.= $this->dropdownLink($this->Html->image('icons/gears.png'));
+		$ret.= $this->Html->tag('ul', null, ['class' => 'dropdown-menu']);
+		$ret.= $this->li('Gerenciar Empresas',
+			[
+				'admin' => true,
+				'controller' => 'empresas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Gerenciar empresas',
+			]
+		);
+		$ret.= $this->li('Gerenciar Pessoas',
+			[
+				'admin' => true,
+				'controller' => 'pessoas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Gerenciar pessoas',
+			]
+		);
+		$ret.= $this->Html->tag('li', '', [
+			'class' => 'divider',
+			'role' => 'separator',
+		]);
+		$ret.= $this->Html->tag('li', 'Meu perfil', [
+			'class' => 'dropdown-header',
+		]);
+		$ret.= $this->perfil();
+		$ret.= $this->Html->tag('/ul');
+		$ret.= $this->Html->tag('/li');
+		$ret.= $this->logout();
+		$ret.= $this->Html->tag('/ul');
+		return $ret;
+	}
+	public function empresa() {
+		$ret = '';
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
+		$ret.= $this->instituicoes();
+		$ret.= $this->vagas();
+		$ret.= $this->empresas();
+
+		$ret.= $this->li('Talentos',
+			[
+				'empresa' => true,
+				'controller' => 'pessoas',
+				'action' => 'talentos',
+			],
+			[
+				'title' => 'Procurar talentos',
+			]
+		);
+		$ret.= $this->Html->tag('/ul');
+	
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);
+		$ret.= $this->Html->tag('li', null, [
+			'class' => 'dropdown',
+		]);
+		$ret.= $this->dropdownLink($this->Html->image('icons/gears.png'));
+		$ret.= $this->Html->tag('ul', null, ['class' => 'dropdown-menu']);
+		$ret.= $this->li('Minha Empresa',
+			[
+				'empresa' => true,
+				'controller' => 'empresas',
+				'action' => 'gerenciar',
+			],
+			[
+				'title' => 'Gerenciar página da empresa',
+			]
+		);
+		$ret.= $this->li('Minhas Vagas',
+			[
+				'empresa' => true,
+				'controller' => 'vagas',
+				'action' => 'index',
+			],
+			[
+				'title' => 'Gerenciar vagas',
+			]
+		);
+		$ret.= $this->Html->tag('li', '', [
+			'class' => 'divider',
+			'role' => 'separator',
+		]);
+		$ret.= $this->Html->tag('li', 'Meu perfil', [
+			'class' => 'dropdown-header',
+		]);
+		$ret.= $this->perfil();
+		$ret.= $this->Html->tag('/ul');
+		$ret.= $this->Html->tag('/li');
+		$ret.= $this->logout();
+		$ret.= $this->Html->tag('/ul');
+		return $ret;
+	}
+	public function instituicao() {
+		$ret = '';
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
+		$ret.= $this->instituicoes();
+		$ret.= $this->vagas();
+		$ret.= $this->empresas();
+		$ret.= $this->Html->tag('/ul');
+	
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);
+		$ret.= $this->Html->tag('li', null, [
+			'class' => 'dropdown',
+		]);
+		$ret.= $this->dropdownLink($this->Html->image('icons/gears.png'));
+		$ret.= $this->Html->tag('ul', null, ['class' => 'dropdown-menu']);
+		$ret.= $this->li('Minha Instituição',
+			[
+				'instituicao' => true,
+				'controller' => 'instituicoes',
+				'action' => 'gerenciar',
+			],
+			[
+				'title' => 'Gerenciar página da instituição',
+			]
+		);
+		$ret.= $this->li('Meus Talentos',
+			[
+				'instituicao' => true,
+				'controller' => 'pessoas',
+				'action' => 'talentos',
+			],
+			[
+				'title' => 'Gerenciar talentos',
+			]
+		);
+		$ret.= $this->Html->tag('li', '', [
+			'class' => 'divider',
+			'role' => 'separator',
+		]);
+		$ret.= $this->Html->tag('li', 'Meu perfil', [
+			'class' => 'dropdown-header',
+		]);
+		$ret.= $this->perfil();
+		$ret.= $this->Html->tag('/ul');
+		$ret.= $this->Html->tag('/li');
+		$ret.= $this->logout();
+		$ret.= $this->Html->tag('/ul');
+		return $ret;
+	}
+	public function padrao() {
+		$ret = '';
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
+		$ret.= $this->instituicoes();
+		$ret.= $this->vagas();
+		$ret.= $this->empresas();
+		$ret.= $this->Html->tag('/ul');
+	
+		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav navbar-right']);
+		$ret.= $this->perfil();
+		$ret.= $this->logout();
+		$ret.= $this->Html->tag('/ul');
+		return $ret;
+	}
 	public function instituicoes() {
 		return $this->li('Instituições',
 			[
@@ -37,6 +211,19 @@ class MenuHelper extends AppHelper {
 			],
 			[
 				'title' => 'Vagas',
+			]
+		);
+	}
+	public function dropdownLink($label) {
+		return $this->Html->link($label.' '.$this->Html->tag('span', '', ['class' => 'caret']),
+			'#',
+			[
+				'class' => 'dropdown-toggle',
+				'data-toggle' => 'dropdown',
+				'role' => 'button',
+				'aria-haspopup' => 'true',
+				'aria-expanded' => 'false',
+				'escape' => false,
 			]
 		);
 	}
@@ -81,15 +268,15 @@ class MenuHelper extends AppHelper {
 			]
 		);
 	}
-	public function perfil($pessoa) {
-		if(!$pessoa) {
+	public function perfil() {
+		if(!$this->pessoa) {
 			return false;
 		}
 		$userLabel = '';
 		$userLabel.= $this->Html->tag('i', '', ['class' => 'fa fa-user']);
 		$userLabel.= ' ';
-		$userLabel.= $pessoa['Pessoa']['nome'];
-		echo $this->li($userLabel,
+		$userLabel.= $this->pessoa['Pessoa']['nome'];
+		return $this->li($userLabel,
 			[
 				'admin' => false,
 				'controller' => 'pessoas',

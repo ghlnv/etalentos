@@ -6,12 +6,15 @@
 @media only screen and (max-width: 1050px) {
 	
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 767px) {
 	.box.box-header .box-image {
 		height: 250px;
 	}
 	.box.box-header .box-avatar {
 		top: -160px;
+	}
+	.navbar-nav .open .dropdown-menu {
+		background-color: #FFF;
 	}
 }
 @media only screen and (max-width: 650px) {

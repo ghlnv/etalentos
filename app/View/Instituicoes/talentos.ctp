@@ -5,6 +5,12 @@ echo $this->Html->tag('h2', null, ['class' => 'marginLeft marginRight']);
 echo 'Talentos';
 echo $this->Html->tag('/h2');
 
+if(empty($pessoas)) {
+	echo $this->Html->tag('div', 'Infelizmente ainda não encontramos nenhum talento associado a esta instituição...', [
+		'class' => 'box',
+		'style' => 'padding: 10px; text-align: center;'
+	]);
+}
 echo $this->Html->tag('table', null, ['class' => 'table table-striped table-hover']);
 foreach($pessoas as $pessoa) {
 	echo $this->Html->tag('tr');

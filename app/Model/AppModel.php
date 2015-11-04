@@ -196,6 +196,16 @@ class AppModel extends Model {
 		}
 		return false;
 	}
+	public function trySendEmailTo($to) {
+		try{
+			$this->Email->to($to);
+			return $this->Email->send();
+		}
+		catch(Exception $e){
+			debug($e->getMessage());
+		}
+		return false;
+	}
 	
 	// #########################################################################
 	// Métodos privados ########################################################

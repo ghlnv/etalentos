@@ -11,6 +11,12 @@ echo $this->Pessoas->formBuscaPadrao();
 echo $this->Html->tag('/div');
 echo $this->Html->tag('/div');
 
+if(empty($pessoas)) {
+	echo $this->Html->tag('div', 'Infelizmente ainda não encontramos nenhum talento para sua busca...', [
+		'class' => 'box',
+		'style' => 'padding: 10px; text-align: center;'
+	]);
+}
 echo $this->Html->tag('table', null, ['class' => 'table table-striped table-hover']);
 foreach($pessoas as $pessoa) {
 	echo $this->Html->tag('tr');

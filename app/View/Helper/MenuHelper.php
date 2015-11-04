@@ -195,7 +195,7 @@ class MenuHelper extends AppHelper {
 		);
 	}
 	public function mensagens() {
-		return $this->li('Mensagens',
+		return $this->li($this->Html->image('icons/message-16.png').' Mensagens',
 			[
 				'admin' => false,
 				'controller' => 'mensagens',
@@ -203,6 +203,7 @@ class MenuHelper extends AppHelper {
 			],
 			[
 				'title' => 'Mensagens',
+				'escape' => false,
 			]
 		);
 	}

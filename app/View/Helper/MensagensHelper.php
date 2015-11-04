@@ -30,8 +30,11 @@ class MensagensHelper extends AppHelper {
 
 		$linkTxt = '';
 		$linkTxt.= $this->Html->tag('div', null, array(
-			'style' => 'font-size: 1.1em; font-weight: bolder;',
+			'style' => 'font-size: 18px;',
 		));
+		$linkTxt.= $this->Html->image('icons/chat-32.png', [
+			'style' => 'float: right; margin-left: 10px;'
+		]);
 
 		if($pessoa['Pessoa']['countNaoLidas']) {
 			$linkTxt.= $this->Html->tag('span', null, array(
@@ -48,13 +51,11 @@ class MensagensHelper extends AppHelper {
 			$linkTxt.= $this->Html->tag('/span');
 		}
 
-		$linkTxt.= $this->Html->image('icons/chat-16.png');
-		$linkTxt.= ' ';
 		$linkTxt.= $pessoa['Pessoa']['nome'];
 		$linkTxt.= $this->Html->tag('/div');
 		return $this->Html->link($linkTxt, $url,
 			array(
-				'title' => 'Mensagens com '.$pessoa['Pessoa']['nome'],
+				'title' => 'Contato com '.$pessoa['Pessoa']['nome'],
 				'class' => 'clean',
 				'escape' => false,
 			)

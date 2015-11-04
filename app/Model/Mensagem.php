@@ -108,6 +108,7 @@ class Mensagem extends AppModel {
 		if(!$this->save($mensagem)) {
 			return false;
 		}
+		$this->reportarMensagemRecebida($this->getLastInsertID());
 		return true;
 	}
 	function escrever($mensagem) {
@@ -198,147 +199,17 @@ class Mensagem extends AppModel {
 		}
 		return $this->saveAll($mensagensExcluidas, array('validate' => 'first'));
 	}
-	function adminEnviarCliente($mensagem) {
-		$this->set($mensagem);
-		if(!$this->validates()) {
-			return false;
-		}
-		
-		$this->loadModel('MalaDireta');
-		if(empty($mensagem['Cliente'])
-		&& empty($mensagem['Mensagem']['para'])) {
-			if($this->MalaDireta->cadastrar($mensagem)) {
-				return true;
-			}
-			$this->invalidate('para', 'Campo obrigatório');
-			return false;
-		}
-		$this->MalaDireta->cadastrar($mensagem);
-		
-		$this->loadModel('Pessoa');
-		$mensagem['Mensagem']['remetente_id'] = AuthComponent::user('pessoa_id');
-		$mensagem['Mensagem']['data'] = date('Y-m-d G:i:s');
-		
-		App::uses('CakeEmail', 'Network/Email');
-		$this->Email = new CakeEmail('smtp');
-		$this->Email->subject('Mensagem da comunidade Purali');
-		
-		// mensagem externa ####################################################
-		if(!empty($mensagem['Mensagem']['para'])) {
-			$this->Email->template('externo_mensagem');
-			
-			$para = explode(',', str_replace(';', ',', $mensagem['Mensagem']['para']));
-			foreach($para as $externo) {
-				$externo = trim($externo);
-				if($externo) {
-					$this->Email->viewVars(compact('mensagem'));
-					$this->trySendEmailTo($externo);
-				}
-			}
-		}
-		
-		// mensagem para cliente ###############################################
-		if(empty($mensagem['Cliente'])) {
-			return true;
-		}
-		$this->loadModel('Sincronizar');
-		$this->loadModel('MPCliente');
-		
-		if(!$mensagem['Mensagem']['direta']) {
-			$this->Email->template('cliente_mensagem');
-		}
-		else {
-			$this->Email->template('cliente_mensagem_direta');
-		}
-		
-		foreach($mensagem['Cliente'] as $cliente) {
-			$cliente = $this->MPCliente->buscarParaMensagem($cliente['idcliente']);
-			if(!empty($cliente['MPCliente']['idcliente'])) {
-				$mpClienteId = $cliente['MPCliente']['idcliente'];
-				$mensagem['Mensagem']['destinatario_id'] = $this->Pessoa->pessoaIdDoMpClienteId($mpClienteId);
-				if(empty($mensagem['Mensagem']['destinatario_id'])) {
-					$mensagem['Mensagem']['destinatario_id'] = $this->Sincronizar->cliente($mpClienteId);
-				}
-				$mensagem['Mensagem']['mp_cliente_id'] = $mpClienteId;
-				$mensagem['Mensagem']['nome'] = $cliente['MPCliente']['nome'];
-				
-				$this->create();
-				$this->save($mensagem['Mensagem']);
-				$mensagem['Mensagem']['id'] = $this->getLastInsertID();
-				
-				if($cliente['MPPrivacidade']['receberemails']) {
-					$this->Email->viewVars(compact('mensagem'));
-					$this->trySendEmailTo($cliente['MPUsuario']['email']);
-				}
-			}
-		}
-		return true;
-	}
-	function adminEnviarEmpresa($mensagem) {
-		$this->set($mensagem);
-		if(!$this->validates()) {
-			return false;
-		}
-		$this->loadModel('MalaDireta');
-		$this->loadModel('MPMsg');
-		if(empty($mensagem['Empresa'])) {
-			if($this->MalaDireta->cadastrar($mensagem, true)) {
-				return true;
-			}
-			$this->invalidate('para', 'Campo obrigatório');
-			return false;
-		}
-		$this->MalaDireta->cadastrar($mensagem, true);
-		
-		$this->loadModel('MPEmpresa');
-		$this->loadModel('Sincronizar');
-		$this->loadModel('Pessoa');
-		$mensagem['Mensagem']['remetente_id'] = AuthComponent::user('pessoa_id');
-		
-		App::uses('CakeEmail', 'Network/Email');
-		$this->Email = new CakeEmail('smtp');
-		$this->Email->subject('Mensagem da comunidade Purali');
-		
-		if(!$mensagem['Mensagem']['direta']) {
-			$this->Email->template('parceiro_mensagem');
-		}
-		else {
-			$this->Email->template('parceiro_mensagem_direta');
-		}
-		
-		foreach($mensagem['Empresa'] as $empresa) {
-			$empresa = $this->MPEmpresa->buscarParaMensagem($empresa['idempresa']);
-			if(!empty($empresa['MPEmpresa']['idempresa'])) {
-				$mensagem['Mensagem']['mp_empresa_id'] = $empresa['MPEmpresa']['idempresa'];
-				$mensagem['Mensagem']['destinatario_id'] = $this->Pessoa->pessoaIdDoMpEmpresaId($empresa['MPEmpresa']['idempresa']);
-				if(empty($mensagem['Mensagem']['destinatario_id'])) {
-					$mensagem['Mensagem']['destinatario_id'] = $this->Sincronizar->empresa($mensagem['Mensagem']['mp_empresa_id']);
-				}
-
-				$this->create();
-				$this->save($mensagem['Mensagem']);
-				$mensagem['Mensagem']['id'] = $this->getLastInsertID();
-
-				if(empty($empresa['MPEmpresa']['email'])) {
-					$empresa['MPEmpresa']['email'] = $empresa['MPUsuario']['email'];
-				}
-				$this->Email->viewVars(compact('mensagem'));
-				$this->trySendEmailTo($empresa['MPEmpresa']['email']);
-			}	
-		}
-		return true;
-	}
 	
 	// #########################################################################
 	// Métodos privados ########################################################
 	private function reportarMensagemRecebida($mensagemId) {
-//		App::uses('CakeEmail', 'Network/Email');
-//		$this->Email = new CakeEmail('smtp');
-//		$this->Email->subject('Mensagem da comunidade Purali');
-//		$this->Email->template('mensagem_recebida');
-//		
-//		$mensagem = $this->buscarMensagemRemetenteEDestinatario($mensagemId);
-//		$this->Email->viewVars(compact('mensagem'));
-//		$this->trySendEmailTo($mensagem['Destinatario']['email']);
+		App::uses('CakeEmail', 'Network/Email');
+		$this->Email = new CakeEmail('default');
+		$this->Email->subject('Mensagem da comunidade Purali');
+		$this->Email->template('mensagem_recebida');
+		
+		$mensagem = $this->buscarMensagemRemetenteEDestinatario($mensagemId);
+		$this->Email->viewVars(compact('mensagem'));
+		$this->trySendEmailTo($mensagem['Destinatario']['email']);
 	}
 }

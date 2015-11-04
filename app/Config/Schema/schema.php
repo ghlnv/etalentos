@@ -564,6 +564,11 @@ class AppSchema extends CakeSchema {
 			'charset' => 'utf8',
 			'collate' => 'utf8_general_ci'
 		),
+		'mensagem_reportada' => array(
+			'type' => 'datetime',
+			'null' => true,
+			'default' => NULL
+		),
 		'created' => array(
 			'type' => 'datetime',
 			'null' => true,

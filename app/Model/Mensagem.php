@@ -209,7 +209,15 @@ class Mensagem extends AppModel {
 		$this->Email->template('mensagem_recebida');
 		
 		$mensagem = $this->buscarMensagemRemetenteEDestinatario($mensagemId);
+		if(date('Y-m-d H:i:s', strtotime('now -12 hour')) < $mensagem['Destinatario']['mensagem_reportada']) {
+			return true;
+		}
+		$this->Destinatario->save([
+			'id' => $mensagem['Destinatario']['id'],
+			'mensagem_reportada' => date('Y-m-d H:i:s'),
+		]);
 		$this->Email->viewVars(compact('mensagem'));
 		$this->trySendEmailTo($mensagem['Destinatario']['email']);
+		return true;
 	}
 }

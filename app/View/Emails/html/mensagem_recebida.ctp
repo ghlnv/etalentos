@@ -1,5 +1,6 @@
 <?php
-echo 'Olá! Você recebeu uma nova mensagem...';
+$primeiroNome = $this->Gerar->explodeReset($mensagem['Destinatario']['nome']);
+echo "Olá $primeiroNome! Você recebeu uma nova mensagem...";
 echo $this->Html->tag('br');
 echo $this->Html->tag('br');
 echo $this->Html->link('Clique aqui para ver seus contatos no eTalentos.',

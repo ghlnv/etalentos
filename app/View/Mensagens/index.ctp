@@ -2,7 +2,13 @@
 echo $this->Html->tag('div', null, ['class' => 'container']);
 echo $this->Html->tag('h1', 'Mensagens');
 
-if(!empty($pessoas)) {
+if(empty($pessoas)) {
+	echo $this->Html->tag('div', 'Você ainda não recebeu nenhuma mensagem no eTalentos...', [
+		'class' => 'box',
+		'style' => 'padding: 10px; text-align: center;'
+	]);
+}
+else {
 	echo $this->Html->tag('div', null, array(
 		'style' => 'margin-bottom: 2em;',
 	));

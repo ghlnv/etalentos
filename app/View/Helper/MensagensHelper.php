@@ -7,6 +7,22 @@ class MensagensHelper extends AppHelper {
 	
 	// #########################################################################
 	// Métodos #################################################################
+	public function linkConveraPessoa(&$pessoa, $options = []) {
+		return $this->Html->link($this->Html->image('icons/chat-32.png'),
+			[
+				'controller' => 'mensagens',
+				'action' => 'conversa',
+				$pessoa['Pessoa']['id'],
+			],
+			array_merge(
+				[
+					'title' => 'Entrar em contato',
+					'escape' => false,
+				],
+				$options
+			)
+		);
+	}
 	public function linkConversa(&$pessoa) {
 		$url = [
 			'controller' => 'mensagens',

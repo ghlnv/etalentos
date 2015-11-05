@@ -342,7 +342,7 @@ class PessoasHelper extends AppHelper {
 			)
 		);
 	}
-	public function linkCurriculo(&$pessoa) {
+	public function linkCurriculo(&$pessoa, $options = []) {
 		return $this->Html->link($this->Html->image('icons/cv-32.png'),
 			array(
 				'admin' => false,
@@ -351,10 +351,13 @@ class PessoasHelper extends AppHelper {
 				$pessoa['id'],
 				Inflector::slug($pessoa['nome'], '-'),
 			),
-			array(
-				'title' => 'Ver perfil da pessoa',
-				'style' => 'margin: 0 0.5em;',
-				'escape' => false
+			array_merge(
+				[
+					'title' => 'Ver currículo do talento',
+					'style' => 'margin: 0 0.5em;',
+					'escape' => false
+				],
+				$options
 			)
 		);
 	}

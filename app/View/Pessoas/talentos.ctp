@@ -33,6 +33,7 @@ foreach($pessoas as $pessoa) {
 		'style' => 'text-align: right;',
 	]);
 	echo $this->Pessoas->linkCurriculo($pessoa['Pessoa']);
+	echo $this->Mensagens->linkConveraPessoa($pessoa, ['style' => 'margin-left: 10px;']);
 	echo $this->Html->tag('/div');
 	echo $this->Html->tag('/div');
 	

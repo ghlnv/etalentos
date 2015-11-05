@@ -69,9 +69,8 @@ class InteressadosHelper extends AppHelper {
 		$ret.= $this->Form->end();
 		return $ret;
 	}
-	public function curriculo($pessoa) {
+	public function curriculoHeader(&$pessoa) {
 		$ret = '';
-		$ret.= $this->Html->tag('div', null, ['style' => 'font-size: 16px; line-height: 30px;']);
 		$ret.= $this->Html->tag('span', null, ['class' => 'smallText']);
 		if($pessoa['Pessoa']['nacionalidade']
 		|| $pessoa['Pessoa']['estado_civil']
@@ -135,10 +134,16 @@ class InteressadosHelper extends AppHelper {
 			$ret.= $this->Html->tag('br');
 		}
 		
-		$ret.= $this->Html->tag('b', 'E-mail: ');
-		$ret.= $pessoa['Pessoa']['email'];
-		$ret.= $this->Html->tag('br');
+//		$ret.= $this->Html->tag('b', 'E-mail: ');
+//		$ret.= $pessoa['Pessoa']['email'];
+//		$ret.= $this->Html->tag('br');
 		$ret.= $this->Html->tag('/span');
+		return $ret;
+	}
+	public function curriculo(&$pessoa) {
+		$ret = '';
+		$ret.= $this->Html->tag('div', null, ['style' => 'font-size: 16px; line-height: 30px;']);
+		$ret.= $this->curriculoHeader($pessoa);
 		
 		$ret.= $this->Html->tag('h3', 'Objetivo profissional');
 		$ret.= $this->Html->tag('hr', '', ['style' => 'margin-top: 0;']);

@@ -64,7 +64,7 @@ class MensagensController extends AppController {
 	public function conversa($destinatarioId) {
 		$this->loadModel('Pessoa');
 		if($destinatarioId == AuthComponent::user('pessoa_id')) {
-			$this->Session->setFlash(__("Por favor envie contatos para outras instituições ou empresas...", true));
+			$this->Session->setFlash(__("Por favor envie contatos para outras pessoas...", true));
 			$this->redirect($this->referer());
 		}
 		if(!empty($this->request->data)) {

@@ -28,7 +28,7 @@
 	Router::connect('/e/*', array('controller' => 'empresas', 'action' => 'ver'));
 	Router::connect('/evagas/*', array('controller' => 'empresas', 'action' => 'vagas'));
 	Router::connect('/vaga/*', array('controller' => 'vagas', 'action' => 'ver'));
-	Router::connect('/curriculo/*', array('controller' => 'pessoas', 'action' => 'curriculo'));
+	Router::connect('/cv/*', array('controller' => 'pessoas', 'action' => 'curriculo'));
 	Router::connect('/definirNovaSenha/*', array('controller' => 'usuarios', 'action' => 'definirNovaSenha'));
 	
 /**

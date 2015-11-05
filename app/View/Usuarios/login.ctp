@@ -27,14 +27,38 @@ echo $this->Form->submit('Entrar', array(
 echo $this->Form->end();
 
 echo $this->Html->tag('br');
+echo $this->Html->tag('div', 'Não possui login? Registre-se...', [
+	'class' => '',
+	'style' => 'font-weight: bolder; margin: 0; text-align: center; padding: 10px;',
+]);
 echo $this->Html->tag('br');
-echo $this->Html->link("Não possui login? Registre-se &#10097;",
+echo $this->Html->link("Instituições &#10097;",
+	[
+		'controller' => 'instituicoes',
+		'action' => 'registrar',
+	],
+	[
+		'class' => 'btn btn-primary btn-lg btn-block',
+		'escape' => false,
+	]
+);
+echo $this->Html->link("Talentos &#10097;",
 	[
 		'controller' => 'pessoas',
 		'action' => 'registrar',
 	],
 	[
-		'class' => 'btn btn-primary btn-lg btn-block',
+		'class' => 'btn btn-success btn-lg btn-block',
+		'escape' => false,
+	]
+);
+echo $this->Html->link("Empresas &#10097;",
+	[
+		'controller' => 'empresas',
+		'action' => 'registrar',
+	],
+	[
+		'class' => 'btn btn-warning btn-lg btn-block',
 		'escape' => false,
 	]
 );

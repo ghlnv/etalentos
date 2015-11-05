@@ -175,8 +175,8 @@ class MenuHelper extends AppHelper {
 	public function padrao() {
 		$ret = '';
 		$ret.= $this->Html->tag('ul', null, ['class' => 'nav navbar-nav']);
-		$ret.= $this->linkInstituicoes();
 		$ret.= $this->linkVagas();
+		$ret.= $this->linkInstituicoes();
 		$ret.= $this->linkEmpresas();
 		$ret.= $this->Html->tag('/ul');
 	

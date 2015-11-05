@@ -7,8 +7,13 @@ echo $this->Html->tag('/h1');
 echo $this->Html->tag('hr');
 
 echo $this->Pessoas->formPerfil();
-echo $this->Pessoas->linkPagina($this->request->data['Pessoa']);
-echo $this->Pessoas->linkCurriculoEditar($this->request->data['Pessoa']);
+
+if(1 != $this->request->data['Pessoa']['id']
+&& 'empresa' != $this->request->data['Usuario']['tipo']
+&& 'instituicao' != $this->request->data['Usuario']['tipo']) {
+	echo $this->Pessoas->linkPagina($this->request->data['Pessoa']);
+	echo $this->Pessoas->linkCurriculoEditar($this->request->data['Pessoa']);
+}
 echo $this->Html->tag('br');
 echo $this->Html->tag('br');
 

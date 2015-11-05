@@ -134,6 +134,11 @@ class InteressadosHelper extends AppHelper {
 			$ret.= $this->Html->tag('br');
 		}
 		
+		$ret.= $this->Html->tag('b');
+		$ret.= $this->Pessoas->urlCurriculo($pessoa['Pessoa']);
+		$ret.= $this->Html->tag('/b');
+		$ret.= $this->Html->tag('br');
+		
 //		$ret.= $this->Html->tag('b', 'E-mail: ');
 //		$ret.= $pessoa['Pessoa']['email'];
 //		$ret.= $this->Html->tag('br');

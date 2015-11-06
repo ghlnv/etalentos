@@ -315,7 +315,7 @@ class Usuario extends AppModel {
 		$this->Email = new CakeEmail('default');
 		$this->Email->template('usuario_requerimento_senha');
 		$this->Email->viewVars(compact('usuario', 'token'));
-		$this->Email->subject('Nova senha para login no Clinimap requerida com sucesso!');
+		$this->Email->subject('Nova senha para login no eTalentos requerida com sucesso!');
 
 		$this->Email->to($usuario['Usuario']['login']);
 		$this->Email->send();
@@ -324,7 +324,7 @@ class Usuario extends AppModel {
 		$this->Email = new CakeEmail('default');
 		$this->Email->template('usuario_nova_senha');
 		$this->Email->viewVars(compact('usuario'));
-		$this->Email->subject('Nova senha para login no Clinimap cadastrada com sucesso!');
+		$this->Email->subject('Nova senha para login no eTalentos cadastrada com sucesso!');
 
 		$this->Email->to($usuario['Usuario']['login']);
 		$this->Email->send();
@@ -336,7 +336,7 @@ class Usuario extends AppModel {
 		$this->Email = new CakeEmail('default');
 		$this->Email->template('admin_nova_senha');
 		$this->Email->viewVars(compact('admin', 'usuario'));
-		$this->Email->subject('Usuário gerou nova senha para login no Clinimap!');
+		$this->Email->subject('Usuário gerou nova senha para login no eTalentos!');
 
 		$this->Email->to($admin['Pessoa']['email']);
 		$this->Email->send();

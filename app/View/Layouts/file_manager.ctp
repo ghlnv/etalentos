@@ -6,7 +6,7 @@ echo $this->Html->tag('head');
 echo $this->Html->charset();
 
 echo $this->Html->tag('title'); 
-echo utf8_encode(strtolower(utf8_decode($title_for_layout))).' / CliniMap';
+echo utf8_encode(strtolower(utf8_decode($title_for_layout))).' / eTalentos';
 echo $this->Html->tag('/title');
 
 echo $this->Html->meta('icon');
@@ -54,7 +54,7 @@ echo $content_for_layout;
 echo $this->Html->tag('/div');
 
 echo $this->Html->tag('div', null, array('id' => 'footer'));
-echo __('CliniMap.com.br');
+echo __('etalentos.com.br');
 echo $this->Html->tag('/div');
 	
 echo $this->element('sql_dump');

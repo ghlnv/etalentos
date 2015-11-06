@@ -205,7 +205,7 @@ class Mensagem extends AppModel {
 	private function reportarMensagemRecebida($mensagemId) {
 		App::uses('CakeEmail', 'Network/Email');
 		$this->Email = new CakeEmail('default');
-		$this->Email->subject('Mensagem da comunidade Purali');
+		$this->Email->subject('Nova mensagem no eTalentos');
 		$this->Email->template('mensagem_recebida');
 		
 		$mensagem = $this->buscarMensagemRemetenteEDestinatario($mensagemId);
